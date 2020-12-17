@@ -1,0 +1,45 @@
+$height100 :100%;
+
+//全局样式重置
+body,
+p,h1 {
+  margin: 0;
+}
+html,body,#app,.home,.container{
+  height: $height100;
+}
+h3{
+  text-align: left;
+}
+
+/* 重置a样式 */
+a {
+  text-decoration: none;
+  color: #000;
+  // color: #fff;
+}
+
+.el-header,
+.el-footer {
+  color: #333;
+  line-height: 60px;
+}
+
+.el-aside {
+  // background-color: #d3dce6;
+  color: #333;
+  text-align: center;
+  line-height: 200px;
+}
+
+.el-main {
+  background-color: #e9eef3;
+  color: #333;
+  text-align: center;
+  height: 100%;
+}
+
+//重置水平分割线样式
+.el-divider--horizontal{
+  margin: 0 0 15px 0;
+}
