@@ -1,9 +1,16 @@
 <template>
   <div class="NewEvent">
     <el-card class="box-card">
+      <h3>公告发布</h3>
+      <el-divider class="el-divider"></el-divider>
+
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="公告标题">
           <el-input v-model="form.title"></el-input>
+        </el-form-item>
+
+        <el-form-item label="公告内容">
+          <el-input type="textarea" v-model="form.desc"></el-input>
         </el-form-item>
 
         <el-form-item label="附加文件">
@@ -14,28 +21,22 @@
           </el-upload>
         </el-form-item>
 
-        <el-form-item label="公告内容">
-          <el-input type="textarea" v-model="form.desc"></el-input>
-        </el-form-item>
-
         <el-form-item label="开始时间">
-          <el-col :span="5">
+          <el-col :span="3">
             <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
           </el-col>
-          <el-col class="line" :span="1">————</el-col>
-          <el-col :span="5">
+          <!-- <el-col :span="3">
             <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
-          </el-col>
+          </el-col> -->
         </el-form-item>
 
         <el-form-item label="结束时间">
-          <el-col :span="5">
+          <el-col :span="3">
             <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
           </el-col>
-          <el-col class="line" :span="1">————</el-col>
-          <el-col :span="5">
+          <!-- <el-col :span="3">
             <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
-          </el-col>
+          </el-col> -->
         </el-form-item>
 
         <el-form-item label="发布人员">
@@ -49,13 +50,13 @@
         <el-form-item label="影响范围">
           <el-input v-model="form.title" class="shortInput" placeholder="请选择机构"></el-input>
         </el-form-item>
-        
+
         <el-form-item label="短信提醒">
-            <el-radio-group v-model="form.resource">
-              <el-radio label="是"></el-radio>
-              <el-radio label="否"></el-radio>
-            </el-radio-group>
-          </el-form-item>
+          <el-radio-group v-model="form.resource">
+            <el-radio label="是"></el-radio>
+            <el-radio label="否"></el-radio>
+          </el-radio-group>
+        </el-form-item>
 
         <el-form-item>
           <el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -109,6 +110,6 @@ export default {
   text-align: left !important;
 }
 .shortInput {
-  width: 217px;
+  width: 240px;
 }
 </style>

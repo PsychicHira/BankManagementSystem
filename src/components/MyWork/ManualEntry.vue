@@ -1,25 +1,40 @@
 <template>
   <div class="ManualEntry">
     <el-card class="box-card">
+      <h3>手工录入事件</h3>
+      <el-divider class="el-divider"></el-divider>
+
       <el-form ref="form" :model="form" label-width="80px">
 
-        <el-form-item label="联系人员">
-          <el-input v-model="form.title" class="shortInput" placeholder="事件联络人员"></el-input>
-        </el-form-item>
+        <el-row>
+          <el-col :span="6">
+            <el-form-item label="联系人员">
+              <el-input v-model="form.title" placeholder="事件联络人员"></el-input>
+            </el-form-item>
+          </el-col>
 
-        <el-form-item label="联系电话">
-          <el-input v-model="form.title" class="shortInput" placeholder="请输入联系电话"></el-input>
-        </el-form-item>
+          <el-col :span="6">
+            <el-form-item label="联系电话">
+              <el-input v-model="form.title" placeholder="请输入联系电话"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
-        </el-form-item>
-        <el-form-item label="机构名称">
-          <el-input v-model="form.title" class="shortInput" placeholder=""></el-input>
-        </el-form-item>
+        <el-row>
+          <el-col :span="6">
+            </el-form-item>
+            <el-form-item label="机构名称">
+              <el-input v-model="form.title" placeholder=""></el-input>
+            </el-form-item>
+          </el-col>
 
-        </el-form-item>
-        <el-form-item label="联系地址">
-          <el-input v-model="form.title" class="shortInput" placeholder=""></el-input>
-        </el-form-item>
+          <el-col :span="6">
+            </el-form-item>
+            <el-form-item label="联系地址">
+              <el-input v-model="form.title" placeholder=""></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
         <el-form-item label="标题">
           <el-input v-model="form.title"></el-input>
@@ -29,28 +44,6 @@
           <el-input type="textarea" v-model="form.desc"></el-input>
         </el-form-item>
 
-        <el-form-item label="业务分类" :inline="true">
-          <el-select v-model="form.region" placeholder="请选择业务分类">
-            <el-option label="业务支持" value="shanghai"></el-option>
-            <el-option label="项目管理" value="shanghai"></el-option>
-            <el-option label="会议餐饮审批" value="shanghai"></el-option>
-            <el-option label="会议审批" value="shanghai"></el-option>
-            <el-option label="车辆申请" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="优先级" :inline="true">
-          <el-select v-model="form.reference" placeholder="请选择优先级">
-            <el-option label="一半" value="shanghai"></el-option>
-            <el-option label="重要" value="shanghai"></el-option>
-            <el-option label="严重" value="shanghai"></el-option>
-            <el-option label="2天" value="shanghai"></el-option>
-            <el-option label="3天" value="shanghai"></el-option>
-            <el-option label="4天" value="shanghai"></el-option>
-            <el-option label="5天" value="shanghai"></el-option>
-          </el-select>
-        </el-form-item>
-
         <el-form-item label="附加文件">
           <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/" :on-preview="handlePreview" :on-remove="handleRemove" :file-list="fileList" :auto-upload="false">
             <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
@@ -58,6 +51,37 @@
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
         </el-form-item>
+
+        <el-row>
+          <el-col :span="6">
+            <el-form-item label="业务分类">
+              <el-select v-model="form.region" placeholder="请选择业务分类">
+                <el-option label="业务支持" value="21312"></el-option>
+                <el-option label="项目管理" value="123123"></el-option>
+                <el-option label="会议餐饮审批" value="shang1hai"></el-option>
+                <el-option label="会议审批" value="shan2ghai"></el-option>
+                <el-option label="车辆申请" value="bei3jing"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="6">
+            <el-form-item label="优先级">
+              <el-select v-model="form.reference" placeholder="请选择优先级">
+                <el-option label="一半" value="1"></el-option>
+                <el-option label="重要" value="shan4ghai"></el-option>
+                <el-option label="严重" value="shandghai"></el-option>
+                <el-option label="2天" value="shangfhai"></el-option>
+                <el-option label="3天" value="shangghai"></el-option>
+                <el-option label="4天" value="shanhghai"></el-option>
+                <el-option label="5天" value="shanjghai"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+
+        </el-row>
+
+        
 
         <el-form-item label="处理意见">
           <el-input type="textarea" v-model="form.desc"></el-input>
@@ -144,6 +168,6 @@ export default {
   text-align: left !important;
 }
 .shortInput {
-  width: 217px;
+  width: 240px;
 }
 </style>

@@ -2,20 +2,30 @@
   <div class="NewEvent">
     <el-card class="box-card">
 
-      <h3>日志查询</h3>
+      <h3>工作统计</h3>
       <el-divider class="el-divider"></el-divider>
 
       <el-form ref="form" :model="form" label-width="80px">
         <el-row>
           <el-col :span="6">
-            <el-form-item label="创建人员">
+            <el-form-item label="查询机构">
               <el-input v-model="form.name"></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
-            <el-form-item label="电话号码">
+            <el-form-item label="姓名">
               <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="3">
+            <el-form-item label="完成情况">
+              <el-select v-model="form.region" placeholder="请选择" style="width:100%">
+                <el-option label="已完成" value="21312"></el-option>
+                <el-option label="未完成" value="123123"></el-option>
+                <el-option label="无" value="shang1hai"></el-option>
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -33,17 +43,25 @@
             </el-form-item>
           </el-col>
 
+        </el-row>
+
+        <el-row>
           <el-col :span="6">
-            <el-form-item label="状态">
-              <el-select v-model="form.region" placeholder="请选择状态">
-                <el-option label="所有" value="21312"></el-option>
-                <el-option label="已完成" value="123123"></el-option>
-                <el-option label="部分完成" value="shang1hai"></el-option>
-                <el-option label="未完成" value="shan2ghai"></el-option>
-              </el-select>
+            <el-form-item label="关键字">
+              <el-input v-model="form.name"></el-input>
             </el-form-item>
           </el-col>
 
+          <el-col :span="6">
+            <el-form-item label="业务类别">
+              <el-select v-model="form.region" placeholder="请选择" style="width:100%">
+                <el-option label="所有" value="21312"></el-option>
+                <el-option label="管理共享" value="123123"></el-option>
+                <el-option label="共享分类" value="shang1hai"></el-option>
+                <el-option label="综合管理" value="shan2ghai"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
         </el-row>
 
         <el-form-item>

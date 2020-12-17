@@ -6,8 +6,13 @@
       <el-divider class="el-divider"></el-divider>
 
       <el-form ref="form" :model="form" label-width="80px">
+
         <el-form-item label="标题">
           <el-input v-model="form.title"></el-input>
+        </el-form-item>
+
+        <el-form-item label="事件描述">
+          <el-input type="textarea" v-model="form.desc"></el-input>
         </el-form-item>
 
         <el-form-item label="附加文件">
@@ -18,31 +23,34 @@
           </el-upload>
         </el-form-item>
 
-        <el-form-item label="事件描述">
-          <el-input type="textarea" v-model="form.desc"></el-input>
-        </el-form-item>
+        <el-row>
+          <el-col :span="6">
+            <el-form-item label="业务分类">
+              <el-select v-model="form.region" placeholder="请选择业务分类">
+                <el-option label="业务支持" value="21312"></el-option>
+                <el-option label="项目管理" value="123123"></el-option>
+                <el-option label="会议餐饮审批" value="shang1hai"></el-option>
+                <el-option label="会议审批" value="shan2ghai"></el-option>
+                <el-option label="车辆申请" value="bei3jing"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
 
-        <el-form-item label="业务分类" :inline="true">
-          <el-select v-model="form.region" placeholder="请选择业务分类">
-            <el-option label="业务支持" value="21312"></el-option>
-            <el-option label="项目管理" value="123123"></el-option>
-            <el-option label="会议餐饮审批" value="shang1hai"></el-option>
-            <el-option label="会议审批" value="shan2ghai"></el-option>
-            <el-option label="车辆申请" value="bei3jing"></el-option>
-          </el-select>
-        </el-form-item>
+          <el-col :span="6">
+            <el-form-item label="优先级">
+              <el-select v-model="form.reference" placeholder="请选择优先级">
+                <el-option label="一半" value="1"></el-option>
+                <el-option label="重要" value="shan4ghai"></el-option>
+                <el-option label="严重" value="shandghai"></el-option>
+                <el-option label="2天" value="shangfhai"></el-option>
+                <el-option label="3天" value="shangghai"></el-option>
+                <el-option label="4天" value="shanhghai"></el-option>
+                <el-option label="5天" value="shanjghai"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
 
-        <el-form-item label="优先级" :inline="true">
-          <el-select v-model="form.reference" placeholder="请选择优先级">
-            <el-option label="一半" value="1"></el-option>
-            <el-option label="重要" value="shan4ghai"></el-option>
-            <el-option label="严重" value="shandghai"></el-option>
-            <el-option label="2天" value="shangfhai"></el-option>
-            <el-option label="3天" value="shangghai"></el-option>
-            <el-option label="4天" value="shanhghai"></el-option>
-            <el-option label="5天" value="shanjghai"></el-option>
-          </el-select>
-        </el-form-item>
+        </el-row>
 
         <el-form-item label="创建人员">
           <el-input v-model="form.name" class="shortInput"></el-input>
@@ -54,7 +62,6 @@
 
         <el-form-item label="受理机构">
           <el-input v-model="form.name" class="shortInput" placeholder="请选择受理机构"></el-input>
-          <el-input v-model="form.name" class="shortInput"></el-input>
         </el-form-item>
 
         <el-form-item>
@@ -108,7 +115,7 @@ export default {
 .NewEvent {
   text-align: left !important;
 }
-.shortInput{
-  width:217px;
+.shortInput {
+  width: 240px;
 }
 </style>

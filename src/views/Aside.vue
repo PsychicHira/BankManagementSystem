@@ -12,13 +12,13 @@
               <span>我的工作区</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="/Home/Todo">待办事件</el-menu-item>
-              <el-menu-item index="/Home/NewEvent">新建事件</el-menu-item>
-              <el-menu-item index="/Home/ManualEntry">手工录入</el-menu-item>
-              <el-menu-item index="/Home/Announce">公告发布</el-menu-item>
-              <el-menu-item index="/Home/Operations">运维事件</el-menu-item>
-              <el-menu-item index="/Home/PastEvent">往日事件</el-menu-item>
-              <el-menu-item index="/Home/DepartmentEvents">本部待办</el-menu-item>
+              <el-menu-item index="/MyWork/Todo">待办事件</el-menu-item>
+              <el-menu-item index="/MyWork/NewEvent">新建事件</el-menu-item>
+              <el-menu-item index="/MyWork/ManualEntry">手工录入</el-menu-item>
+              <el-menu-item index="/MyWork/Announce">公告发布</el-menu-item>
+              <el-menu-item index="/MyWork/Operations">运维事件</el-menu-item>
+              <el-menu-item index="/MyWork/PastEvent">往日事件</el-menu-item>
+              <el-menu-item index="/MyWork/DepartmentEvents">本部待办</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <!-- 计划日志 -->
@@ -28,12 +28,12 @@
               <span>计划日志</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="2-1">日志填写</el-menu-item>
-              <el-menu-item index="2-2">日志查询</el-menu-item>
-              <el-menu-item index="2-3">事务分类维护</el-menu-item>
-              <el-menu-item index="2-4">工作统计</el-menu-item>
-              <el-menu-item index="2-5">机构日志查询</el-menu-item>
-              <el-menu-item index="2-6">日志统计</el-menu-item>
+              <el-menu-item index="/Schedule/FillInSchedule">日志填写</el-menu-item>
+              <el-menu-item index="/Schedule/SchedulesInquiry">日志查询</el-menu-item>
+              <el-menu-item index="/Schedule/ProjectManagement">事务分类维护</el-menu-item>
+              <el-menu-item index="/Schedule/WorkStatistics">工作统计</el-menu-item>
+              <el-menu-item index="/Schedule/OrganizationSchedulesInquiry">机构日志查询</el-menu-item>
+              <el-menu-item index="/Schedule/SchedulesStatistics">日志统计</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <!-- 汇总统计 -->
@@ -43,14 +43,15 @@
               <span>汇总统计</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="3-1">公告查询</el-menu-item>
-              <el-menu-item index="3-2">我的事件</el-menu-item>
-              <el-menu-item index="3-3">所辖事件</el-menu-item>
-              <el-menu-item index="3-4">本行统计</el-menu-item>
-              <el-menu-item index="3-5">排班查询</el-menu-item>
-              <el-menu-item index="3-6">定向查询</el-menu-item>
+              <el-menu-item index="/SammaryStatistics/AnnouncementInquiry">公告查询</el-menu-item>
+              <el-menu-item index="/SammaryStatistics/MyEvents">我的事件</el-menu-item>
+              <el-menu-item index="/SammaryStatistics/JurisdictionEvents">所辖事件</el-menu-item>
+              <el-menu-item index="/SammaryStatistics/BankStatistics">本行统计</el-menu-item>
+              <el-menu-item index="/SammaryStatistics/SchedulesInquiry">排班查询</el-menu-item>
+              <el-menu-item index="/SammaryStatistics/DirectInquiry">定向查询</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
+
           <!-- 日常维护 -->
           <el-submenu index="4">
             <template slot="title">
@@ -130,7 +131,7 @@ export default {
 //这是DIV中的ul
 .el-menu {
   padding-top: 70px;
-  margin-top:-70px;
+  margin-top: -70px;
   // z-index: 0;
 }
 //让二级菜单和一级菜单文字左侧对齐
