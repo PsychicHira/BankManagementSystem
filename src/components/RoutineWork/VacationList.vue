@@ -1,57 +1,29 @@
 <template>
   <div class="NewEvent">
     <el-card class="box-card">
-      <h3>定向查询</h3>
+      <h3>休假名单维护</h3>
       <el-divider class="el-divider"></el-divider>
-      <el-form ref="form" :model="form" label-width="80px">
+      <el-form ref="form" :model="form" label-width="100px">
         <el-row>
-          <el-col :span="6">
-            <el-form-item label="关键字">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-col>
 
           <el-col :span="6">
-            <el-form-item label="ID">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-
-        <el-row>
-          <el-col :span="6">
-            <el-form-item label="开始时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="6">
-            <el-form-item label="结束时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="6">
-            <el-form-item label="状态">
-              <el-select v-model="form.region" placeholder="请选择状态">
-                <el-option label="等待接受" value="21312"></el-option>
-                <el-option label="完成" value="123123"></el-option>
-                <el-option label="正在处理" value="shang1hai"></el-option>
-                <el-option label="督办" value="shan2ghai"></el-option>
-                <el-option label="等待办理" value="shan2ghai"></el-option>
-                <el-option label="关闭" value="shan2ghai"></el-option>
-                <el-option label="重新办理" value="shan2ghai"></el-option>
-                <el-option label="审批" value="shan2ghai"></el-option>
+            <el-form-item label="姓名">
+              <el-select v-model="form.region" placeholder="请选择" style="width:100%">
+                <el-option label="业务支持" value="21312"></el-option>
+                <el-option label="项目管理" value="123123"></el-option>
+                <el-option label="会议餐饮审批" value="shang1hai"></el-option>
+                <el-option label="会议审批" value="shan2ghai"></el-option>
+                <el-option label="车辆申请" value="bei3jing"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
 
         </el-row>
-
+        
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
-          <el-button>重置</el-button>
         </el-form-item>
+
       </el-form>
 
       <el-table :data="tableData" stripe style="width: 100%">

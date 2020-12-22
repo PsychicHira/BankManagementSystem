@@ -28,12 +28,12 @@
               <span>计划日志</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="/Schedule/FillInSchedule">日志填写</el-menu-item>
-              <el-menu-item index="/Schedule/SchedulesInquiry">日志查询</el-menu-item>
-              <el-menu-item index="/Schedule/ProjectManagement">事务分类维护</el-menu-item>
-              <el-menu-item index="/Schedule/WorkStatistics">工作统计</el-menu-item>
-              <el-menu-item index="/Schedule/OrganizationSchedulesInquiry">机构日志查询</el-menu-item>
-              <el-menu-item index="/Schedule/SchedulesStatistics">日志统计</el-menu-item>
+              <el-menu-item index="/Logs/FillInLogs">日志填写</el-menu-item>
+              <el-menu-item index="/Logs/LogsInquiry">日志查询</el-menu-item>
+              <el-menu-item index="/Logs/ProjectManagement">事务分类维护</el-menu-item>
+              <el-menu-item index="/Logs/WorkStatistics">工作统计</el-menu-item>
+              <el-menu-item index="/Logs/OrganizationLogsInquiry">机构日志查询</el-menu-item>
+              <el-menu-item index="/Logs/LogsStatistics">日志统计</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <!-- 汇总统计 -->
@@ -59,12 +59,12 @@
               <span>日常维护</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="4-1">字典类别管理</el-menu-item>
-              <el-menu-item index="4-2">个人信息</el-menu-item>
-              <el-menu-item index="4-3">密码修改</el-menu-item>
+              <el-menu-item index="/RoutineWork/Dictionary">字典类别管理</el-menu-item>
+              <el-menu-item index="/RoutineWork/PersonalInfo">个人信息</el-menu-item>
+              <el-menu-item index="/RoutineWork/ChangePassword">密码修改</el-menu-item>
               <el-menu-item index="/RoutineWork/ScheduleManagement">排班管理</el-menu-item>
-              <el-menu-item index="4-5">知识库</el-menu-item>
-              <el-menu-item index="4-6">休假名单维护</el-menu-item>
+              <el-menu-item index="/RoutineWork/KnowledgeBase">知识库</el-menu-item>
+              <el-menu-item index="/RoutineWork/VacationList">休假名单维护</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <!-- 在线申请 -->
@@ -74,11 +74,11 @@
               <span>在线申请</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="5-1">出差申请</el-menu-item>
-              <el-menu-item index="5-2">请休假申请</el-menu-item>
-              <el-menu-item index="5-3">测评考试项目</el-menu-item>
-              <el-menu-item index="5-4">会议室审批</el-menu-item>
-              <el-menu-item index="5-5">车辆审批</el-menu-item>
+              <el-menu-item index="/ApplyOnline/BusinessTrip">出差申请</el-menu-item>
+              <el-menu-item index="/ApplyOnline/Leave">请休假申请</el-menu-item>
+              <el-menu-item index="/ApplyOnline/Examination">测评考试项目</el-menu-item>
+              <el-menu-item index="/ApplyOnline/ConferenceRoom">会议室审批</el-menu-item>
+              <el-menu-item index="/ApplyOnline/vehicleApproval">车辆审批</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <!-- OKR管理 -->
@@ -88,10 +88,20 @@
               <span>OKR管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="6-1">代理资金项目管理</el-menu-item>
-              <el-menu-item index="6-2">项目管理</el-menu-item>
+              <template slot="title">代理资金</template>
+              <el-menu-item index="1-1">代理资金项目管理</el-menu-item>
+              <el-menu-item index="1-2">代理资金账户管理</el-menu-item>
+              <el-menu-item index="6-1">交易流水识别</el-menu-item>
+              <el-menu-item index="6-2">代理资金明细查询</el-menu-item>
+              <el-menu-item index="6-2">代理资金汇总表</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group>
+            <template slot="title">项目管理</template>
+              <el-menu-item index="6-7">新项目录入</el-menu-item>
+              <el-menu-item index="6-8">新项目查询</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
+
         </el-menu>
       </el-col>
     </el-row>

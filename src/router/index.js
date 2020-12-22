@@ -11,13 +11,13 @@ import Operations from '@/components/MyWork/Operations'
 import PastEvent from '@/components/MyWork/PastEvent'
 import DepartmentEvents from '@/components/MyWork/DepartmentEvents'
 
-//Schedule
-import FillInSchedule from '@/components/Schedule/FillInSchedule'
-import LogsInquiry from '@/components/Schedule/LogsInquiry'
-import ProjectManagement from '@/components/Schedule/ProjectManagement'
-import WorkStatistics from '@/components/Schedule/WorkStatistics'
-import OrganizationSchedulesInquiry from '@/components/Schedule/OrganizationSchedulesInquiry'
-import SchedulesStatistics from '@/components/Schedule/SchedulesStatistics'
+//Logs
+import FillInLogs from '@/components/Logs/FillInLogs'
+import LogsInquiry from '@/components/Logs/LogsInquiry'
+import ProjectManagement from '@/components/Logs/ProjectManagement'
+import WorkStatistics from '@/components/Logs/WorkStatistics'
+import OrganizationLogsInquiry from '@/components/Logs/OrganizationLogsInquiry'
+import LogsStatistics from '@/components/Logs/LogsStatistics'
 
 //SammaryStatistics
 import AnnouncementInquiry from '@/components/SummaryStatistics/AnnouncementInquiry'
@@ -29,6 +29,20 @@ import DirectInquiry from '@/components/SummaryStatistics/DirectInquiry'
 
 //RoutineWork
 import ScheduleManagement from '@/components/RoutineWork/ScheduleManagement'
+import Dictionary from '@/components/RoutineWork/Dictionary'
+import PersonalInfo from '@/components/RoutineWork/PersonalInfo'
+import ChangePassword from '@/components/RoutineWork/ChangePassword'
+import KnowledgeBase from '@/components/RoutineWork/KnowledgeBase'
+import VacationList from '@/components/RoutineWork/VacationList'
+
+//ApplyOnline
+import BusinessTrip from '@/components/ApplyOnline/BusinessTrip'
+import Leave from '@/components/ApplyOnline/Leave'
+import Examination from '@/components/ApplyOnline/Examination'
+import ConferenceRoom from '@/components/ApplyOnline/ConferenceRoom'
+import VehicleApproval from '@/components/ApplyOnline/VehicleApproval'
+
+
 
 Vue.use(Router)
 
@@ -60,7 +74,6 @@ export default new Router({
       meta: { title: '我的工作区' },
       children:
         [
-          //MyWork
           { path: 'Todo', name: 'Todo', component: Todo, meta: { title: '待办事项' } },
           { path: 'NewEvent', name: 'NewEvent', component: NewEvent, meta: { title: '新建事件' } },
           { path: 'ManualEntry', name: 'ManualEntry', component: ManualEntry, meta: { title: '手工录入' } },
@@ -71,22 +84,21 @@ export default new Router({
         ]
     },
 
-    //Schedule
+    //Logs
     {
-      path: '/Schedule',
-      name: 'Schedule',
-      redirect: '/Schedule/FillInSchedule',
+      path: '/Logs',
+      name: 'Logs',
+      redirect: '/Logs/FillInLogs',
       component: Home,
       meta: { title: '计划日志' },
       children:
         [
-          //RoutineWork
-          { path: 'FillInSchedule', name: 'FillInSchedule', component: FillInSchedule, meta: { title: '日志填写' } },
+          { path: 'FillInLogs', name: 'FillInLogs', component: FillInLogs, meta: { title: '日志填写' } },
           { path: 'LogsInquiry', name: 'LogsInquiry', component: LogsInquiry, meta: { title: '日志查询' } },
           { path: 'ProjectManagement', name: 'ProjectManagement', component: ProjectManagement, meta: { title: '事务分类维护' } },
           { path: 'WorkStatistics', name: 'WorkStatistics', component: WorkStatistics, meta: { title: '工作统计' } },
-          { path: 'OrganizationSchedulesInquiry', name: 'OrganizationSchedulesInquiry', component: OrganizationSchedulesInquiry, meta: { title: '机构日志查询' } },
-          { path: 'SchedulesStatistics', name: 'SchedulesStatistics', component: SchedulesStatistics, meta: { title: '日志统计' } },
+          { path: 'OrganizationLogsInquiry', name: 'OrganizationLogsInquiry', component: OrganizationLogsInquiry, meta: { title: '机构日志查询' } },
+          { path: 'LogsStatistics', name: 'LogsStatistics', component: LogsStatistics, meta: { title: '日志统计' } },
         ]
     },
 
@@ -99,7 +111,6 @@ export default new Router({
       meta: { title: '汇总统计' },
       children:
         [
-          //RoutineWork
           { path: 'AnnouncementInquiry', name: 'AnnouncementInquiry', component: AnnouncementInquiry, meta: { title: '公告查询' } },
           { path: 'MyEvents', name: 'MyEvents', component: MyEvents, meta: { title: '我的事件' } },
           { path: 'JurisdictionEvents', name: 'JurisdictionEvents', component: JurisdictionEvents, meta: { title: '所辖事件' } },
@@ -109,23 +120,40 @@ export default new Router({
         ]
     },
 
-
     //RoutineWork
     {
       path: '/RoutineWork',
       name: 'RoutineWork',
-      redirect: '/RoutineWork/Todo',
+      redirect: '/RoutineWork/Dictionary',
       component: Home,
       meta: { title: '日常维护' },
       children:
         [
-          //RoutineWork
+          { path: 'Dictionary', name: 'Dictionary', component: Dictionary, meta: { title: '字典类别管理' } },
+          { path: 'PersonalInfo', name: 'PersonalInfo', component: PersonalInfo, meta: { title: '个人信息' } },
+          { path: 'ChangePassword', name: 'ChangePassword', component: ChangePassword, meta: { title: '修改密码' } },
           { path: 'ScheduleManagement', name: 'ScheduleManagement', component: ScheduleManagement, meta: { title: '排班管理' } },
+          { path: 'KnowledgeBase', name: 'KnowledgeBase', component: KnowledgeBase, meta: { title: '知识库' } },
+          { path: 'VacationList', name: 'VacationList', component: VacationList, meta: { title: '休假名单维护' } },
         ]
     },
 
-
-
+    //ApplyOnline
+    {
+      path: '/ApplyOnline',
+      name: 'ApplyOnline',
+      redirect: '/ApplyOnline/BusinessTrip',
+      component: Home,
+      meta: { title: '在线申请' },
+      children:
+        [
+          { path: 'BusinessTrip', name: 'BusinessTrip', component: BusinessTrip, meta: { title: '出差申请' } },
+          { path: 'Leave', name: 'Leave', component: Leave, meta: { title: '请休假申请' } },
+          { path: 'Examination', name: 'Examination', component: Examination, meta: { title: '测评考试项目' } },
+          { path: 'ConferenceRoom', name: 'ConferenceRoom', component: ConferenceRoom, meta: { title: '会议室审批' } },
+          { path: 'VehicleApproval', name: 'VehicleApproval', component: VehicleApproval, meta: { title: '车辆审批' } },
+        ]
+    },
 
   ]
 })

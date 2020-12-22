@@ -148,7 +148,7 @@ export default {
         }
       ],
       arr1: [],
-      manT: [
+      man: [
         {
           name: '王小虎1'
         },
@@ -206,7 +206,7 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event);
       if (tab.index == 0) {
-        this.man = this.manT
+        this.man = this.man
       }
       if (tab.index == 1) {
         this.man = []
@@ -263,6 +263,9 @@ export default {
       console.log(this.arr)
       console.log(this.arr1)
     }
+  },
+  mounted:function(){
+    console.log(123)
   }
 }
 </script>
