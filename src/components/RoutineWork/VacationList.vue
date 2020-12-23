@@ -19,31 +19,35 @@
           </el-col>
 
         </el-row>
-        
+
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
+          <el-button type="success" @click="onSubmit">新增</el-button>
         </el-form-item>
 
       </el-form>
 
       <el-table :data="tableData" stripe style="width: 100%">
 
-        <el-table-column prop="id" label="ID">
+        <el-table-column prop="id" label="序号">
         </el-table-column>
 
-        <el-table-column prop="title" label="标题">
+        <el-table-column prop="title" label="姓名">
         </el-table-column>
 
-        <el-table-column prop="name" label="当前环节" width="180">
+        <el-table-column prop="name" label="单位" width="180">
         </el-table-column>
 
-        <el-table-column prop="date" label="创建时间" width="180">
+        <el-table-column prop="date" label="参加工作时间" width="180">
         </el-table-column>
 
-        <el-table-column prop="sponsor" label="发起人" width="180">
+        <el-table-column prop="sponsor" label="连续工龄" width="180">
         </el-table-column>
 
-        <el-table-column prop="status" label="状态">
+        <el-table-column prop="status" label="本年休假天数">
+        </el-table-column>
+
+        <el-table-column prop="status" label="本年已休天数">
         </el-table-column>
 
       </el-table>
@@ -88,7 +92,7 @@ export default {
           status: '等待接受'
         }
       ],
-      form:[]
+      form: []
     };
   },
   methods: {

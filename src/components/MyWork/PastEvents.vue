@@ -1,19 +1,19 @@
 <template>
-  <div class="NewEvent">
+  <div class="PastEvents">
     <el-card class="box-card">
       <h3>往日事件</h3>
       <el-divider class="el-divider"></el-divider>
-      <el-form ref="form" :model="form" label-width="80px">
+      <el-form ref="form" :model="form" label-width="100px">
         <el-row>
           <el-col :span="6">
-            <el-form-item label="创建人员">
-              <el-input v-model="form.name"></el-input>
+            <el-form-item label="关键字查询">
+              <el-input v-model="form.string"></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
-            <el-form-item label="电话号码">
-              <el-input v-model="form.name"></el-input>
+            <el-form-item label="发起机构">
+              <el-input v-model="form.department"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -21,23 +21,28 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="开始时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.start" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="结束时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.end" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
-            <el-form-item label="状态">
-              <el-select v-model="form.region" placeholder="请选择状态">
-                <el-option label="所有" value="21312"></el-option>
-                <el-option label="已完成" value="123123"></el-option>
-                <el-option label="部分完成" value="shang1hai"></el-option>
-                <el-option label="未完成" value="shan2ghai"></el-option>
+            <el-form-item label="按状态查询">
+              <el-select v-model="form.status" placeholder="请选择">
+                <el-option label="所有" value="status1"></el-option>
+                <el-option label="等待接受" value="status2"></el-option>
+                <el-option label="完成" value="status3"></el-option>
+                <el-option label="正在处理" value="status4"></el-option>
+                <el-option label="督办" value="status5"></el-option>
+                <el-option label="等待审批" value="status6"></el-option>
+                <el-option label="等待审批关闭" value="status7"></el-option>
+                <el-option label="重新办理" value="status8"></el-option>
+                <el-option label="审批" value="status9"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -58,7 +63,7 @@
         <el-table-column prop="title" label="标题">
         </el-table-column>
 
-        <el-table-column prop="name" label="当前环节" width="180">
+        <el-table-column prop="now" label="当前环节" width="180">
         </el-table-column>
 
         <el-table-column prop="date" label="创建时间" width="180">
@@ -84,28 +89,28 @@ export default {
       tableData: [
         {
           date: '2016-05-02',
-          name: '王小虎',
+          now: '普通事件',
           sponsor: 'tom',
           id: 2131231324255,
           title: '事件标题1',
           status: '等待接受'
         }, {
           date: '2016-05-04',
-          name: '王小虎',
+          now: '测试事件',
           sponsor: 'tony',
           id: 56756765,
           title: '事件标题2',
           status: '等待接受'
         }, {
           date: '2016-05-01',
-          name: '王小虎',
+          now: '测试事件2',
           sponsor: 'john',
           id: 435435,
           title: '事件标题3',
           status: '等待接受'
         }, {
           date: '2016-05-03',
-          name: '王小虎',
+          now: '测试事件3',
           sponsor: 'mike',
           id: 567567567,
           title: '事件标题4',
@@ -122,10 +127,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.NewEvent {
-  text-align: left !important;
-}
-.shortInput {
-  width: 240px;
-}
+
 </style>

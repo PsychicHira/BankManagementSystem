@@ -1,13 +1,13 @@
 <template>
-  <div class="NewEvent">
+  <div class="DirectInquiry">
     <el-card class="box-card">
-      <h3>公告查询</h3>
+      <h3>定向查询</h3>
       <el-divider class="el-divider"></el-divider>
       <el-form ref="form" :model="form" label-width="100px">
         <el-row>
           <el-col :span="6">
             <el-form-item label="查询机构">
-              <el-input v-model="form.name"></el-input>
+              <el-input v-model="form.department"></el-input>
             </el-form-item>
           </el-col>
 
@@ -19,11 +19,12 @@
 
            <el-col :span="6">
             <el-form-item label="人员级别">
-              <el-select v-model="form.region" placeholder="请选择">
-                <el-option label="所有" value="21312"></el-option>
-                <el-option label="已完成" value="123123"></el-option>
-                <el-option label="部分完成" value="shang1hai"></el-option>
-                <el-option label="未完成" value="shan2ghai"></el-option>
+              <el-select v-model="form.grade" placeholder="请选择" class="w100">
+                <el-option label="所有" value="1"></el-option>
+                <el-option label="主管及以下普通员工" value="2"></el-option>
+                <el-option label="非主持工作的中层领导" value="3"></el-option>
+                <el-option label="部门及分支机构负责人、主持工作人员" value="4"></el-option>
+                <el-option label="复行级领导、行长助理、董事会秘书" value="5"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -32,23 +33,29 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="开始时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.start" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="结束时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.end" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="请休假类别">
-              <el-select v-model="form.region" placeholder="请选择">
-                <el-option label="所有" value="21312"></el-option>
-                <el-option label="已完成" value="123123"></el-option>
-                <el-option label="部分完成" value="shang1hai"></el-option>
-                <el-option label="未完成" value="shan2ghai"></el-option>
+              <el-select v-model="form.askForLeave" placeholder="请选择" class="w100">
+                <el-option label="所有" value="1"></el-option>
+                <el-option label="年休（探亲)假" value="2"></el-option>
+                <el-option label="病假" value="3"></el-option>
+                <el-option label="婚假" value="4"></el-option>
+                <el-option label="产假" value="5"></el-option>
+                <el-option label="陪护假" value="6"></el-option>
+                <el-option label="工伤假" value="7"></el-option>
+                <el-option label="其他假" value="8"></el-option>
+                <el-option label="事假" value="9"></el-option>
+                <el-option label="丧假" value="0"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -56,7 +63,7 @@
         </el-row>
 
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">查询</el-button>
+          <el-button type="primary" @click="onSubmit">查询</el-button> 
           <el-button>重置</el-button>
         </el-form-item>
       </el-form>
@@ -133,10 +140,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.NewEvent {
-  text-align: left !important;
-}
-.shortInput {
-  width: 240px;
-}
+
 </style>

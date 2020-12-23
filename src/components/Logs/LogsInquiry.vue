@@ -1,5 +1,5 @@
 <template>
-  <div class="NewEvent">
+  <div class="LogsInquiry">
     <el-card class="box-card">
 
       <h3>日志查询</h3>
@@ -15,7 +15,7 @@
 
           <el-col :span="6">
             <el-form-item label="电话号码">
-              <el-input v-model="form.name"></el-input>
+              <el-input v-model="form.phone"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -23,19 +23,19 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="开始时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.start" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="结束时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.end" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="状态">
-              <el-select v-model="form.region" placeholder="请选择状态">
+              <el-select v-model="form.status" placeholder="请选择状态">
                 <el-option label="所有" value="21312"></el-option>
                 <el-option label="已完成" value="123123"></el-option>
                 <el-option label="部分完成" value="shang1hai"></el-option>
@@ -78,14 +78,14 @@ export default {
   data() {
     return {
       form: {
-        title: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        name: '',
+        phone: '',
+        start: '',
+        end: '',
+        status: '',
+      },
+      tableData:{
+
       }
     }
   },
@@ -111,10 +111,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.NewEvent {
-  text-align: left !important;
-}
-.shortInput {
-  width: 240px;
-}
+
 </style>

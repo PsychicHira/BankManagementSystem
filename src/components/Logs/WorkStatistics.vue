@@ -1,5 +1,5 @@
 <template>
-  <div class="NewEvent">
+  <div class="WorkStatistics">
     <el-card class="box-card">
 
       <h3>工作统计</h3>
@@ -15,7 +15,7 @@
 
           <el-col :span="6">
             <el-form-item label="所属机构">
-              <el-input v-model="form.name"></el-input>
+              <el-input v-model="form.department"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -23,13 +23,13 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="开始时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.start" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="结束时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.end" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
 
@@ -106,10 +106,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.NewEvent {
-  text-align: left !important;
-}
-.shortInput {
-  width: 240px;
-}
+
 </style>

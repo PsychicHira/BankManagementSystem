@@ -14,6 +14,7 @@
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>退出登陆</el-dropdown-item>
+            <el-dropdown-item>密码修改</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>

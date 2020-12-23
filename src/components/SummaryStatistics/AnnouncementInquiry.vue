@@ -1,5 +1,5 @@
 <template>
-  <div class="NewEvent">
+  <div class="AnnouncementInquiry">
     <el-card class="box-card">
       <h3>公告查询</h3>
       <el-divider class="el-divider"></el-divider>
@@ -7,7 +7,7 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="查询关键字">
-              <el-input v-model="form.name"></el-input>
+              <el-input v-model="form.words"></el-input>
             </el-form-item>
           </el-col>
 
@@ -21,13 +21,13 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="开始时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.start" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="结束时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.end" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
 
@@ -47,16 +47,13 @@
         <el-table-column prop="title" label="标题">
         </el-table-column>
 
-        <el-table-column prop="name" label="当前环节" width="180">
+        <el-table-column prop="start" label="创建时间" width="180">
         </el-table-column>
 
-        <el-table-column prop="date" label="创建时间" width="180">
+        <el-table-column prop="end" label="结束时间">
         </el-table-column>
 
         <el-table-column prop="sponsor" label="发起人" width="180">
-        </el-table-column>
-
-        <el-table-column prop="status" label="状态">
         </el-table-column>
 
       </el-table>
@@ -72,28 +69,28 @@ export default {
     return {
       tableData: [
         {
-          date: '2016-05-02',
+          start: '2016-05-02',
           name: '王小虎',
           sponsor: 'tom',
           id: 2131231324255,
           title: '事件标题1',
           status: '等待接受'
         }, {
-          date: '2016-05-04',
+          start: '2016-05-04',
           name: '王小虎',
           sponsor: 'tony',
           id: 56756765,
           title: '事件标题2',
           status: '等待接受'
         }, {
-          date: '2016-05-01',
+          start: '2016-05-01',
           name: '王小虎',
           sponsor: 'john',
           id: 435435,
           title: '事件标题3',
           status: '等待接受'
         }, {
-          date: '2016-05-03',
+          start: '2016-05-03',
           name: '王小虎',
           sponsor: 'mike',
           id: 567567567,
@@ -101,7 +98,7 @@ export default {
           status: '等待接受'
         }
       ],
-      form:[]
+      form: []
     };
   },
   methods: {
@@ -111,10 +108,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.NewEvent {
-  text-align: left !important;
-}
-.shortInput {
-  width: 240px;
-}
 </style>

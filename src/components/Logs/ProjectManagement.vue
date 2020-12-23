@@ -1,5 +1,5 @@
 <template>
-  <div class="NewEvent">
+  <div class="ProjectManagement">
     <el-card class="box-card">
 
       <h3>事务分类维护</h3>
@@ -9,29 +9,39 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="请选择事物大类">
-              <el-select v-model="form.region" placeholder="请选择" style="width:100%">
-                <el-option label="所有" value="21312"></el-option>
-                <el-option label="已完成" value="123123"></el-option>
-                <el-option label="部分完成" value="shang1hai"></el-option>
-                <el-option label="未完成" value="shan2ghai"></el-option>
+              <el-select v-model="form.b" placeholder="请选择" style="width:100%">
+                <el-option label="1综合管理" value="213wer12"></el-option>
+                <el-option label="2常规巡查" value="21ewrwe312"></el-option>
+                <el-option label="3运行维护" value="21werwerwer312"></el-option>
+                <el-option label="4变更投产（新系统/新功能/新设备）" value="21ys312"></el-option>
+                <el-option label="5系统建设" value="213rr2"></el-option>
+                <el-option label="6共享分类" value="2131tt2"></el-option>
+                <el-option label="7科技共享" value="2t1312"></el-option>
+                <el-option label="8管理共享" value="21ty312"></el-option>
+                <el-option label="9客户经理条线" value="213y12"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="请选择事物中类">
-              <el-select v-model="form.region" placeholder="请选择" style="width:100%">
-                <el-option label="所有" value="21312"></el-option>
-                <el-option label="已完成" value="123123"></el-option>
-                <el-option label="部分完成" value="shang1hai"></el-option>
-                <el-option label="未完成" value="shan2ghai"></el-option>
+              <el-select v-model="form.m" placeholder="请选择" style="width:100%">
+                <el-option label="1综合管理" value="12asd1312"></el-option>
+                <el-option label="2常规巡查" value="21asd3112"></el-option>
+                <el-option label="3运行维护" value="21asdas3112"></el-option>
+                <el-option label="4变更投产（新系统/新功能/新设备）" value="21131asdsa2"></el-option>
+                <el-option label="5系统建设" value="2113asdasdas12"></el-option>
+                <el-option label="6共享分类" value="2131asdas12"></el-option>
+                <el-option label="7科技共享" value="2131asdasd12"></el-option>
+                <el-option label="8管理共享" value="21311dsa2"></el-option>
+                <el-option label="9客户经理条线" value="21asd312312"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
 
-          <el-col :span="3">
+          <el-col :span="4">
             <el-form-item label="事物编号">
-              <el-input v-model="form.name"></el-input>
+              <el-input v-model="form.num"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -46,16 +56,16 @@
 
           <el-col :span="6">
             <el-form-item label="事物要求">
-              <el-input v-model="form.name"></el-input>
+              <el-input v-model="form.need"></el-input>
             </el-form-item>
           </el-col>
 
-          <el-col :span="3">
-            <el-form-item label="共享标志">
-              <el-select v-model="form.region" placeholder="请选择" style="width:100%">
-                <el-option label="共享" value="21312"></el-option>
-                <el-option label="不共享" value="123123"></el-option>
-                <el-option label="无" value="shang1hai"></el-option>
+          <el-col :span="4">
+            <el-form-item label="审核标志">
+              <el-select v-model="form.sign" placeholder="请选择" style="width:100%">
+                <el-option label="不审核" value="21sdasd312"></el-option>
+                <el-option label="审核" value="fdgfg123123"></el-option>
+                <el-option label="无" value="shafgg1hai"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -92,14 +102,12 @@ export default {
   data() {
     return {
       form: {
-        title: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        b: '',
+        m: '',
+        name: '',
+        num: '',
+        sign: '',
+        need: '',
       }
     }
   },
@@ -108,27 +116,10 @@ export default {
       console.log('submit!');
       console.log(this.form);
     },
-
-
-    //文件上传
-    submitUpload() {
-      this.$refs.upload.submit();
-    },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(file);
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.NewEvent {
-  text-align: left !important;
-}
-.shortInput {
-  width: 240px;
-}
+
 </style>

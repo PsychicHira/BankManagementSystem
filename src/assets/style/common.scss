@@ -35,11 +35,19 @@ a {
 .el-main {
   background-color: #e9eef3;
   color: #333;
-  text-align: center;
   height: 100%;
 }
 
 //重置水平分割线样式
 .el-divider--horizontal{
   margin: 0 0 15px 0;
+}
+
+//共有样式
+.shortInput {
+  width: 240px;
+}
+
+.w100{
+  width:100%
 }

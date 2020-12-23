@@ -264,7 +264,7 @@ export default {
       console.log(this.arr1)
     }
   },
-  mounted:function(){
+  mounted: function () {
     console.log(123)
   }
 }
@@ -331,6 +331,7 @@ export default {
   //标签居中，覆盖原样式
   & >>> .el-tabs__nav {
     float: none;
+    text-align: center;
   }
   .el-container {
     width: 80%;

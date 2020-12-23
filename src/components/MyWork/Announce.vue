@@ -1,5 +1,5 @@
 <template>
-  <div class="NewEvent">
+  <div class="Announce">
     <el-card class="box-card">
       <h3>公告发布</h3>
       <el-divider class="el-divider"></el-divider>
@@ -10,7 +10,7 @@
         </el-form-item>
 
         <el-form-item label="公告内容">
-          <el-input type="textarea" v-model="form.desc"></el-input>
+          <el-input type="textarea" v-model="form.content" :rows="4"></el-input>
         </el-form-item>
 
         <el-form-item label="附加文件">
@@ -21,46 +21,53 @@
           </el-upload>
         </el-form-item>
 
-        <el-form-item label="开始时间">
-          <el-col :span="3">
-            <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+        <el-row>
+          <el-col :span="6">
+            <el-form-item label="开始时间">
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.start" style="width: 100%;"></el-date-picker>
+            </el-form-item>
           </el-col>
-          <!-- <el-col :span="3">
-            <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
-          </el-col> -->
-        </el-form-item>
 
-        <el-form-item label="结束时间">
-          <el-col :span="3">
-            <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+          <el-col :span="6">
+            <el-form-item label="结束时间">
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.end" style="width: 100%;"></el-date-picker>
+            </el-form-item>
           </el-col>
-          <!-- <el-col :span="3">
-            <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
-          </el-col> -->
-        </el-form-item>
 
-        <el-form-item label="发布人员">
-          <el-input v-model="form.name" class="shortInput"></el-input>
-        </el-form-item>
+        </el-row>
 
-        <el-form-item label="联系电话">
-          <el-input v-model="form.name" placeholder="请输入联系电话" class="shortInput"></el-input>
-        </el-form-item>
+        <el-row>
+          <el-col :span="6">
+            <el-form-item label="发布人员">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-col>
 
-        <el-form-item label="影响范围">
-          <el-input v-model="form.title" class="shortInput" placeholder="请选择机构"></el-input>
-        </el-form-item>
+          <el-col :span="6">
+            <el-form-item label="联系电话">
+              <el-input v-model="form.phone"></el-input>
+            </el-form-item>
+          </el-col>
 
-        <el-form-item label="短信提醒">
-          <el-radio-group v-model="form.resource">
-            <el-radio label="是"></el-radio>
-            <el-radio label="否"></el-radio>
-          </el-radio-group>
-        </el-form-item>
+          <el-col :span="6">
+            <el-form-item label="影响范围">
+              <el-input v-model="form.area"></el-input>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="6">
+            <el-form-item label="短信提醒">
+              <el-radio-group v-model="form.SMS">
+                <el-radio label="是"></el-radio>
+                <el-radio label="否"></el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">立即创建</el-button>
-          <el-button>取消</el-button>
+          <el-button type="primary" @click="onSubmit">提交</el-button>
+          <el-button>重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -106,10 +113,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.NewEvent {
-  text-align: left !important;
-}
-.shortInput {
-  width: 240px;
-}
 </style>

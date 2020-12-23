@@ -4,18 +4,18 @@
       <h3>手工录入事件</h3>
       <el-divider class="el-divider"></el-divider>
 
-      <el-form ref="form" :model="form" label-width="80px">
+      <el-form ref="form" :model="form" label-width="110px">
 
         <el-row>
           <el-col :span="6">
             <el-form-item label="联系人员">
-              <el-input v-model="form.title" placeholder="事件联络人员"></el-input>
+              <el-input v-model="form.name" placeholder="事件联络人员"></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="联系电话">
-              <el-input v-model="form.title" placeholder="请输入联系电话"></el-input>
+              <el-input v-model="form.phone" placeholder="请输入联系电话"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -24,14 +24,14 @@
           <el-col :span="6">
             </el-form-item>
             <el-form-item label="机构名称">
-              <el-input v-model="form.title" placeholder=""></el-input>
+              <el-input v-model="form.department" placeholder=""></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             </el-form-item>
             <el-form-item label="联系地址">
-              <el-input v-model="form.title" placeholder=""></el-input>
+              <el-input v-model="form.address" placeholder=""></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -41,7 +41,7 @@
         </el-form-item>
 
         <el-form-item label="事件描述">
-          <el-input type="textarea" v-model="form.desc"></el-input>
+          <el-input type="textarea" v-model="form.desc" :rows="4"></el-input>
         </el-form-item>
 
         <el-form-item label="附加文件">
@@ -55,49 +55,47 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="业务分类">
-              <el-select v-model="form.region" placeholder="请选择业务分类">
-                <el-option label="业务支持" value="21312"></el-option>
-                <el-option label="项目管理" value="123123"></el-option>
-                <el-option label="会议餐饮审批" value="shang1hai"></el-option>
-                <el-option label="会议审批" value="shan2ghai"></el-option>
-                <el-option label="车辆申请" value="bei3jing"></el-option>
+              <el-select v-model="form.category" placeholder="请选择业务分类" class="w100">
+                <el-option label="业务支持" value="category1"></el-option>
+                <el-option label="项目管理" value="category2"></el-option>
+                <el-option label="会议餐饮审批" value="category3"></el-option>
+                <el-option label="会议审批" value="category4"></el-option>
+                <el-option label="车辆审批" value="category5"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="优先级">
-              <el-select v-model="form.reference" placeholder="请选择优先级">
-                <el-option label="一半" value="1"></el-option>
-                <el-option label="重要" value="shan4ghai"></el-option>
-                <el-option label="严重" value="shandghai"></el-option>
-                <el-option label="2天" value="shangfhai"></el-option>
-                <el-option label="3天" value="shangghai"></el-option>
-                <el-option label="4天" value="shanhghai"></el-option>
-                <el-option label="5天" value="shanjghai"></el-option>
+              <el-select v-model="form.reference" placeholder="请选择优先级" class="w100">
+                <el-option label="一半" value="reference1"></el-option>
+                <el-option label="重要" value="reference2"></el-option>
+                <el-option label="严重" value="reference3"></el-option>
+                <el-option label="2天" value="reference4"></el-option>
+                <el-option label="3天" value="reference5"></el-option>
+                <el-option label="4天" value="reference6"></el-option>
+                <el-option label="5天" value="reference7"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
 
         </el-row>
 
-        
-
         <el-form-item label="处理意见">
-          <el-input type="textarea" v-model="form.desc"></el-input>
+          <el-input type="textarea" v-model="form.sugguest" :rows="4"></el-input>
         </el-form-item>
 
         <el-form-item label="信息来源" :inline="true">
-          <el-select v-model="form.region" placeholder="请选择信息来源">
-            <el-option label="电话传真" value="shanghai"></el-option>
-            <el-option label="维护单" value="shanghai"></el-option>
-            <el-option label="Notes" value="shanghai"></el-option>
-            <el-option label="其他方式" value="shanghai"></el-option>
+          <el-select v-model="form.source" placeholder="请选择信息来源">
+            <el-option label="电话传真" value="source1"></el-option>
+            <el-option label="维护单" value="source2"></el-option>
+            <el-option label="Notes" value="source3"></el-option>
+            <el-option label="其他方式" value="source4"></el-option>
           </el-select>
         </el-form-item>
 
         <el-form-item label="流转方式">
-          <el-radio-group v-model="form.resource">
+          <el-radio-group v-model="form.flowing">
             <el-radio label="完成"></el-radio>
             <el-radio label="进一步处理"></el-radio>
             <el-radio label="请示"></el-radio>
@@ -106,17 +104,33 @@
           </el-radio-group>
         </el-form-item>
 
-        <el-form-item label="受理机构">
-          <el-input v-model="form.title" class="shortInput" placeholder="请选择人员"></el-input>
-          <el-input v-model="form.title" class="shortInput" placeholder="请选择业务分类"></el-input>
-          <el-checkbox-group v-model="form.type">
-            <el-checkbox label="知识库预选项" name="type"></el-checkbox>
-          </el-checkbox-group>
-          <el-input v-model="form.title" class="shortInput" placeholder="请输入数量等级"></el-input>
-        </el-form-item>
+        <el-row>
+          <el-form-item label="受理机构">
+
+            <el-col class="shortInput margin">
+              <el-form-item label="人员">
+                <el-input v-model="form.acceptName"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col class="shortInput margin">
+              <el-form-item label="业务分类">
+                <el-input v-model="form.acceptCategory"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col class="shortInput margin">
+              <el-form-item label="数量等级">
+                <el-input v-model="form.acceptNum"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-checkbox-group v-model="form.option">
+              <el-checkbox label="知识库预选项" name="type"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+
+        </el-row>
 
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">立即创建</el-button>
+          <el-button type="primary" @click="onSubmit">创建</el-button>
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>
@@ -164,10 +178,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ManualEntry {
-  text-align: left !important;
-}
-.shortInput {
-  width: 240px;
+.margin{
+  margin-right: 15px;
 }
 </style>

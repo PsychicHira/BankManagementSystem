@@ -8,7 +8,7 @@ import NewEvent from '@/components/MyWork/NewEvent'
 import ManualEntry from '@/components/MyWork/ManualEntry'
 import Announce from '@/components/MyWork/Announce'
 import Operations from '@/components/MyWork/Operations'
-import PastEvent from '@/components/MyWork/PastEvent'
+import PastEvents from '@/components/MyWork/PastEvents'
 import DepartmentEvents from '@/components/MyWork/DepartmentEvents'
 
 //Logs
@@ -79,7 +79,7 @@ export default new Router({
           { path: 'ManualEntry', name: 'ManualEntry', component: ManualEntry, meta: { title: '手工录入' } },
           { path: 'Announce', name: 'Announce', component: Announce, meta: { title: '公告发布' } },
           { path: 'Operations', name: 'Operations', component: Operations, meta: { title: '运维事件' } },
-          { path: 'PastEvent', name: 'PastEvent', component: PastEvent, meta: { title: '往日事件' } },
+          { path: 'PastEvents', name: 'PastEvents', component: PastEvents, meta: { title: '往日事件' } },
           { path: 'DepartmentEvents', name: 'DepartmentEvents', component: DepartmentEvents, meta: { title: '本部待办' } },
         ]
     },
