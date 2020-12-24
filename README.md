@@ -1,5 +1,4 @@
-# 201116     11111
-
+# 201116     
 > A Vue.js project
 
 ## Build Setup
