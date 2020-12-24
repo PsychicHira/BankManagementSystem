@@ -42,6 +42,16 @@ import Examination from '@/components/ApplyOnline/Examination'
 import ConferenceRoom from '@/components/ApplyOnline/ConferenceRoom'
 import VehicleApproval from '@/components/ApplyOnline/VehicleApproval'
 
+//OKR
+import AgencyFundsProject from '@/components/OKR/AgencyFundsProject'
+import AgencyFundsAccount from '@/components/OKR/AgencyFundsAccount'
+import TransactionFlowing from '@/components/OKR/TransactionFlowing'
+import AgencyFundsInquiry from '@/components/OKR/AgencyFundsInquiry'
+import AgencyFundsSammary from '@/components/OKR/AgencyFundsSammary'
+
+import ProjectEntry from '@/components/OKR/ProjectEntry'
+import ProjectInquiry from '@/components/OKR/ProjectInquiry'
+
 
 
 Vue.use(Router)
@@ -154,6 +164,24 @@ export default new Router({
           { path: 'VehicleApproval', name: 'VehicleApproval', component: VehicleApproval, meta: { title: '车辆审批' } },
         ]
     },
+    //OKR
+    {
+      path: '/OKR',
+      name: 'OKR',
+      redirect: '/OKR/AgencyFundsProject',
+      component: Home,
+      meta: { title: 'OKR管理' },
+      children:
+        [
+          { path: 'AgencyFundsProject', name: 'AgencyFundsProject', component: AgencyFundsProject, meta: { title: '代理资金项目管理' } },
+          { path: 'AgencyFundsAccount', name: 'AgencyFundsAccount', component: AgencyFundsAccount, meta: { title: '代理资金账户管理' } },
+          { path: 'TransactionFlowing', name: 'TransactionFlowing', component: TransactionFlowing, meta: { title: '交易流水识别' } },
+          { path: 'AgencyFundsInquiry', name: 'AgencyFundsInquiry', component: AgencyFundsInquiry, meta: { title: '代理资金明细查询' } },
+          { path: 'AgencyFundsSammary', name: 'AgencyFundsSammary', component: AgencyFundsSammary, meta: { title: '国开资金汇总查询' } },
 
+          { path: 'ProjectEntry', name: 'ProjectEntry', component: ProjectEntry, meta: { title: '新项目录入' } },
+          { path: 'ProjectInquiry', name: 'ProjectInquiry', component: ProjectInquiry, meta: { title: '新项目查询' } },
+        ]
+    },
   ]
 })

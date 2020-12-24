@@ -1,5 +1,5 @@
 <template>
-  <div class="ManualEntry">
+  <div class="PersonalInfo">
     <el-card class="box-card">
       <h3>个人信息</h3>
       <el-divider class="el-divider"></el-divider>
@@ -187,10 +187,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ManualEntry {
-  text-align: left !important;
-}
-.shortInput {
-  width: 240px;
-}
+
 </style>

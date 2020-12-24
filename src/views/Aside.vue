@@ -89,16 +89,16 @@
             </template>
             <el-menu-item-group>
               <template slot="title">代理资金</template>
-              <el-menu-item index="1-1">代理资金项目管理</el-menu-item>
-              <el-menu-item index="1-2">代理资金账户管理</el-menu-item>
-              <el-menu-item index="6-1">交易流水识别</el-menu-item>
-              <el-menu-item index="6-2">代理资金明细查询</el-menu-item>
-              <el-menu-item index="6-2">代理资金汇总表</el-menu-item>
+              <el-menu-item index="/OKR/AgencyFundsProject">代理资金项目管理</el-menu-item>
+              <el-menu-item index="/OKR/AgencyFundsAccount">代理资金账户管理</el-menu-item>
+              <el-menu-item index="/OKR/TransactionFlowing">交易流水识别</el-menu-item>
+              <el-menu-item index="/OKR/AgencyFundsInquiry">代理资金明细查询</el-menu-item>
+              <el-menu-item index="/OKR/AgencyFundsSammary">代理资金汇总表</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group>
             <template slot="title">项目管理</template>
-              <el-menu-item index="6-7">新项目录入</el-menu-item>
-              <el-menu-item index="6-8">新项目查询</el-menu-item>
+              <el-menu-item index="/OKR/ProjectEntry">新项目录入</el-menu-item>
+              <el-menu-item index="/OKR/ProjectInquiry">新项目查询</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 

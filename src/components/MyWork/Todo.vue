@@ -3,20 +3,52 @@
     <el-card class="box-card">
       <h3>待办事件</h3>
       <el-divider class="el-divider"></el-divider>
-      <el-table :data="tableData" stripe style="width: 100%">
-        <el-table-column prop="id" label="ID">
+      
+            <el-table :data="tableData">
+
+        <el-table-column label="ID">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.row.id }}</span>
+          </template>
         </el-table-column>
-        <el-table-column prop="date" label="创建时间" width="180">
+
+        <el-table-column label="标题">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.row.title }}</span>
+          </template>
         </el-table-column>
-        <el-table-column prop="title" label="标题">
+
+        <el-table-column label="当前环节">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.row.now }}</span>
+          </template>
         </el-table-column>
-        <el-table-column prop="name" label="发起人" width="180">
+
+        <el-table-column label="创建时间">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.row.date }}</span>
+          </template>
         </el-table-column>
-        <el-table-column prop="address" label="发起机构">
+
+        <el-table-column label="发起人">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.row.sponsor }}</span>
+          </template>
         </el-table-column>
-        <el-table-column prop="address" label="当前环节">
+
+        <el-table-column label="发起机构">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.row.department }}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button type="success" size="mini" @click="handleEdit(scope.$index, scope.row)">查看</el-button>
+          </template>
         </el-table-column>
       </el-table>
+      
     </el-card>
   </div>
 
@@ -30,33 +62,206 @@ export default {
       tableData: [
         {
           date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
           id: 2131231324255,
           title: '事件标题1'
-        }, {
+        },
+        {
           date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
           id: 56756765,
           title: '事件标题2'
-        }, {
+        },
+        {
           date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
           id: 435435,
           title: '事件标题3'
-        }, {
+        },
+        {
           date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
           id: 567567567,
           title: '事件标题4'
-        }
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+        {
+          date: '2016-05-01',
+          sponsor: '王小虎',
+          now:'陈伟',
+          department:'总行营业部',
+          id: 435435,
+          title: '事件标题3'
+        },
+
       ]
     };
   },
   methods: {
+
+    handleEdit(index, row) {
+      console.log(index, row);
+    },
 
   }
 }

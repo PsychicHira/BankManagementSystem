@@ -32,16 +32,16 @@
         <el-table-column prop="id" label="序号">
         </el-table-column>
 
-        <el-table-column prop="title" label="姓名">
+        <el-table-column prop="name" label="姓名">
         </el-table-column>
 
-        <el-table-column prop="name" label="单位" width="180">
+        <el-table-column prop="depatment" label="单位" width="180">
         </el-table-column>
 
-        <el-table-column prop="date" label="参加工作时间" width="180">
+        <el-table-column prop="start" label="参加工作时间" width="180">
         </el-table-column>
 
-        <el-table-column prop="sponsor" label="连续工龄" width="180">
+        <el-table-column prop="successive" label="连续工龄" width="180">
         </el-table-column>
 
         <el-table-column prop="status" label="本年休假天数">

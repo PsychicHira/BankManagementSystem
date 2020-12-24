@@ -107,7 +107,8 @@ export default {
       centerDialogVisible: false,
       form: {
         SMS: ''
-      }
+      },
+      value: new Date(),
 
     }
   },
@@ -120,5 +121,18 @@ export default {
   }
 }
 </script>
-  <style lang="scss" scoped>
+  
+<style lang="scss" scoped>
+.FillInLogs {
+  .el-calendar-day {
+    .item {
+      height: 100%;
+      text-align: center;
+    }
+  }
+  //选中的日期颜色
+  & >>> .is-selected {
+    background-color: #f1fa7b !important;
+  }
+}
 </style>
