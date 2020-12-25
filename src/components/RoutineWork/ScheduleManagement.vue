@@ -11,7 +11,9 @@
             <el-calendar v-model="value">
               <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
               <template slot="dateCell" slot-scope="{date, data}">
-                <el-tooltip class="item" effect="dark" :content="tips" placement="top">
+                <el-tooltip class="item" effect="light" placement="top">
+
+                  <div slot="content">{{person(data.day)}}<br />{{data.day}}</div>
                   <!-- <el-button>上边</el-button> -->
 
                   <p @click="getCurrentDate(data)">
@@ -20,6 +22,7 @@
                     {{ data.day.split('-').slice(1).join('-') }}
                   </p>
                 </el-tooltip>
+
               </template>
             </el-calendar>
           </el-tab-pane>
@@ -71,19 +74,20 @@
           <el-button size="mini" type="primary" class="btn">添加人员</el-button>
 
           <el-tab-pane class="active" label="值班顺序表（男）" name="man">
-            <el-table :data="man" style="width: 100%" height="422" max-height="422">
+            <el-table :data="departmentMan" style="width: 100%" height="422" max-height="422">
               <el-table-column fixed type="index" label="序号" width="150">
               </el-table-column>
               <el-table-column property="name" label="姓名">
               </el-table-column>
               <el-table-column label="操作" fixed="right">
                 <template slot-scope="scope">
-                  <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                  <!-- <el-button size="mini" type="success" @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
                   <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                 </template>
               </el-table-column>
             </el-table>
           </el-tab-pane>
+
           <el-tab-pane label="值班顺序表（女）" name="female">
             <el-table :data="female" style="width: 100%" height="422" max-height="422">
               <el-table-column fixed type="index" label="序号" width="150">
@@ -92,7 +96,7 @@
               </el-table-column>
               <el-table-column label="操作" fixed="right">
                 <template slot-scope="scope">
-                  <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                  <!-- <el-button size="mini" type="success" @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
                   <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                 </template>
               </el-table-column>
@@ -103,10 +107,13 @@
     </div>
 
     <!-- 值班说明 -->
-    <!-- <div class="div bottom"> -->
-      <el-card class="box-card div bottom">
-        <h1>值班说明</h1>
-        <el-divider class="el-divider"></el-divider>
+    <el-card class="box-card div bottom">
+      <div slot="header" class="clearfix">
+        <span style="font-weight:bold;font-size:18px">值班说明</span>
+        <el-button style="float: right" type="success" size="mini">修改值班说明</el-button>
+      </div>
+      <!-- <div v-for="o in 4" :key="o" class="text item"> -->
+      <div class="text item">
         <span>1、值班方式：现场值班，日终完成后暂改电话值班</span><br>
         <span>2、值班事件：工作日8:30——次日8：30，.；周末白班8：30——19:00.夜班18:00——次日8：30</span><br>
         <span>3、值班工作主要内容</span><br>
@@ -115,13 +122,14 @@
         <span>C、负责紧急事件现场沟通、协调、汇报等</span><br>
         <span>4、每月排班顺序按以上表顺序执行（若遇重大节假日另行报名值班）</span><br>
         <span>5、1-4号女生负责每周六白天值班、依次轮流</span><br>
-      </el-card>
-    <!-- </div> -->
+
+      </div>
+    </el-card>
 
     <!-- 弹窗 -->
-    <el-dialog title="提示" :visible.sync="centerDialogVisible" width="50%" center>
+    <el-dialog title="请安排值班人员" :visible.sync="centerDialogVisible" width="50%" center>
       <!-- <span>内容</span> -->
-      <el-transfer v-model="arr1" :data="arr" :titles="['可选值班人员','当前值班人员']"></el-transfer>
+      <el-transfer :data="optionalPerson" v-model="currentPerson" :titles="['可选值班人员','当前值班人员']"></el-transfer>
       <span slot="footer" class="dialog-footer">
         <el-button @click="centerDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="transferConfirm">确 定</el-button>
@@ -131,6 +139,8 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'ScheduleManagement',
   data() {
@@ -144,73 +154,59 @@ export default {
       // ]
       centerDialogVisible: false,
       newName: "",
-      tips: '王小虎1，王小虎2，王小虎3',
-      arr: [
-        {
-          key: 1,
-          label: '王虎1'
-        },
-        {
-          key: 2,
-          label: '王虎2'
-        }
+      // tips: '王小虎1，王小虎2，王小虎3',
+      //tips是鼠标经过日历显示的值班人员
+      tips: this.tips ? this.tips : '无',
+      //日历的每一天数据
+      calendarData: {
+        '2020-12-16': '冯洋',
+        '2020-12-17': '吴正淮'
+      }
+      // '2020-12-16':{
+      //   name:'',
+      //   day:''
+      // }
+      ,
+
+      departmentMan: [
+
       ],
-      arr1: [],
-      man: [
-        {
-          name: '王小虎1'
-        },
-        {
-          name: '王小虎2'
-        },
-        {
-          name: '王小虎3'
-        },
-        {
-          name: '王小虎4'
-        },
-        {
-          name: '王小虎1'
-        },
-        {
-          name: '王小虎2',
-        },
-        {
-          name: '王小虎3',
-        },
-        {
-          name: '王小虎4',
-        },
-        {
-          name: '王小虎1',
-        },
-        {
-          name: '王小虎2',
-        },
-        {
-          name: '王小虎3',
-        },
-        {
-          name: '王小虎4',
-        }
+      currentPerson: [
+
+      ],
+      optionalPerson: [
+        // {
+        //   key: 1,
+        //   label: '王虎1'
+        // },
+        // {
+        //   key: 2,
+        //   label: '王虎2'
+        // }
       ],
       female: [
         {
-          name: '王小虎4',
+          name: '王梦玲',
         },
         {
-          name: '王小虎4',
+          name: '杜霞',
         },
         {
-          name: '王小虎4',
+          name: '郭佳佳',
         },
         {
-          name: '王小虎4',
+          name: '栗谷',
         },
       ]
     }
   },
   methods: {
+    person(day) {
+
+      return this.calendarData[day]
+    },
+
+
     handleClick(tab, event) {
       console.log(tab, event);
       if (tab.index == 0) {
@@ -237,9 +233,28 @@ export default {
     //   return res
     // },
     getCurrentDate(data) {
-      console.log(data)
-      console.log(data.day)
+      this.transferConfirm(data.day)
       this.centerDialogVisible = true
+    },
+
+    //穿梭框选完人员点击确定触发
+    transferConfirm(day) {
+      this.centerDialogVisible = false
+      // console.log(this.optionalPerson)
+      // console.log(this.currentPerson)
+      console.log(day)
+      //类型等于string的时候是日期，是对象的时候是event
+      if (typeof day == 'string') {
+        this.day = day
+        return
+      }
+      if (this.day) {
+        this.calendarData[this.day] = ''
+      }
+      this.currentPerson.forEach(ele => {
+        this.calendarData[this.day] += this.optionalPerson[ele].label + ','
+      })
+      // console.log(this.calendarData['2020-12-16'])
     },
     //编辑
     handleEdit(index, row) {
@@ -266,14 +281,24 @@ export default {
 
       console.log(index, row);
     },
-    transferConfirm() {
-      this.centerDialogVisible = false
-      console.log(this.arr)
-      console.log(this.arr1)
-    }
+
   },
   mounted: function () {
-    console.log(123)
+    //获取人员数据
+    let data = require('./data.js')
+    //部门值班——值班人员男
+    this.departmentMan = data.departmentMan
+    //把男性人员给到可选值班人员数组
+    data.departmentMan.forEach((el, index) => {
+      this.optionalPerson.push({ key: index, label: el.name })
+    })
+
+
+    let o = {a:4,b:5}
+    // let c = 'asdasd'
+    // o[c] = ''
+    o.asdasd = 7
+    console.log(o.c)
   }
 }
 </script>
@@ -290,6 +315,8 @@ export default {
   overflow: hidden;
   p {
     height: 60px;
+    text-align: center;
+    line-height: 60px;
   }
 }
 .right {
@@ -336,10 +363,14 @@ export default {
 
 //scheduleManagement下的日历tab切换
 .scheduleManagement {
+  & >>> .el-card__body {
+    padding-top: 0;
+  }
   //标签居中，覆盖原样式
   & >>> .el-tabs__nav {
     float: none;
     text-align: center;
+    line-height: 60px;
   }
   .el-container {
     width: 80%;

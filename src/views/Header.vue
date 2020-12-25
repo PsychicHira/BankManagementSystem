@@ -1,26 +1,34 @@
 <template>
-<div class="header-container">
-  <el-container direction="vertical" >
-    <el-header class="header">
-      <div class="header-left">
-        <h1>行务综合服务平台</h1>
-        <BreadCrumb></BreadCrumb>
-      </div>
-      <div class="header-right">
-        <i class="el-icon-user-solid"></i>
-        <el-dropdown trigger="click">
-          <span class="el-dropdown-link">
-            郭佳佳（信息技术部)<a href="javascript:void(0)" class="el-icon-caret-bottom el-icon--right"></a>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>退出登陆</el-dropdown-item>
-            <el-dropdown-item>密码修改</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </div>
-    </el-header>
-  </el-container>
-</div>
+  <div class="header-container">
+    <el-container direction="vertical">
+      <el-header class="header">
+        <div class="header-left">
+          <!-- <h1>行务综合服务平台</h1> -->
+          <BreadCrumb></BreadCrumb>
+        </div>
+
+        <div class="header-middle">
+          <img src="../assets/logo.png" alt="">
+          <h1>行务综合服务平台</h1>
+        </div>
+
+        <div class="header-right">
+          <i class="el-icon-user-solid"></i>
+
+          <el-dropdown trigger="click" @command="handleCommand">
+            <span class="el-dropdown-link">
+              郭佳佳（信息技术部)<a href="javascript:void(0)" class="el-icon-caret-bottom el-icon--right"></a>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>退出登陆</el-dropdown-item>
+              <el-dropdown-item command="密码修改">密码修改</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+
+        </div>
+      </el-header>
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -45,9 +53,24 @@ export default {
     //   let h1DivWidth = viewWidth - 160;
     //   h1Div[0].setAttribute("style", "width:" + h1DivWidth + "px");
     // },
+
+    // toChangePassword:function(){
+    //   console.log(123)
+    //   this.$route.push('/RoutineWork/ChangePassword')
+    // },
+
+    handleCommand(command) {
+      // this.$message('click on item ' + command);
+      if (command == '密码修改') {
+        this.$router.push('/RoutineWork/ChangePassword')
+      }
+
+
+    }
   },
   mounted: function () {
     // this.getViewWidth()
+
   },
 };
 </script>
@@ -65,8 +88,28 @@ export default {
     float: left;
     height: 70px;
     padding-left: 20px;
-    h1{
+    h1 {
       line-height: 50px;
+    }
+  }
+  & >>> .header-middle {
+    display: inline;
+    width: 500px;
+    height: 70px;
+    // margin: 0 auto;
+    padding-left: 20%;
+    // position: absolute;
+    float: left;
+    h1{
+      line-height: 70px;
+      text-align: center;
+      font-size: 26px;
+    }
+    img{
+      margin-top: 5px;
+      height: 60px;
+      display: inline;
+      float: left;
     }
   }
   .header-right {
@@ -80,7 +123,7 @@ export default {
   }
 }
 .header-container >>> .el-container {
-  height:70px;
+  height: 70px;
 }
 
 //改变 .el-dropdown 自带文字颜色

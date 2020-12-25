@@ -134,5 +134,11 @@ export default {
   & >>> .is-selected {
     background-color: #f1fa7b !important;
   }
+
+  p {
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+  }
 }
 </style>
