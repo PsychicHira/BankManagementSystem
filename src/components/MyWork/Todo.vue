@@ -3,8 +3,8 @@
     <el-card class="box-card">
       <h3>待办事件</h3>
       <el-divider class="el-divider"></el-divider>
-      
-            <el-table :data="tableData">
+
+      <el-table :data="tableData">
 
         <el-table-column label="ID">
           <template slot-scope="scope">
@@ -48,7 +48,7 @@
           </template>
         </el-table-column>
       </el-table>
-      
+
     </el-card>
   </div>
 
@@ -63,96 +63,96 @@ export default {
         {
           date: '2016-05-02',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 2131231324255,
           title: '事件标题1'
         },
         {
           date: '2016-05-04',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 56756765,
           title: '事件标题2'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-03',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 567567567,
           title: '事件标题4'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
@@ -160,96 +160,96 @@ export default {
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
         {
           date: '2016-05-01',
           sponsor: '王小虎',
-          now:'陈伟',
-          department:'总行营业部',
+          now: '陈伟',
+          department: '总行营业部',
           id: 435435,
           title: '事件标题3'
         },
@@ -262,6 +262,15 @@ export default {
     handleEdit(index, row) {
       console.log(index, row);
     },
+
+  },
+  mounted: function () {
+    // let Todo = document.getElementsByClassName('Todo')
+    // console.log('todo')
+    // if (Todo.length > 0) {
+    //   document.getElementsByTagName("html")[0].removeAttribute("class", "html");
+    //   document.getElementsByTagName("body")[0].removeAttribute("class", "body");
+    // }
 
   }
 }

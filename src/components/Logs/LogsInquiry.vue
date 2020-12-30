@@ -52,14 +52,14 @@
         </el-form-item>
       </el-form>
 
-      <el-table :data="tableData" stripe style="width: 100%">
+      <el-table :data="tableData" stripe>
         <el-table-column prop="id" label="序号">
         </el-table-column>
-        <el-table-column prop="date" label="姓名" width="180">
+        <el-table-column prop="date" label="姓名">
         </el-table-column>
         <el-table-column prop="title" label="工作内容">
         </el-table-column>
-        <el-table-column prop="name" label="完成情况" width="180">
+        <el-table-column prop="name" label="完成情况">
         </el-table-column>
         <el-table-column prop="address" label="启示与反思">
         </el-table-column>

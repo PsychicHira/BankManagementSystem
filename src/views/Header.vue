@@ -7,9 +7,15 @@
           <BreadCrumb></BreadCrumb>
         </div>
 
-        <div class="header-middle">
+        <!-- <div class="header-middle">
           <img src="../assets/logo.png" alt="">
           <h1>行务综合服务平台</h1>
+        </div> -->
+
+        <div class="col">
+          <img src="../assets/logoAlong.png" alt="">
+          <h1>西藏银行 —— 行务综合服务平台</h1>
+          <h2>བོད་ལྗོངས་དངུལ་ཁང། ཕྱོགས་བསྡུས་ཞབས་ཞུ་འི་སྟེགས་བུ།</h2>
         </div>
 
         <div class="header-right">
@@ -100,12 +106,12 @@ export default {
     padding-left: 20%;
     // position: absolute;
     float: left;
-    h1{
+    h1 {
       line-height: 70px;
       text-align: center;
       font-size: 26px;
     }
-    img{
+    img {
       margin-top: 5px;
       height: 60px;
       display: inline;
@@ -113,7 +119,8 @@ export default {
     }
   }
   .header-right {
-    position: relative;
+    position: absolute;
+    top: 20px;
     color: #fff;
     float: right;
     right: 50px;
@@ -129,5 +136,38 @@ export default {
 //改变 .el-dropdown 自带文字颜色
 .el-dropdown {
   color: #000;
+}
+
+.col {
+  position: relative;
+  width: 410px;
+  height: 70px;
+  margin: 0 auto;
+  img {
+    height: 60px;
+    // position: absolute;
+    margin-top: 5px;
+    // margin-left: 14%;
+    display: block;
+    float: left;
+    margin-right: 15px;
+  }
+  h1,
+  h2 {
+    display: inline-block;
+    margin: 0;
+    color: #000;
+  }
+  h1 {
+    position: absolute;
+    top: -4px;
+    // letter-spacing: 5px;
+    font-size:20px
+  }
+  h2 {
+    position: absolute;
+    bottom: -4px;
+    // letter-spacing: 4px;
+  }
 }
 </style>

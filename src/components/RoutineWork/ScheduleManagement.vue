@@ -294,11 +294,6 @@ export default {
     })
 
 
-    let o = {a:4,b:5}
-    // let c = 'asdasd'
-    // o[c] = ''
-    o.asdasd = 7
-    console.log(o.c)
   }
 }
 </script>
