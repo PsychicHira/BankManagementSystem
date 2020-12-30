@@ -10,7 +10,7 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="申请部门">
-              <el-input v-model="form.depatment"></el-input>
+              <el-input v-model="form.department"></el-input>
             </el-form-item>
           </el-col>
 
@@ -29,10 +29,10 @@
           <el-col :span="6">
             <el-form-item label="申请人类型">
               <el-select v-model="form.type" placeholder="请选择" class="w100">
-                <el-option label="主管及以下普通员工" value="1"></el-option>
-                <el-option label="非主持工作的中层领导" value="2"></el-option>
-                <el-option label="部门及分支机构负责人、主持工作人员" value="3"></el-option>
-                <el-option label="复行级领导、行长助理、董事会秘书" value="4"></el-option>
+                <el-option label="主管及以下普通员工" value="主管及以下普通员工"></el-option>
+                <el-option label="非主持工作的中层领导" value="非主持工作的中层领导"></el-option>
+                <el-option label="部门及分支机构负责人、主持工作人员" value="部门及分支机构负责人、主持工作人员"></el-option>
+                <el-option label="复行级领导、行长助理、董事会秘书" value="复行级领导、行长助理、董事会秘书"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -70,13 +70,13 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="离岗期间人员姓名">
-              <el-input v-model="form.leaveName"></el-input>
+              <el-input v-model="form.leaverName"></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="离岗期间人员职务">
-              <el-input v-model="form.leavePost"></el-input>
+              <el-input v-model="form.leaverPost"></el-input>
             </el-form-item>
           </el-col>
 
@@ -89,7 +89,7 @@
           <el-col :span="6">
             <el-form-item label="审批人">
               <el-select v-model="form.approve" placeholder="请选择" class="w100">
-                <el-option label="刘书宇" value="1"></el-option>
+                <el-option label="刘书宇" value="刘书宇"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -134,22 +134,54 @@ export default {
   data() {
     return {
       form: {
-        title: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
+        department: '',
+        name: '',
+        phone: '',
+        type: '',
+        start: '',
+        end: '',
+        address: '',
+        leaverName: '',
+        leaverPost: '',
+        BTPost: '',
+        approve: '',
         desc: '',
         SMS: ''
-      }
+      },
+      fileList: [
+        // {
+        //   // name: '',
+        //   // url: ''
+        // }, 
+        // {
+        //   // name: '',
+        //   // url: ''
+        // }]
+      ]
     }
   },
   methods: {
     onSubmit() {
       console.log('submit!');
       console.log(this.form);
+
+      if (JSON.parse(localStorage.getItem("login")).userName == 'admin') {
+        console.log(123)
+        localStorage.setItem('BTData', JSON.stringify(this.form));
+
+        this.$message({
+          message: '提交成功',
+          type: 'success',
+          center:true
+        });
+      } else {
+        console.log(456)
+        this.$message({
+          message: '提交成功',
+          type: 'success',
+          center:true
+        });
+      }
     },
 
 
@@ -163,6 +195,9 @@ export default {
     handlePreview(file) {
       console.log(file);
     }
+  },
+  mounted: function () {
+    console.log(JSON.parse(localStorage.getItem("login")).userName)
   }
 }
 </script>

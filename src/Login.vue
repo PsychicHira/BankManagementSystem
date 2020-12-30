@@ -18,7 +18,7 @@
         <el-input type="password" v-model="ruleForm.passWord" autocomplete="on"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm(ruleForm)" class="button">登录</el-button>
+        <el-button type="primary" @click="login(ruleForm)" class="button">登录</el-button>
       </el-form-item>
     </el-form>
 
@@ -46,12 +46,18 @@ export default {
     };
   },
   methods: {
-    submitForm(formName) {
+    login(formName) {
       // console.log(formName)
       if (formName.userName != '' && formName.passWord != '') {
         // alert('发送登陆请求');
         // this.$router.push('/home')
-        this.$router.replace('/home')
+        console.log(formName)
+
+        localStorage.setItem('login',JSON.stringify(formName));
+        
+        this.$router.push('/home')
+
+        // this.$router.replace('/home')
       } else
         alert('请输入账号密码');
       return false;
@@ -109,7 +115,7 @@ export default {
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    box-shadow: 0 0 25px #909399;
+    box-shadow: 0 0 15px #909399;
     background-color: #fff;
   }
   .button {
