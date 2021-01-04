@@ -37,6 +37,7 @@ import VacationList from '@/components/RoutineWork/VacationList'
 
 //ApplyOnline
 import BusinessTrip from '@/components/ApplyOnline/BusinessTrip'
+import Training from '@/components/ApplyOnline/Training'
 import Leave from '@/components/ApplyOnline/Leave'
 import Examination from '@/components/ApplyOnline/Examination'
 import ConferenceRoom from '@/components/ApplyOnline/ConferenceRoom'
@@ -158,6 +159,7 @@ export default new Router({
       children:
         [
           { path: 'BusinessTrip', name: 'BusinessTrip', component: BusinessTrip, meta: { title: '出差申请' } },
+          { path: 'Training', name: 'Training', component: Training, meta: { title: '培训申请' } },
           { path: 'Leave', name: 'Leave', component: Leave, meta: { title: '请休假申请' } },
           { path: 'Examination', name: 'Examination', component: Examination, meta: { title: '测评考试项目' } },
           { path: 'ConferenceRoom', name: 'ConferenceRoom', component: ConferenceRoom, meta: { title: '会议室审批' } },
@@ -178,7 +180,6 @@ export default new Router({
           { path: 'TransactionFlowing', name: 'TransactionFlowing', component: TransactionFlowing, meta: { title: '交易流水识别' } },
           { path: 'AgencyFundsInquiry', name: 'AgencyFundsInquiry', component: AgencyFundsInquiry, meta: { title: '代理资金明细查询' } },
           { path: 'AgencyFundsSammary', name: 'AgencyFundsSammary', component: AgencyFundsSammary, meta: { title: '国开资金汇总查询' } },
-
           { path: 'ProjectEntry', name: 'ProjectEntry', component: ProjectEntry, meta: { title: '新项目录入' } },
           { path: 'ProjectInquiry', name: 'ProjectInquiry', component: ProjectInquiry, meta: { title: '新项目查询' } },
         ]

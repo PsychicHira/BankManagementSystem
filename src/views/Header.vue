@@ -23,7 +23,7 @@
 
           <el-dropdown trigger="click" @command="handleCommand">
             <span class="el-dropdown-link">
-              郭佳佳（信息技术部)<a href="javascript:void(0)" class="el-icon-caret-bottom el-icon--right"></a>
+              {{name}}<a href="javascript:void(0)" class="el-icon-caret-bottom el-icon--right"></a>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>退出登陆</el-dropdown-item>
@@ -47,7 +47,7 @@ export default {
   },
   data() {
     return {
-
+      name: ''
     };
   },
   methods: {
@@ -76,7 +76,14 @@ export default {
   },
   mounted: function () {
     // this.getViewWidth()
+    console.log('header')
 
+
+    if (JSON.parse(localStorage.getItem("login")).userName != 'admin') {
+      this.name = '张三'
+    } else {
+      this.name = '小明（信息技术部)'
+    }
   },
 };
 </script>
@@ -162,7 +169,7 @@ export default {
     position: absolute;
     top: -4px;
     // letter-spacing: 5px;
-    font-size:20px
+    font-size: 20px;
   }
   h2 {
     position: absolute;

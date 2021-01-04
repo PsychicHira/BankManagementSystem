@@ -75,6 +75,7 @@
             </template>
             <el-menu-item-group>
               <el-menu-item index="/ApplyOnline/BusinessTrip">出差申请</el-menu-item>
+              <el-menu-item index="/ApplyOnline/Training">培训申请</el-menu-item>
               <el-menu-item index="/ApplyOnline/Leave">请休假申请</el-menu-item>
               <el-menu-item index="/ApplyOnline/Examination">测评考试项目</el-menu-item>
               <el-menu-item index="/ApplyOnline/ConferenceRoom">会议室审批</el-menu-item>

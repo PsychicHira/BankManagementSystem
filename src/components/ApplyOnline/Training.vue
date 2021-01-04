@@ -1,11 +1,11 @@
 <template>
-  <div class="BusinessTrip">
+  <div class="Training">
     <el-card class="box-card">
 
-      <h3>出差申请</h3>
+      <h3>培训申请</h3>
       <el-divider class="el-divider"></el-divider>
 
-      <el-form ref="form" :model="form" label-width="150px">
+      <el-form ref="form" :model="form" label-width="100px">
 
         <el-row>
           <el-col :span="6">
@@ -53,40 +53,12 @@
           </el-col>
 
           <el-col :span="6">
-            <el-form-item label="出差地点">
+            <el-form-item label="地点">
               <el-input v-model="form.address"></el-input>
             </el-form-item>
           </el-col>
 
-          <el-col :span="6">
-            <el-form-item>
-              <el-checkbox-group v-model="form.SMS">
-                <el-checkbox label="无差旅费报销" name="type"></el-checkbox>
-              </el-checkbox-group>
-            </el-form-item>
-          </el-col>
-        </el-row>
-
-        <el-row>
-          <el-col :span="6">
-            <el-form-item label="离岗期间人员姓名">
-              <el-input v-model="form.leaverName"></el-input>
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="6">
-            <el-form-item label="离岗期间人员职务">
-              <el-input v-model="form.leaverPost"></el-input>
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="6">
-            <el-form-item label="出差人职务">
-              <el-input v-model="form.BTPost"></el-input>
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="6">
+                    <el-col :span="6">
             <el-form-item label="审批人">
               <el-select v-model="form.approve" placeholder="请选择" class="w100">
                 <el-option label="刘书宇" value="刘书宇"></el-option>
@@ -94,20 +66,11 @@
               </el-select>
             </el-form-item>
           </el-col>
-
-        </el-row>
-
-        <el-row>
-          <el-col :span="12">
-            <el-form-item label="出差人员">
-              <el-input v-model="form.BTname"></el-input>
-            </el-form-item>
-          </el-col>
         </el-row>
 
         <el-row>
 
-          <el-form-item label="出差事由">
+          <el-form-item label="培训内容">
             <el-input type="textarea" v-model="form.desc" :rows="4"></el-input>
           </el-form-item>
 
@@ -142,9 +105,6 @@ export default {
         start: '',
         end: '',
         address: '',
-        leaverName: '',
-        leaverPost: '',
-        BTPost: '',
         approve: '',
         desc: '',
         SMS: '',
@@ -169,7 +129,7 @@ export default {
 
       if (JSON.parse(localStorage.getItem("login")).userName == 'admin') {
         console.log(123)
-        localStorage.setItem('BTData', JSON.stringify(this.form));
+        localStorage.setItem('TrainningData', JSON.stringify(this.form));
 
         this.$message({
           message: '提交成功',
@@ -199,7 +159,7 @@ export default {
     }
   },
   mounted: function () {
-    console.log(JSON.parse(localStorage.getItem("login")).userName)
+    // console.log(JSON.parse(localStorage.getItem("login")).userName)
   }
 }
 </script>
