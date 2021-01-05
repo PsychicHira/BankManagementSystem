@@ -85,6 +85,15 @@ export default {
     // }
 
 
+  },
+  mounted:function(){
+    this.$axios.get('/api').then(function(res){
+      console.log(res.data)
+    })
+
+    this.$axios.post('/post').then(function(res){
+      console.log(res.data)
+    })
   }
 }
 </script>
