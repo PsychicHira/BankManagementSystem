@@ -9,16 +9,16 @@
       </div>
     </div>
 
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+    <el-form :model="loginInfo" status-icon :rules="rules" ref="loginInfo" class="demo-ruleForm">
       <!-- <div class="title">登录</div> -->
-      <el-form-item label="用户名" prop="userName">
-        <el-input type="text" v-model="ruleForm.userName" autocomplete="on"></el-input>
+      <el-form-item label="用户名" prop="login_name">
+        <el-input type="text" v-model="loginInfo.login_name" autocomplete="on"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="passWord">
-        <el-input type="password" v-model="ruleForm.passWord" autocomplete="on"></el-input>
+      <el-form-item label="密码" prop="password">
+        <el-input type="password" v-model="loginInfo.password" autocomplete="on"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="login(ruleForm)" class="button">登录</el-button>
+        <el-button type="primary" @click="login(loginInfo)" class="button">登录</el-button>
       </el-form-item>
     </el-form>
 
@@ -31,31 +31,35 @@ export default {
   data() {
 
     return {
-      ruleForm: {
-        userName: '',
-        passWord: ''
+      loginInfo: {
+        login_name: '',
+        password: ''
       },
       rules: {
         userName: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
         ],
-        passWord: [
+        password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
         ]
       }
     };
   },
   methods: {
-    login(formName) {
+    login(loginInfo) {
       // console.log(formName)
-      if (formName.userName != '' && formName.passWord != '') {
+      if (loginInfo.login_name != '' && loginInfo.password != '') {
+        this.$axios.post('/login',loginInfo).then(function (res) {
+          console.log(res.data)
+        })
         // alert('发送登陆请求');
         // this.$router.push('/home')
-        console.log(formName)
+        // console.log(formName)
 
-        localStorage.setItem('login',JSON.stringify(formName));
-        
-        this.$router.push('/home')
+
+        // localStorage.setItem('login',JSON.stringify(formName));
+
+        // this.$router.push('/home')
 
         // this.$router.replace('/home')
       } else
@@ -86,14 +90,14 @@ export default {
 
 
   },
-  mounted:function(){
-    this.$axios.get('/api').then(function(res){
-      console.log(res.data)
-    })
+  mounted: function () {
+    //   this.$axios.get('/api').then(function(res){
+    //     console.log(res.data)
+    //   })
 
-    this.$axios.post('/post').then(function(res){
-      console.log(res.data)
-    })
+    //   this.$axios.post('/post').then(function(res){
+    //     console.log(res.data)
+    //   })
   }
 }
 </script>

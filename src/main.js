@@ -11,6 +11,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI);
 // Vue.use(axios);
 Vue.prototype.$axios = axios
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 
 /* eslint-disable no-new */
