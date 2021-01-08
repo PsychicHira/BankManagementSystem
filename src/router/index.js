@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../Login'
 import Home from '../Home'
+import index from '../index'
 //MyWork
 import Todo from '@/components/MyWork/Todo'
 import NewEvent from '@/components/MyWork/NewEvent'
@@ -53,6 +54,9 @@ import AgencyFundsSammary from '@/components/OKR/AgencyFundsSammary'
 import ProjectEntry from '@/components/OKR/ProjectEntry'
 import ProjectInquiry from '@/components/OKR/ProjectInquiry'
 
+//Framework
+import department from '@/components/Framework/department'
+
 
 
 Vue.use(Router)
@@ -70,10 +74,14 @@ export default new Router({
       component: Login,
     },
     {
-      path: '/Home',
-      name: 'Home',
-      redirect: '/MyWork/Todo',
+      path: '/index',
+      name: 'index',
       component: Home,
+      meta: { title: '我的主页' },
+      children:
+        [
+          { path: '', name: 'index', component: index, meta: { title: '我的主页' } },
+        ]
     },
 
     //MyWork
@@ -182,6 +190,18 @@ export default new Router({
           { path: 'AgencyFundsSammary', name: 'AgencyFundsSammary', component: AgencyFundsSammary, meta: { title: '国开资金汇总查询' } },
           { path: 'ProjectEntry', name: 'ProjectEntry', component: ProjectEntry, meta: { title: '新项目录入' } },
           { path: 'ProjectInquiry', name: 'ProjectInquiry', component: ProjectInquiry, meta: { title: '新项目查询' } },
+        ]
+    },
+    //Framework
+    {
+      path: '/Framework',
+      name: 'Framework',
+      redirect: '/Framework/department',
+      component: Home,
+      meta: { title: '架构管理' },
+      children:
+        [
+          { path: 'department', name: 'department', component: department, meta: { title: '部门管理' } },
         ]
     },
   ]

@@ -3,7 +3,18 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
+const devProxy = ['/','/login'];  // 代理
+// 生成代理配置对象
+let proxyObj = {};
+devProxy.forEach((value, index) => {
+    proxyObj[value] = {
+        target: 'http://127.0.0.1:3000/',
+        changeOrigin: true,
+        pathRewrite: {
+            [`^${value}`]: value
+        }
+    };
+});
 module.exports = {
   dev: {
 
@@ -11,15 +22,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     //配置跨域
-    proxyTable: {
-      '/':{
-        target:'http://localhost:3000',
-        changeOrigin:true,
-        pathRewite:{
-          '/':''
-        }
-      }
-    },
+    proxyTable: proxyObj,
 
     // Various Dev Server settings
     host: '127.0.0.1', // can be overwritten by process.env.HOST
@@ -53,6 +56,8 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
+    //配置跨域
+    proxyTable: proxyObj,
 
     /**
      * Source Maps

@@ -121,39 +121,40 @@ export default {
 
   },
   mounted: function () {
-    // let Todo = document.getElementsByClassName('Todo')
-    // console.log('todo')
-    // if (Todo.length > 0) {
-    //   document.getElementsByTagName("html")[0].removeAttribute("class", "html");
-    //   document.getElementsByTagName("body")[0].removeAttribute("class", "body");
+    // console.log(this.$store.name)
+    // // let Todo = document.getElementsByClassName('Todo')
+    // // console.log('todo')
+    // // if (Todo.length > 0) {
+    // //   document.getElementsByTagName("html")[0].removeAttribute("class", "html");
+    // //   document.getElementsByTagName("body")[0].removeAttribute("class", "body");
+    // // }
+
+    // JSON.parse(localStorage.getItem("login"))
+    // // console.log(JSON.parse(localStorage.getItem("login")).userName)
+
+    // if (JSON.parse(localStorage.getItem("login")).userName != 'admin') {
+    //   // console.log(JSON.parse(localStorage.getItem("BTData")))
+
+    //   let data = JSON.parse(localStorage.getItem("BTData"))
+    //   this.tableData[0] = {}
+    //   this.tableData[0].title = '出差申请'
+    //   this.tableData[0].sponsor = data.name
+    //   this.tableData[0].department = data.department
+    //   this.tableData[0].id = '1'
+    //   this.tableData[0].now = '待审批'
+    //   this.tableData[0].date = '2020-12-31'
+
+
+    //   let data1 = JSON.parse(localStorage.getItem("TrainningData"))
+    //   this.tableData[1] = {}
+    //   this.tableData[1].title = '培训申请'
+    //   this.tableData[1].sponsor = '小明'
+    //   this.tableData[1].department = data.department
+    //   this.tableData[1].id = '2'
+    //   this.tableData[1].now = '待审批'
+    //   this.tableData[1].date = '2020-12-31'
+
     // }
-
-    JSON.parse(localStorage.getItem("login"))
-    // console.log(JSON.parse(localStorage.getItem("login")).userName)
-
-    if (JSON.parse(localStorage.getItem("login")).userName != 'admin') {
-      // console.log(JSON.parse(localStorage.getItem("BTData")))
-
-      let data = JSON.parse(localStorage.getItem("BTData"))
-      this.tableData[0] = {}
-      this.tableData[0].title = '出差申请'
-      this.tableData[0].sponsor = data.name
-      this.tableData[0].department = data.department
-      this.tableData[0].id = '1'
-      this.tableData[0].now = '待审批'
-      this.tableData[0].date = '2020-12-31'
-
-
-      let data1 = JSON.parse(localStorage.getItem("TrainningData"))
-      this.tableData[1] = {}
-      this.tableData[1].title = '培训申请'
-      this.tableData[1].sponsor = '小明'
-      this.tableData[1].department = data.department
-      this.tableData[1].id = '2'
-      this.tableData[1].now = '待审批'
-      this.tableData[1].date = '2020-12-31'
-
-    }
 
 
 

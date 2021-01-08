@@ -102,6 +102,16 @@
               <el-menu-item index="/OKR/ProjectInquiry">新项目查询</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
+          <!-- 架构管理 -->
+          <el-submenu index="7">
+            <template slot="title">
+              <i class="el-icon-s-promotion"></i>
+              <span>架构管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/Framework/department">部门管理</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
 
         </el-menu>
       </el-col>

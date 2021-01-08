@@ -36,7 +36,7 @@ export default {
         password: ''
       },
       rules: {
-        userName: [
+        login_name: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
         ],
         password: [
@@ -47,53 +47,41 @@ export default {
   },
   methods: {
     login(loginInfo) {
-      // console.log(formName)
-      if (loginInfo.login_name != '' && loginInfo.password != '') {
-        this.$axios.post('/login',loginInfo).then(function (res) {
-          console.log(res.data)
-        })
-        // alert('发送登陆请求');
-        // this.$router.push('/home')
-        // console.log(formName)
-
-
-        // localStorage.setItem('login',JSON.stringify(formName));
-
-        // this.$router.push('/home')
-
-        // this.$router.replace('/home')
-      } else
+      if (loginInfo.login_name == '' && loginInfo.password == '') {
         alert('请输入账号密码');
-      return false;
+        return false;
+      } else{
+        this.$axios.post('/login', loginInfo).then( (res)=>{
+          if (res.data == '0') {
+            alert('账号或密码错误');
+          }else{
+            this.$router.push('/index')
+          }
+        }).catch(function (error) {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log('Error', error.message);
+          }
+          console.log(error.config);
+        });
+      }
     }
 
   },
   beforeCreate() {
-    // let login = document.getElementsByClassName('login')
-    // let bd = login.parentNode
-    // document.getElementsByTagName("body")[0].className = "red";
-    // console.log(document.body)
-
-
-    // html, body {
-    //     width: 100%;
-    //     height: 100%;
-    //     overflow: hidden;
-    //     margin: 0;
-    //     padding: 0;
-    // }
-    // body{
-    //   background-image: url('./assets/bdlg.jpg');
-    //   background-repeat: no-repeat;
-    //   background-size: 100%;
-    // }
-
 
   },
   mounted: function () {
-    //   this.$axios.get('/api').then(function(res){
-    //     console.log(res.data)
-    //   })
+    console.log('login')
+      // this.$axios.get('/api',).then(function(res){
+      //   console.log(res.data)
+      // })
+      // this.$store.name='tom'
 
     //   this.$axios.post('/post').then(function(res){
     //     console.log(res.data)
