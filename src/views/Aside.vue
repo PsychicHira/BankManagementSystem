@@ -110,6 +110,7 @@
             </template>
             <el-menu-item-group>
               <el-menu-item index="/Framework/department">部门管理</el-menu-item>
+              <el-menu-item index="/Framework/personel">人员管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 

@@ -56,6 +56,7 @@ import ProjectInquiry from '@/components/OKR/ProjectInquiry'
 
 //Framework
 import department from '@/components/Framework/department'
+import personel from '@/components/Framework/personel'
 
 
 
@@ -202,6 +203,7 @@ export default new Router({
       children:
         [
           { path: 'department', name: 'department', component: department, meta: { title: '部门管理' } },
+          { path: 'personel', name: 'personel', component: personel, meta: { title: '人员管理' } },
         ]
     },
   ]
