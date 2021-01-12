@@ -12,7 +12,7 @@
     <el-form :model="loginInfo" status-icon :rules="rules" ref="loginInfo" class="demo-ruleForm">
       <!-- <div class="title">登录</div> -->
       <el-form-item label="用户名" prop="login_name">
-        <el-input type="text" v-model="loginInfo.login_name" autocomplete="on"></el-input>
+        <el-input type="text" v-model="loginInfo.loginName" autocomplete="on"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input type="password" v-model="loginInfo.password" autocomplete="on"></el-input>
@@ -32,7 +32,7 @@ export default {
 
     return {
       loginInfo: {
-        login_name: '',
+        loginName: '',
         password: ''
       },
       rules: {
@@ -47,12 +47,12 @@ export default {
   },
   methods: {
     login(loginInfo) {
-      if (loginInfo.login_name == '' && loginInfo.password == '') {
+      if (loginInfo.loginName == '' && loginInfo.password == '') {
         alert('请输入账号密码');
         return false;
       } else{
         this.$axios.post('/login', loginInfo).then( (res)=>{
-          if (res.data == '0') {
+          if (res.data.code == 0) {
             alert('账号或密码错误');
           }else{
             this.$router.push('/index')
@@ -77,7 +77,6 @@ export default {
 
   },
   mounted: function () {
-    console.log('login')
       // this.$axios.get('/api',).then(function(res){
       //   console.log(res.data)
       // })
