@@ -7,13 +7,18 @@ import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
 import Vuex from 'vuex'
 import store from './store'
+import fileDownload from 'js-file-download';
 
 Vue.use(Vuex)
+
+//挂载到全局变量
+Vue.prototype.$fileDownload = fileDownload
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
 // Vue.use(axios);
+//挂载到全局变量
 Vue.prototype.$axios = axios
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.baseURL = process.env.API_HOST;

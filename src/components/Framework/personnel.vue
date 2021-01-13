@@ -76,7 +76,7 @@
         </el-form-item>
       </el-form>
 
-<el-divider class="el-divider"></el-divider>
+      <el-divider class="el-divider"></el-divider>
 
       <el-table :data="tableData" stripe>
         <el-table-column label="序号" width="50">
@@ -181,6 +181,10 @@
 </template>
 
 <script>
+import {
+  queryDepartment as C_queryDepartment,
+  queryPersonnel as C_queryPersonnel
+} from '../../common/methods.js'
 export default {
   name: 'department',
   data() {
@@ -272,7 +276,7 @@ export default {
             duration: 3000
           });
           //重新查询部门数据
-            this.queryPersonnel()
+          this.queryPersonnel()
         }
       }).catch(function (error) {
         this.$message({
@@ -322,6 +326,7 @@ export default {
     fixInputInvalid($event) {
       this.$forceUpdate()
     },
+
     //删除人员
     deletePersonnel(index, row) {
       console.log(index, row);
@@ -356,86 +361,72 @@ export default {
         });
       });
     },
-    // //重置
-    // clear() {
-    //   this.form = {}
-    // },
-
-
-    //发送请求——查询人员，封装方法
-    queryPersonnel() {
-      //发送请求——查询人员
-      this.$axios.get('personnel/query').then(res => {
-        if (res.data.code == 0) {
-          console.log(res.data.message)
-          this.$message({
-            message: '数据库请求失败',
-            type: 'error',
-            duration: 3000
-          })
-        } else {
-          //将人员数据给 this.tableData
-          this.tableData = res.data.data
-          //如果有没填的项目，判断一下设置空，不然显示undefined
-          this.tableData.forEach(ele => {
-            //console.log(typeof ele.phoneNumber)   string类型
-            if (ele.phoneNumber == 'undefined') {
-              ele.phoneNumber = ''
-            }
-            if (ele.identification == 'undefined') {
-              ele.identification = ''
-            }
-            if (ele.employeeNumber == 'undefined') {
-              ele.employeeNumber = ''
-            }
-          })
-        }
-      }).catch(function (error) {
-        this.$message({
-          message: '请求失败',
-          type: 'error',
-          duration: 3000
-        });
-        console.log(error);
-      });
+    //重置
+    clear() {
+      this.form = {}
     },
 
-    //发送请求——查询部门，封装方法
-    queryDepartment() {
-      //发送请求——查询部门
-      this.$axios.get('department/query').then(res => {
-        if (res.data.code == 0) {
-          console.log(res.data.message)
-          this.$message({
-            message: '数据库请求失败',
-            type: 'error',
-            duration: 3000
-          })
-        } else {
-          // 将部门数据给 this.departments 下拉框
-          let arr = res.data.data
-          arr.forEach(element => {
-            this.departments.push({
-              value: element.number,
-              label: element.departmentName
-            })
-          });
-        }
-      }).catch(function (error) {
-        this.$message({
-          message: '请求失败',
-          type: 'error',
-          duration: 3000
-        });
-        console.log(error);
-      });
-    },
+
   },
 
 
   mounted: function () {
-    this.queryPersonnel()
-    this.queryDepartment()
+    C_queryPersonnel(res => {
+      if (res == 0) {
+        this.$message({
+          message: '数据库请求失败',
+          type: 'error',
+          duration: 3000
+        })
+      } else if (res == 2) {
+        this.$message({
+          message: '发生错误',
+          type: 'error',
+          duration: 3000
+        });
+      } else {
+        console.log(res)
+        //将人员数据给 this.tableData
+        this.tableData = res
+        //如果有没填的项目，判断一下设置空，不然显示undefined
+        this.tableData.forEach(ele => {
+          //console.log(typeof ele.phoneNumber)   string类型
+          if (ele.phoneNumber == 'undefined') {
+            ele.phoneNumber = ''
+          }
+          if (ele.identification == 'undefined') {
+            ele.identification = ''
+          }
+          if (ele.employeeNumber == 'undefined') {
+            ele.employeeNumber = ''
+          }
+        })
+      }
+    });
+
+    C_queryDepartment(res => {
+      if (res == 0) {
+        this.$message({
+          message: '数据库请求失败',
+          type: 'error',
+          duration: 3000
+        })
+      } else if (res == 2) {
+        this.$message({
+          message: '发生错误',
+          type: 'error',
+          duration: 3000
+        });
+      } else {
+        res.forEach(element => {
+          //所属部门的options
+          this.departments.push({
+            value: element.number,
+            label: element.departmentName
+          })
+        });
+      }
+    });
 
   }
 }

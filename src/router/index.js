@@ -76,7 +76,7 @@ export default new Router({
     },
     {
       path: '/index',
-      name: 'index',
+      // name: 'index',     //可以理解为，只有一个子路由作为默认路由的时候，父级路由不能有name，否则会报警告
       component: Home,
       meta: { title: '我的主页' },
       children:

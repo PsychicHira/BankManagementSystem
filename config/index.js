@@ -8,7 +8,7 @@ const devProxy = ['/','/login'];  // 代理
 let proxyObj = {};
 devProxy.forEach((value, index) => {
     proxyObj[value] = {
-        target: 'http://127.0.0.1:3000/',
+        target: 'http://127.0.0.1:3000',
         changeOrigin: true,
         pathRewrite: {
             [`^${value}`]: value

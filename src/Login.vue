@@ -50,11 +50,12 @@ export default {
       if (loginInfo.loginName == '' && loginInfo.password == '') {
         alert('请输入账号密码');
         return false;
-      } else{
-        this.$axios.post('/login', loginInfo).then( (res)=>{
+      } else {
+        this.$axios.post('/login', loginInfo).then((res) => {
           if (res.data.code == 0) {
             alert('账号或密码错误');
-          }else{
+          } else {
+            this.$store.isLogin = 1
             this.$router.push('/index')
           }
         }).catch(function (error) {
@@ -77,10 +78,10 @@ export default {
 
   },
   mounted: function () {
-      // this.$axios.get('/api',).then(function(res){
-      //   console.log(res.data)
-      // })
-      // this.$store.name='tom'
+    // this.$axios.get('/api',).then(function(res){
+    //   console.log(res.data)
+    // })
+    // this.$store.name='tom'
 
     //   this.$axios.post('/post').then(function(res){
     //     console.log(res.data)

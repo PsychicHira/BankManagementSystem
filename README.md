@@ -8,6 +8,8 @@
 
 查询成功返回1
 
+异常错误返回2
+
 ### 登录
 
 - **url**
@@ -400,13 +402,196 @@
 
 
 
+### 根据部门查所属其人员
 
+##### **查**
 
+- **url**
 
+  department/queryPersonnnel
 
+- **method**
 
+  get
 
+- **字段**
 
+  ```
+  department/queryPersonnnel?department=xxx
+  
+  {
+  	department:''
+  }
+  ```
 
+- **返回值**
 
-- 
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "name": "仁青"
+        },
+        {
+            "name": "魏山"
+        },
+        {
+            "name": "曹芬"
+        },
+        {
+            "name": "陈宗涛"
+        },
+        {
+            "name": "仇晓菲"
+        },
+        {
+            "name": "次央"
+        },
+        {
+            "name": "格珍"
+        },
+        {
+            "name": "李世勇"
+        },
+        {
+            "name": "潘高峰"
+        }
+    ]
+}
+```
+
+### 查询业务分类
+
+##### **查**
+
+- **url**
+
+  /businessCategory
+
+- **method**
+
+  get
+
+- **字段**
+
+  无
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "id": "1",
+            "businessCategory": "业务支持"
+        },
+        {
+            "id": "2",
+            "businessCategory": "项目管理"
+        },
+        {
+            "id": "3",
+            "businessCategory": "会议餐饮审批"
+        },
+        {
+            "id": "4",
+            "businessCategory": "会议审批"
+        },
+        {
+            "id": "5",
+            "businessCategory": "车辆审批"
+        }
+    ]
+}
+```
+
+### 查询优先级
+
+##### **查**
+
+- **url**
+
+  /priority
+
+- **method**
+
+  get
+
+- **字段**
+
+  无
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "id": "1",
+            "priority": "一半"
+        },
+        {
+            "id": "2",
+            "priority": "重要"
+        },
+        {
+            "id": "3",
+            "priority": "严重"
+        },
+        {
+            "id": "4",
+            "priority": "2天"
+        },
+        {
+            "id": "5",
+            "priority": "3天"
+        },
+        {
+            "id": "6",
+            "priority": "4天"
+        },
+        {
+            "id": "7",
+            "priority": "5天"
+        }
+    ]
+}
+```
+
+### 新建事件
+
+##### **增**
+
+- **url**
+
+  /events/addNewEvent
+
+- **method**
+
+  post
+
+- **字段**
+
+  ```
+  全部是必填
+  {
+      title: "",
+      description:"",
+      businessCategory: "",
+      priority: "",
+      creator: "",
+      department: ""t,
+      phoneNumber:"",
+      isMSG: "",			//是1，否0
+      acceptDepartment: "",
+      acceptor: "",
+    }
+  ```
+
+- **返回值**
