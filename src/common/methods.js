@@ -1,4 +1,8 @@
+import Vue from 'vue'
 import axios from 'axios'
+
+
+
 
 //返回1成功，0失败，2错误
 
@@ -10,6 +14,7 @@ export {
   queryPersonnnelByDepartment,  //根据部门查询人员
   queryBusinessCategory,        //查询业务分类
   queryPriority,        //查询优先级
+  noReturnValJudge
 }
 
 //发送请求——查询部门，封装方法
@@ -90,4 +95,27 @@ let queryPriority = function (cb) {
     console.log(error);
     cb(2)
   })
+}
+
+//无返回值的判断，增时使用
+let noReturnValJudge = function (res) {
+  if (res == 0) {
+    Vue.prototype.$message({
+      message: '数据库请求失败',
+      type: 'error',
+      duration: 3000
+    });
+  } else if (res == 2) {
+    Vue.prototype.$message({
+      message: '发生错误',
+      type: 'error',
+      duration: 3000
+    });
+  } else {
+    Vue.prototype.$message({
+      message: '提交成功',
+      type: 'success',
+      duration: 3000
+    });
+  }
 }

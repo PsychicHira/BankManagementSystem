@@ -55,7 +55,12 @@ export default {
           if (res.data.code == 0) {
             alert('账号或密码错误');
           } else {
-            this.$store.isLogin = 1
+            console.log(res.data)
+            this.$store.isLogin = 1 //登陆成功，isLogin状态存储1，用来为以后的页面判断做准备
+            this.$store.name = res.data.data[0].name //存储姓名
+            this.$store.phoneNumber = res.data.data[0].phoneNumber //存储手机号
+            this.$store.department = res.data.data[0].department //存储所在部门
+            this.$store.id = res.data.data[0].id //存储登录用户id
             this.$router.push('/index')
           }
         }).catch(function (error) {

@@ -588,10 +588,28 @@
       creator: "",
       department: ""t,
       phoneNumber:"",
-      isMSG: "",			//是1，否0
+      isMSG: "",			//传值是ture和false，写入数据库的是：是1，否0
       acceptDepartment: "",
       acceptor: "",
     }
   ```
 
 - **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": {
+        "fieldCount": 0,
+        "affectedRows": 1,
+        "insertId": 70,
+        "serverStatus": 2,
+        "warningCount": 0,
+        "message": "",
+        "protocol41": true,
+        "changedRows": 0
+    }
+}
+```
+

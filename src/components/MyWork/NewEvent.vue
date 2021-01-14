@@ -18,7 +18,7 @@
         <el-form-item label="附加文件">
           <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/" :limit="1" :on-preview="handlePreview" :on-remove="handleRemove" :file-list="fileList" :auto-upload="false" :on-change="changeFile">
             <el-button slot="trigger" size="" type="primary">选取文件</el-button>
-            <el-button style="margin-left: 10px;" size="" type="success" @click="submitUpload($event)">上传到服务器</el-button>
+            <!-- <el-button style="margin-left: 10px;" size="" type="success" @click="submitUpload($event)">上传到服务器</el-button> -->
             <div slot="tip" class="el-upload__tip">多文件请打包成压缩包</div>
           </el-upload>
         </el-form-item>
@@ -45,13 +45,13 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="创建人员" prop="creator">
-              <el-input v-model="form.creator"></el-input>
+              <el-input v-model="form.creator" :disabled="true"></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="所属部门" prop="department">
-              <el-select v-model="form.department" placeholder="请选择部门" autocomplete="on" class="w100" @change="selectDepartment">
+              <el-select v-model="form.department" placeholder="请选择部门" autocomplete="on" class="w100" @change="selectDepartment" :disabled="true">
                 <el-option v-for="item in departments" :key="item.value" :label="item.label" :value="item.value"></el-option>
               </el-select>
             </el-form-item>
@@ -59,7 +59,7 @@
 
           <el-col :span="6">
             <el-form-item label="电话号码" prop="phoneNumber">
-              <el-input v-model="form.phoneNumber"></el-input>
+              <el-input v-model="form.phoneNumber" :disabled="true"></el-input>
             </el-form-item>
           </el-col>
 
@@ -94,8 +94,8 @@
         <el-form-item>
           <el-button type="primary" @click="commitEvent('form')">提交事件</el-button>
           <el-button>重置</el-button>
-          <a href="http://localhost:3000/public/files/" download="123.txt">123</a>
-          <button type="button" id="btn1" @click="downloadfile('http://localhost:3000/public/files/123.txt')">方法下载</button>
+          <!-- <a href="http://localhost:3000/public/files/" download="123.txt">123</a> -->
+          <!-- <button type="button" id="btn1" @click="downloadfile('http://localhost:3000/public/files/123.txt')">方法下载</button> -->
         </el-form-item>
       </el-form>
     </el-card>
@@ -107,7 +107,8 @@ import {
   queryDepartment as C_queryDepartment,
   queryPersonnnelByDepartment as C_queryPersonnnelByDepartment,
   queryBusinessCategory as C_queryBusinessCategory,
-  queryPriority as C_queryPriority
+  queryPriority as C_queryPriority,
+  noReturnValJudge
 } from '../../common/methods.js'
 
 
@@ -120,12 +121,13 @@ export default {
         desc: '',
         businessCategory: '',
         priority: '',
-        creator: '',
-        department: '',
-        phoneNumber: '',
-        isMSG: '',
+        creator: this.$store.name,
+        department: this.$store.department,
+        phoneNumber: this.$store.phoneNumber,
+        isMSG: false,
         acceptDepartment: '',
         acceptor: '',
+        uid:this.$store.id
       },
       fileList: [],
       //发送请求获得的所属部门options
@@ -171,6 +173,9 @@ export default {
         acceptor: [
           { required: true, message: '请选择受理人', trigger: 'blur' },
         ],
+        isMSG: [
+          { required: true, message: '请选是否短信通知', trigger: 'blur' },
+        ],
       },
     }
   },
@@ -189,7 +194,7 @@ export default {
           // alert('submit!');
         } else {
           console.log('error submit!!');
-          // return false;
+          return false;
         }
       });
       if (this.form.name == '' || this.form.sex == '' || this.form.department == '') {
@@ -199,13 +204,23 @@ export default {
         });
         return
       }
+      //如果上传了文件
+      if (this.fileList[0]) {
+        //把上传文件函数改为同步，因为里面有上传文件的axios请求
+        this.submitUpload((res) => {
+          this.form.filePath = res
+        }).then(res => {
+          this.$axios.post('/events/addNewEvent', this.form).then(res => {
+            noReturnValJudge(res)
 
-      // submitUpload()
-      console.log(this.form)
+          })
+        })
+      } else {
+        this.$axios.post('/events/addNewEvent', this.form).then(res => {
+          noReturnValJudge(res)
+        })
+      }
 
-      this.$axios.post('/events/addNewEvent', this.form).then(res => {
-        console.log(res)
-      })
     },
 
     //选择业务分类option
@@ -310,15 +325,15 @@ export default {
       //勾选val是true，取消勾选val是false
       console.log(val)
       if (val == true) {
-        this.form.isMSG = '1'
+        this.form.isMSG = true
       } else {
-        this.form.isMSG = '0'
+        this.form.isMSG = false
       }
     },
 
 
     //文件上传
-    submitUpload() {
+    async submitUpload(cb) {
       // this.$refs.upload.submit();
       const formData = new FormData()
       // console.log(this.$refs.upload.uploadFiles[0])
@@ -336,13 +351,24 @@ export default {
         return
       }
       formData.append('file', file.raw)
-      this.$axios.post('/upload', formData, config).then(res => {
-        console.log(res)
-        console.log(res.data.path)//图片的路径
+      await this.$axios.post('/upload', formData, config).then(res => {
+        // console.log(res.data.path)//图片的路径
+        if (res == 0) {
+          this.$message({
+            message: '数据库请求失败',
+            type: 'error',
+            duration: 3000
+          });
+          return
+        } else {
+          cb(res.data.path)
+        }
       })
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
+      //删除文件就吧值给空
+      this.fileList=[]
     },
     handlePreview(file) {
       console.log(file);
@@ -352,7 +378,8 @@ export default {
       console.log(file)
       console.log(fileList)
       this.fileList = fileList
-    }
+    },
+
   },
   mounted: function () {
     //获取部门

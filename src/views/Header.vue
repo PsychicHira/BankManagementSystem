@@ -47,7 +47,7 @@ export default {
   },
   data() {
     return {
-      name: ''
+      name: this.$store.name+'('+this.$store.department+')'
     };
   },
   methods: {
@@ -77,13 +77,15 @@ export default {
   mounted: function () {
     // this.getViewWidth()
     console.log('header')
+    console.log(this.$store.name)
+    console.log(this.$store.department)
 
 
-    if (JSON.parse(localStorage.getItem("login")).userName != 'admin') {
-      this.name = '张三'
-    } else {
-      this.name = '小明（信息技术部)'
-    }
+    // if (JSON.parse(localStorage.getItem("login")).userName != 'admin') {
+    //   this.name = '张三'
+    // } else {
+    //   this.name = '小明（信息技术部)'
+    // }
   },
 };
 </script>
