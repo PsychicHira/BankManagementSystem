@@ -26,8 +26,6 @@
         </el-form-item>
       </el-form>
 
-
-
       <el-table :data="tableData" stripe>
         <el-table-column label="序号" width="180">
           <template slot-scope="scope">
@@ -114,16 +112,19 @@ export default {
 
     //添加部门
     addDepartment(form) {
+      //设置一个变量，用来终止提交，不然下面一个验证函数return无效，只是终止它自己，不终止这个提交功能
+      //1表示继续，0表示终止
+      let go = 1
       //验证必填项是否填了，没填就弹出红色提醒
       this.$refs[form].validate((valid) => {
         if (valid) {
           // alert('submit!');
         } else {
           console.log('error submit!!');
-          return false;
+          go = 0
         }
       });
-
+      if (go == 0) return
       if (this.form.departmentName == '' || this.form.number == '') {
         this.$message({
           message: '请输入必填项',
@@ -135,8 +136,8 @@ export default {
       console.log(this.form)
       //发送请求——增加部门
       this.$axios.post('department/add', this.form).then(res => {
-          console.log(res)
-          console.log(22222)
+        console.log(res)
+        console.log(22222)
 
         if (res.data.code == 0) {
           console.log(res.data.message)

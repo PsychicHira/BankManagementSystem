@@ -468,7 +468,7 @@
 
 - **url**
 
-  /businessCategory
+  /miniOptions/businessCategory
 
 - **method**
 
@@ -515,7 +515,7 @@
 
 - **url**
 
-  /priority
+  /miniOptions/priority
 
 - **method**
 
@@ -539,26 +539,6 @@
         {
             "id": "2",
             "priority": "重要"
-        },
-        {
-            "id": "3",
-            "priority": "严重"
-        },
-        {
-            "id": "4",
-            "priority": "2天"
-        },
-        {
-            "id": "5",
-            "priority": "3天"
-        },
-        {
-            "id": "6",
-            "priority": "4天"
-        },
-        {
-            "id": "7",
-            "priority": "5天"
         }
     ]
 }
@@ -579,19 +559,19 @@
 - **字段**
 
   ```
-  全部是必填
   {
-      title: "",
-      description:"",
-      businessCategory: "",
-      priority: "",
-      creator: "",
-      department: ""t,
-      phoneNumber:"",
-      isMSG: "",			//传值是ture和false，写入数据库的是：是1，否0
-      acceptDepartment: "",
-      acceptor: "",
-    }
+    "title": "1",
+    "description":"1",
+    "businessCategory": "1",
+    "priority": "1",
+    "creator": "1",
+    "department": "1",
+    "phoneNumber":"1",
+    "isMSG": "0",			
+    "acceptDepartment": "董监办",
+    "acceptor": "陈晋",
+    "uid":"7774b160-4fc5-11eb-a408-65ca51c3a35b"
+  }
   ```
 
 - **返回值**
@@ -603,13 +583,158 @@
     "data": {
         "fieldCount": 0,
         "affectedRows": 1,
-        "insertId": 70,
+        "insertId": 0,
         "serverStatus": 2,
         "warningCount": 0,
         "message": "",
         "protocol41": true,
         "changedRows": 0
     }
+}
+```
+
+### 公告发布
+
+##### **增**
+
+- **url**
+
+  /announce/addAnnounce
+
+- **method**
+
+  post
+
+- **字段**
+
+```
+
+```
+
+- **返回值**
+
+```
+
+```
+
+### 查询问题类型
+
+##### **查**
+
+- **url**
+
+  /miniOptions/problemType
+
+- **method**
+
+  get
+
+- **字段**
+
+  无
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "id": "1",
+            "problemType": "交易系统"
+        },
+        {
+            "id": "2",
+            "problemType": "管理系统"
+        },
+        {
+            "id": "3",
+            "problemType": "网络"
+        }
+    ]
+}
+```
+
+### 查询问题级别
+
+##### **查**
+
+- **url**
+
+  /miniOptions/problemGrade
+
+- **method**
+
+  get
+
+- **字段**
+
+  无
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "id": "1",
+            "problemGrade": "一般"
+        },
+        {
+            "id": "2",
+            "problemGrade": "中级"
+        },
+        {
+            "id": "3",
+            "problemGrade": "高级"
+        }
+    ]
+}
+```
+
+### 查询信息来源
+
+##### **查**
+
+- **url**
+
+  /miniOptions/informationSource
+
+- **method**
+
+  get
+
+- **字段**
+
+  无
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "id": "1",
+            "informationSource": "电话传真"
+        },
+        {
+            "id": "2",
+            "informationSource": "其它方式"
+        },
+        {
+            "id": "3",
+            "informationSource": "维护单"
+        },
+        {
+            "id": "4",
+            "informationSource": "Notes"
+        }
+    ]
 }
 ```
 

@@ -245,15 +245,19 @@ export default {
   methods: {
     //添加人员
     addPersonnel(form) {
+      //设置一个变量，用来终止提交，不然下面一个验证函数return无效，只是终止它自己，不终止这个提交功能
+      //1表示继续，0表示终止
+      let go = 1
       //验证必填项是否填了，没填就弹出红色提醒
       this.$refs[form].validate((valid) => {
         if (valid) {
           // alert('submit!');
         } else {
           console.log('error submit!!');
-          // return false;
+          go = 0
         }
       });
+      if (go == 0) return
       if (this.form.name == '' || this.form.sex == '' || this.form.department == '') {
         this.$message({
           message: '请输入必填项',

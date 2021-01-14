@@ -14,7 +14,16 @@ export {
   queryPersonnnelByDepartment,  //根据部门查询人员
   queryBusinessCategory,        //查询业务分类
   queryPriority,        //查询优先级
-  noReturnValJudge
+  queryProblemType,        //查询问题类型
+  queryProblemGrade,        //查询问题级别
+  queryInformationSource,        //查询信息来源
+  
+
+  submitUpload,         //文件上传
+
+
+
+  noReturnValJudge,   //没有返回值的流程判断，适用于对增加数据之后返回值的判断
 }
 
 //发送请求——查询部门，封装方法
@@ -69,7 +78,7 @@ let queryPersonnel = function (cb) {
 //查询业务分类
 let queryBusinessCategory = function (cb) {
   //发送请求——查询人员
-  axios.get('/businessCategory').then(res => {
+  axios.get('/miniOptions/businessCategory').then(res => {
     if (res.data.code == 0) {
       console.log(res.data.message)
       cb(0)
@@ -84,7 +93,7 @@ let queryBusinessCategory = function (cb) {
 
 //查询优先级
 let queryPriority = function (cb) {
-  axios.get('priority').then(res => {
+  axios.get('/miniOptions/priority').then(res => {
     if (res.data.code == 0) {
       console.log(res.data.message)
       cb(0)
@@ -119,3 +128,82 @@ let noReturnValJudge = function (res) {
     });
   }
 }
+
+//文件上传
+let submitUpload = async function (file,cb) {
+  // this.$refs.upload.submit();
+  const formData = new FormData()
+  // console.log(this.$refs.upload.uploadFiles[0])
+  // const file = file
+  console.log(file)
+
+  let config = {
+    //必须
+    headers: {
+      "Content-Type": "multipart/form-data"
+    },
+  }
+  if (!file) { // 若未选择文件
+    alert('请选择文件')
+    return
+  }
+  formData.append('file', file.raw)
+  await axios.post('/upload', formData, config).then(res => {
+    // console.log(res.data.path)//图片的路径
+    if (res == 0) {
+      this.$message({
+        message: '数据库请求失败',
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.path)
+    }
+  })
+}
+
+//查询问题类型
+let queryProblemType = function (cb){
+  axios.get('/miniOptions/problemType').then(res=>{
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      cb(0)
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    console.log(error);
+    cb(2)
+  })
+}   
+
+//查询问题级别
+let queryProblemGrade = function (cb){
+  axios.get('/miniOptions/problemGrade').then(res=>{
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      cb(0)
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    console.log(error);
+    cb(2)
+  })
+}  
+
+//查询问题来源
+let queryInformationSource = function (cb){
+  axios.get('/miniOptions/informationSource').then(res=>{
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      cb(0)
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    console.log(error);
+    cb(2)
+  })
+}  

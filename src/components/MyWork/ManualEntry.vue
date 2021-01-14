@@ -8,27 +8,28 @@
 
         <el-row>
           <el-col :span="6">
-            <el-form-item label="联系人员">
+            </el-form-item>
+            <el-form-item label="机构名称" prop="department">
+              <el-input v-model="form.department" placeholder=""></el-input>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="6">
+            <el-form-item label="联系人员" prop="name">
               <el-input v-model="form.name" placeholder="事件联络人员"></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
-            <el-form-item label="联系电话">
+            <el-form-item label="联系电话" prop="phoneNumber">
               <el-input v-model="form.phone" placeholder="请输入联系电话"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
 
         <el-row>
-          <el-col :span="6">
-            </el-form-item>
-            <el-form-item label="机构名称">
-              <el-input v-model="form.department" placeholder=""></el-input>
-            </el-form-item>
-          </el-col>
 
-          <el-col :span="6">
+          <el-col :span="12">
             </el-form-item>
             <el-form-item label="联系地址">
               <el-input v-model="form.address" placeholder=""></el-input>
@@ -45,10 +46,10 @@
         </el-form-item>
 
         <el-form-item label="附加文件">
-          <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/" :on-preview="handlePreview" :on-remove="handleRemove" :file-list="fileList" :auto-upload="false">
-            <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-            <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/" :limit="1" :on-preview="handlePreview" :on-remove="handleRemove" :file-list="fileList" :auto-upload="false" :on-change="changeFile">
+            <el-button slot="trigger" size="" type="primary">选取文件</el-button>
+            <!-- <el-button style="margin-left: 10px;" size="" type="success" @click="submitUpload($event)">上传到服务器</el-button> -->
+            <div slot="tip" class="el-upload__tip">多文件请打包成压缩包</div>
           </el-upload>
         </el-form-item>
 
@@ -105,7 +106,7 @@
         </el-form-item>
 
         <el-row>
-          <el-form-item label="受理机构">
+          <!-- <el-form-item label="受理机构">
 
             <el-col class="shortInput margin">
               <el-form-item label="人员">
@@ -125,8 +126,38 @@
             <el-checkbox-group v-model="form.option">
               <el-checkbox label="知识库预选项" name="type"></el-checkbox>
             </el-checkbox-group>
-          </el-form-item>
+          </el-form-item> -->
+          <el-row>
+            <el-col :span="6">
+              <el-form-item label="受理部门" prop="acceptDepartment">
+                <el-select v-model="form.acceptDepartment" placeholder="请选择部门" autocomplete="on" class="w100" @change="selectAceeptDepartment">
+                  <el-option v-for="item in acceptDepartments" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
 
+            <el-col :span="6">
+              <el-form-item label="受理人" prop="acceptor">
+                <el-select v-model="form.acceptor" placeholder="请选择部门" autocomplete="on" class="w100" @change="selectAceeptor">
+                  <el-option v-for="item in acceptors" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+
+            <el-col :span="6">
+              <el-form-item label="数量等级">
+                <el-input v-model="form.acceptNum"></el-input>
+              </el-form-item>
+            </el-col>
+
+            <el-col :span="6">
+            <el-form-item>
+              <el-checkbox-group v-model="form.isMSG" prop="isMSG">
+                <el-checkbox label="知识库预选项" name="type" @change="changeMSG"></el-checkbox>
+              </el-checkbox-group>
+            </el-form-item>
+          </el-col>
+          </el-row>
         </el-row>
 
         <el-form-item>
@@ -153,7 +184,8 @@ export default {
         resource: '',
         desc: ''
       },
-      position: "right"
+      position: "right",
+      fileList: [],
     }
   },
   methods: {
@@ -169,16 +201,24 @@ export default {
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
+      //删除文件就把值给空
+      this.fileList = []
     },
     handlePreview(file) {
       console.log(file);
-    }
+    },
+    changeFile(file, fileList) {
+      // file是最新选择的文件，fileList是已经选择过的文件，包含第一个file，也就是当前file
+      console.log(file)
+      console.log(fileList)
+      this.fileList = fileList
+    },
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.margin{
+.margin {
   margin-right: 15px;
 }
 </style>

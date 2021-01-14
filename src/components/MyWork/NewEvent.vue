@@ -11,8 +11,8 @@
           <el-input v-model="form.title"></el-input>
         </el-form-item>
 
-        <el-form-item label="事件描述" prop="desc">
-          <el-input type="textarea" v-model="form.desc" :rows="4"></el-input>
+        <el-form-item label="事件描述" prop="description">
+          <el-input type="textarea" v-model="form.description" :rows="4"></el-input>
         </el-form-item>
 
         <el-form-item label="附加文件">
@@ -108,7 +108,8 @@ import {
   queryPersonnnelByDepartment as C_queryPersonnnelByDepartment,
   queryBusinessCategory as C_queryBusinessCategory,
   queryPriority as C_queryPriority,
-  noReturnValJudge
+  noReturnValJudge,
+  submitUpload
 } from '../../common/methods.js'
 
 
@@ -118,7 +119,7 @@ export default {
     return {
       form: {
         title: '',
-        desc: '',
+        description: '',
         businessCategory: '',
         priority: '',
         creator: this.$store.name,
@@ -127,9 +128,8 @@ export default {
         isMSG: false,
         acceptDepartment: '',
         acceptor: '',
-        uid:this.$store.id
+        uid: this.$store.id
       },
-      fileList: [],
       //发送请求获得的所属部门options
       departments: [],
       //发送请求获得的受理部门options
@@ -149,7 +149,7 @@ export default {
         title: [
           { required: true, message: '请填写标题', trigger: 'blur' },
         ],
-        desc: [
+        description: [
           { required: true, message: '请填写事件描述', trigger: 'blur' },
         ],
         businessCategory: [
@@ -186,7 +186,9 @@ export default {
 
 
     commitEvent(form) {
-      console.log('submit!');
+      //设置一个变量，用来终止提交，不然下面一个验证函数return无效，只是终止它自己，不终止这个提交功能
+      //1表示继续，0表示终止
+      let go = 1
       console.log(this.form);
       //验证必填项是否填了，没填就弹出红色提醒
       this.$refs[form].validate((valid) => {
@@ -194,20 +196,16 @@ export default {
           // alert('submit!');
         } else {
           console.log('error submit!!');
-          return false;
+          go = 0
         }
       });
-      if (this.form.name == '' || this.form.sex == '' || this.form.department == '') {
-        this.$message({
-          message: '请输入必填项',
-          type: 'warning'
-        });
-        return
-      }
+      if (go == 0) return
+      console.log(1111111)
+      
       //如果上传了文件
       if (this.fileList[0]) {
         //把上传文件函数改为同步，因为里面有上传文件的axios请求
-        this.submitUpload((res) => {
+        submitUpload(this.fileList[0],(res) => {
           this.form.filePath = res
         }).then(res => {
           this.$axios.post('/events/addNewEvent', this.form).then(res => {
@@ -332,43 +330,11 @@ export default {
     },
 
 
-    //文件上传
-    async submitUpload(cb) {
-      // this.$refs.upload.submit();
-      const formData = new FormData()
-      // console.log(this.$refs.upload.uploadFiles[0])
-      const file = this.fileList[0]
-      console.log(file)
 
-      let config = {
-        //必须
-        headers: {
-          "Content-Type": "multipart/form-data"
-        },
-      }
-      if (!file) { // 若未选择文件
-        alert('请选择文件')
-        return
-      }
-      formData.append('file', file.raw)
-      await this.$axios.post('/upload', formData, config).then(res => {
-        // console.log(res.data.path)//图片的路径
-        if (res == 0) {
-          this.$message({
-            message: '数据库请求失败',
-            type: 'error',
-            duration: 3000
-          });
-          return
-        } else {
-          cb(res.data.path)
-        }
-      })
-    },
     handleRemove(file, fileList) {
       console.log(file, fileList);
-      //删除文件就吧值给空
-      this.fileList=[]
+      //删除文件就把值给空
+      this.fileList = []
     },
     handlePreview(file) {
       console.log(file);
