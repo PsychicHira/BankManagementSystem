@@ -16,7 +16,7 @@
               <el-menu-item index="/MyWork/NewEvent">新建事件</el-menu-item>
               <el-menu-item index="/MyWork/ManualEntry">手工录入</el-menu-item>
               <el-menu-item index="/MyWork/Announce">公告发布</el-menu-item>
-              <el-menu-item index="/MyWork/Operations">运维事件</el-menu-item>
+              <el-menu-item index="/MyWork/Operation">运维事件</el-menu-item>
               <el-menu-item index="/MyWork/PastEvents">往日事件</el-menu-item>
               <el-menu-item index="/MyWork/DepartmentEvents">本部待办</el-menu-item>
             </el-menu-item-group>

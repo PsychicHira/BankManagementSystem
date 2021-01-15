@@ -47,7 +47,7 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="问题类型" prop="problemType">
-              <el-select v-model="form.problemType" placeholder="请选择问题类型" autocomplete="on" class="w100" @change="selectProblemTypes">
+              <el-select v-model="form.problemType" placeholder="请选择问题类型" autocomplete="on" @change="selectProblemType">
                 <el-option v-for="item in problemTypes" :key="item.value" :label="item.label" :value="item.value"></el-option>
               </el-select>
             </el-form-item>
@@ -55,11 +55,8 @@
 
           <el-col :span="6">
             <el-form-item label="问题级别" prop="problemGrade">
-              <el-select v-model="form.grade" placeholder="请选择">
-                <el-option label="不选择" value="grade1"></el-option>
-                <el-option label="一般" value="grade2"></el-option>
-                <el-option label="中级" value="grade3"></el-option>
-                <el-option label="高级" value="grade4"></el-option>
+              <el-select v-model="form.problemGrade" placeholder="请选择问题级别" autocomplete="on" @change="selectProblemGrade">
+                <el-option v-for="item in problemGrades" :key="item.value" :label="item.label" :value="item.value"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -70,19 +67,16 @@
         </el-form-item>
 
         <el-form-item label="信息来源" :inline="true" prop="informationSource">
-          <el-select v-model="form.informationSource" placeholder="请选择信息来源">
-            <el-option label="电话传真" value="source1"></el-option>
-            <el-option label="维护单" value="source2"></el-option>
-            <el-option label="Notes" value="source3"></el-option>
-            <el-option label="其他方式" value="source4"></el-option>
-          </el-select>
+          <el-select v-model="form.informationSource" placeholder="请选择信息来源" autocomplete="on" @change="selectInformationSource">
+                <el-option v-for="item in informationSources" :key="item.value" :label="item.label" :value="item.value"></el-option>
+              </el-select>
         </el-form-item>
 
-        <el-form-item label="流转方式" prop="transfer">
-          <el-radio-group v-model="form.transfer">
-            <el-radio label="完成"></el-radio>
-            <el-radio label="转发"></el-radio>
-            <el-radio label="协同工作"></el-radio>
+        <el-form-item label="流转方式" prop="transferWay">
+          <el-radio-group v-model="form.transferWay" @change="selectTransferWay">
+            <el-radio v-for="item in transferWays" :key="item.value" :label="item.label" :value="item.value"></el-radio>
+            <!-- <el-radio label="转发"></el-radio>
+            <el-radio label="协同工作"></el-radio> -->
           </el-radio-group>
         </el-form-item>
 
@@ -121,7 +115,8 @@ import {
   queryPersonnnelByDepartment as C_queryPersonnnelByDepartment,
   queryProblemType as C_queryProblemType,
   queryProblemGrade as C_queryProblemGrade,
-  queryInformationSource as C_queryInformationSource
+  queryInformationSource as C_queryInformationSource,
+  queryOperationTransfer as C_queryOperationTransfer
   // queryBusinessCategory as C_queryBusinessCategory,
   // queryPriority as C_queryPriority,
   // noReturnValJudge,
@@ -138,11 +133,11 @@ export default {
         address: '',
         title: '',
         description: '',
-        problemType: [],
-        problemGrade: [],
+        problemType: '',
+        problemGrade: '',
         opinion: '',
-        informationSource: [],
-        transfer: '',
+        informationSource: '',
+        transferWay: '',
         acceptDepartment: '',
         acceptor: ''
       },
@@ -151,6 +146,7 @@ export default {
       problemTypes: [],
       problemGrades: [],
       informationSources: [],
+      transferWays:[],
       //表单验证项
       rules: {
         title: [
@@ -183,13 +179,13 @@ export default {
         acceptor: [
           { required: true, message: '请选择受理人', trigger: 'blur' },
         ],
-        opnion: [
+        opinion: [
           { required: true, message: '请填写处理意见', trigger: 'blur' },
         ],
         informationSource: [
           { required: true, message: '请选择信息来源', trigger: 'blur' },
         ],
-        transfer: [
+        transferWay: [
           { required: true, message: '请选择流转方式', trigger: 'blur' },
         ],
       },
@@ -197,8 +193,10 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log('submit!');
       console.log(this.form);
+      this.$axios.post('/operation',this.form).then(res=>{
+        console.log(res)
+      })
     },
 
 
@@ -261,14 +259,50 @@ export default {
       })
     },
     //选择问题类型
-    selectProblemTypes(val) {
+    selectProblemType(val) {
       // console.log(val)
       //val打印出来departments其中元素的编号，根据编号查label（名字），再把名字给到form提交表单中
       this.problemTypes.forEach(ele => {
         if (ele.value == val) {
           // console.log(ele.label)
           // this.department = ele.label
-          this.form.acceptor = ele.label
+          this.form.problemType = ele.label
+        }
+      })
+    },
+    //选择问题级别
+    selectProblemGrade(val) {
+      // console.log(val)
+      //val打印出来departments其中元素的编号，根据编号查label（名字），再把名字给到form提交表单中
+      this.problemGrades.forEach(ele => {
+        if (ele.value == val) {
+          // console.log(ele.label)
+          // this.department = ele.label
+          this.form.problemGrade = ele.label
+        }
+      })
+    },
+    //选择信息来源
+    selectInformationSource(val) {
+      // console.log(val)
+      //val打印出来departments其中元素的编号，根据编号查label（名字），再把名字给到form提交表单中
+      this.informationSources.forEach(ele => {
+        if (ele.value == val) {
+          // console.log(ele.label)
+          // this.department = ele.label
+          this.form.informationSource = ele.label
+        }
+      })
+    },
+    //选择流转方式
+    selectTransferWay(val) {
+      // console.log(val)
+      //val打印出来departments其中元素的编号，根据编号查label（名字），再把名字给到form提交表单中
+      this.transferWays.forEach(ele => {
+        if (ele.value == val) {
+          // console.log(ele.label)
+          // this.department = ele.label
+          this.form.transferWay = ele.label
         }
       })
     },
@@ -379,6 +413,32 @@ export default {
         })
       }
     });
+
+    //查询运维流转方式
+    C_queryOperationTransfer(res=>{
+      if (res == 0) {
+        this.$message({
+          message: '数据库请求失败',
+          type: 'error',
+          duration: 3000
+        });
+      } else if (res == 2) {
+        this.$message({
+          message: '发生错误',
+          type: 'error',
+          duration: 3000
+        });
+      } else {
+        // console.log(res)
+        res.forEach((element, index) => {
+          //所属部门的options
+          this.transferWays.push({
+            value: index + 1,
+            label: element.transferWay
+          })
+        })
+      }
+    })
 
 
   }

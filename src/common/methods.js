@@ -17,7 +17,9 @@ export {
   queryProblemType,        //查询问题类型
   queryProblemGrade,        //查询问题级别
   queryInformationSource,        //查询信息来源
-  
+  queryOperationTransfer,        //查询运维流转方式
+  queryEventStatus,        //查询事件状态
+
 
   submitUpload,         //文件上传
 
@@ -130,7 +132,7 @@ let noReturnValJudge = function (res) {
 }
 
 //文件上传
-let submitUpload = async function (file,cb) {
+let submitUpload = async function (file, cb) {
   // this.$refs.upload.submit();
   const formData = new FormData()
   // console.log(this.$refs.upload.uploadFiles[0])
@@ -164,8 +166,8 @@ let submitUpload = async function (file,cb) {
 }
 
 //查询问题类型
-let queryProblemType = function (cb){
-  axios.get('/miniOptions/problemType').then(res=>{
+let queryProblemType = function (cb) {
+  axios.get('/miniOptions/problemType').then(res => {
     if (res.data.code == 0) {
       console.log(res.data.message)
       cb(0)
@@ -176,11 +178,11 @@ let queryProblemType = function (cb){
     console.log(error);
     cb(2)
   })
-}   
+}
 
 //查询问题级别
-let queryProblemGrade = function (cb){
-  axios.get('/miniOptions/problemGrade').then(res=>{
+let queryProblemGrade = function (cb) {
+  axios.get('/miniOptions/problemGrade').then(res => {
     if (res.data.code == 0) {
       console.log(res.data.message)
       cb(0)
@@ -191,11 +193,11 @@ let queryProblemGrade = function (cb){
     console.log(error);
     cb(2)
   })
-}  
+}
 
 //查询问题来源
-let queryInformationSource = function (cb){
-  axios.get('/miniOptions/informationSource').then(res=>{
+let queryInformationSource = function (cb) {
+  axios.get('/miniOptions/informationSource').then(res => {
     if (res.data.code == 0) {
       console.log(res.data.message)
       cb(0)
@@ -206,4 +208,47 @@ let queryInformationSource = function (cb){
     console.log(error);
     cb(2)
   })
-}  
+}
+
+//查询运维流转方式
+let queryOperationTransfer = function (cb) {
+  axios.get('/miniOptions/operationTransfer').then(res => {
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      cb(0)
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    console.log(error);
+    cb(2)
+  })
+}
+
+//查询事件状态
+let queryEventStatus = function (cb) {
+  axios.get('/miniOptions/eventStatus').then(res => {
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      // cb(0)
+      Vue.prototype.$message({
+        message: res.data.message,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else if (res.data.code == 2) {
+      Vue.prototype.$message({
+        message: res.data.message,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    console.log(error);
+    cb(2)
+  })
+}

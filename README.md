@@ -738,3 +738,71 @@
 }
 ```
 
+### 查询运维事件——流转方式
+
+##### **查**
+
+- **url**
+
+  /miniOptions/operationTransfer
+
+- **method**
+
+  get
+
+- **字段**
+
+  无
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "transferWay": "完成"
+        },
+        {
+            "transferWay": "转发"
+        },
+        {
+            "transferWay": "协同工作"
+        }
+    ]
+}
+```
+
+### 查询事件状态
+
+##### **查**
+
+- **url**
+
+  /miniOptions/eventStatus
+
+- **method**
+
+  get
+
+- **字段**
+
+  无
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "id": "1",
+            "eventStatus": "所有"
+        },
+        ...
+    ]
+}
+```
+

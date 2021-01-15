@@ -201,11 +201,11 @@ export default {
       });
       if (go == 0) return
       console.log(1111111)
-      
+
       //如果上传了文件
       if (this.fileList[0]) {
         //把上传文件函数改为同步，因为里面有上传文件的axios请求
-        submitUpload(this.fileList[0],(res) => {
+        submitUpload(this.fileList[0], (res) => {
           this.form.filePath = res
         }).then(res => {
           this.$axios.post('/events/addNewEvent', this.form).then(res => {
@@ -402,7 +402,7 @@ export default {
           })
         })
       }
-    })
+    });
 
     //查询优先级
     C_queryPriority(res => {
@@ -428,7 +428,14 @@ export default {
           })
         })
       }
-    })
+    });
+
+    let a = new Date('2021-1-15')
+    let b = new Date('2021-1-16')
+    let c = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
+    console.log(a < b)
+    console.log(a > b)
+    console.log(a == b)
 
   }
 }
