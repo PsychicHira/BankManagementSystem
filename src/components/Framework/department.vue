@@ -76,7 +76,9 @@
 </template>
 
 <script>
-// import {}
+import {
+  queryDepartment as C_queryDepartment,
+} from '../../common/methods.js'
 export default {
   name: 'department',
   data() {
@@ -258,37 +260,15 @@ export default {
       });
     },
 
-
-    //发送请求——查询部门，封装方法
-    queryDepartment() {
-      //发送请求——查询部门
-      this.$axios.get('department/query').then(res => {
-        if (res.data.code == 0) {
-          console.log(res.data.message)
-          this.$message({
-            message: '数据库请求失败',
-            type: 'error',
-            duration: 3000
-          })
-        } else {
-          console.log(res.data.message)
-          this.tableData = res.data.data
-        }
-      }).catch(function (error) {
-        this.$message({
-          message: '请求失败',
-          type: 'error',
-          duration: 3000
-        });
-        console.log(error);
-      });
-    }
   },
 
 
   mounted: function () {
     //发送请求——查询部门
-    this.queryDepartment()
+    C_queryDepartment(res=>{
+      this.tableData = res
+    })
+
   }
 }
 </script>

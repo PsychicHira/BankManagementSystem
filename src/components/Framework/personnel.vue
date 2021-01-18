@@ -409,19 +409,6 @@ export default {
     });
 
     C_queryDepartment(res => {
-      if (res == 0) {
-        this.$message({
-          message: '数据库请求失败',
-          type: 'error',
-          duration: 3000
-        })
-      } else if (res == 2) {
-        this.$message({
-          message: '发生错误',
-          type: 'error',
-          duration: 3000
-        });
-      } else {
         res.forEach(element => {
           //所属部门的options
           this.departments.push({
@@ -429,7 +416,6 @@ export default {
             label: element.departmentName
           })
         });
-      }
     });
 
   }

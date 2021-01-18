@@ -68,8 +68,8 @@
 
         <el-form-item label="信息来源" :inline="true" prop="informationSource">
           <el-select v-model="form.informationSource" placeholder="请选择信息来源" autocomplete="on" @change="selectInformationSource">
-                <el-option v-for="item in informationSources" :key="item.value" :label="item.label" :value="item.value"></el-option>
-              </el-select>
+            <el-option v-for="item in informationSources" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          </el-select>
         </el-form-item>
 
         <el-form-item label="流转方式" prop="transferWay">
@@ -139,14 +139,15 @@ export default {
         informationSource: '',
         transferWay: '',
         acceptDepartment: '',
-        acceptor: ''
+        acceptor: '',
+        uid: this.$store.id
       },
       acceptDepartments: [],
       acceptors: [],
       problemTypes: [],
       problemGrades: [],
       informationSources: [],
-      transferWays:[],
+      transferWays: [],
       //表单验证项
       rules: {
         title: [
@@ -194,7 +195,7 @@ export default {
   methods: {
     onSubmit() {
       console.log(this.form);
-      this.$axios.post('/operation',this.form).then(res=>{
+      this.$axios.post('/operation', this.form).then(res => {
         console.log(res)
       })
     },
@@ -219,30 +220,15 @@ export default {
       })
       console.log(presentDepartment)
       C_queryPersonnnelByDepartment(presentDepartment, (res) => {
-        // console.log(res)
-        if (res == 0) {
-          this.$message({
-            message: '数据库请求失败',
-            type: 'error',
-            duration: 3000
+        res.forEach((element, index) => {
+          // console.log(index)
+          // console.log(element)
+          //受理人员的options
+          this.acceptors.push({
+            value: index + 1,
+            label: element.name
           })
-        } else if (res == 2) {
-          this.$message({
-            message: '发生错误',
-            type: 'error',
-            duration: 3000
-          });
-        } else {
-          res.forEach((element, index) => {
-            // console.log(index)
-            // console.log(element)
-            //受理人员的options
-            this.acceptors.push({
-              value: index + 1,
-              label: element.name
-            })
-          });
-        }
+        });
       })
     },
 
@@ -338,109 +324,54 @@ export default {
 
     //获取问题类型
     C_queryProblemType(res => {
-      if (res == 0) {
-        this.$message({
-          message: '数据库请求失败',
-          type: 'error',
-          duration: 3000
-        });
-      } else if (res == 2) {
-        this.$message({
-          message: '发生错误',
-          type: 'error',
-          duration: 3000
-        });
-      } else {
-        // console.log(res)
-        res.forEach((element, index) => {
-          //所属部门的options
-          this.problemTypes.push({
-            value: index + 1,
-            label: element.problemType
-          })
+
+      // console.log(res)
+      res.forEach((element, index) => {
+        //所属部门的options
+        this.problemTypes.push({
+          value: index + 1,
+          label: element.problemType
         })
-      }
+      })
     });
 
     //获取问题级别
     C_queryProblemGrade(res => {
-      if (res == 0) {
-        this.$message({
-          message: '数据库请求失败',
-          type: 'error',
-          duration: 3000
-        });
-      } else if (res == 2) {
-        this.$message({
-          message: '发生错误',
-          type: 'error',
-          duration: 3000
-        });
-      } else {
-        // console.log(res)
-        res.forEach((element, index) => {
-          //所属部门的options
-          this.problemGrades.push({
-            value: index + 1,
-            label: element.problemGrade
-          })
+      // console.log(res)
+      res.forEach((element, index) => {
+        //所属部门的options
+        this.problemGrades.push({
+          value: index + 1,
+          label: element.problemGrade
         })
-      }
+      })
     });
 
     //获取信息来源
     C_queryInformationSource(res => {
-      if (res == 0) {
-        this.$message({
-          message: '数据库请求失败',
-          type: 'error',
-          duration: 3000
-        });
-      } else if (res == 2) {
-        this.$message({
-          message: '发生错误',
-          type: 'error',
-          duration: 3000
-        });
-      } else {
-        // console.log(res)
-        res.forEach((element, index) => {
-          //所属部门的options
-          this.informationSources.push({
-            value: index + 1,
-            label: element.informationSource
-          })
+      // console.log(res)
+      res.forEach((element, index) => {
+        //所属部门的options
+        this.informationSources.push({
+          value: index + 1,
+          label: element.informationSource
         })
-      }
+      })
     });
 
     //查询运维流转方式
-    C_queryOperationTransfer(res=>{
-      if (res == 0) {
-        this.$message({
-          message: '数据库请求失败',
-          type: 'error',
-          duration: 3000
-        });
-      } else if (res == 2) {
-        this.$message({
-          message: '发生错误',
-          type: 'error',
-          duration: 3000
-        });
-      } else {
-        // console.log(res)
-        res.forEach((element, index) => {
-          //所属部门的options
-          this.transferWays.push({
-            value: index + 1,
-            label: element.transferWay
-          })
+    C_queryOperationTransfer(res => {
+      // console.log(res)
+      res.forEach((element, index) => {
+        //所属部门的options
+        this.transferWays.push({
+          value: index + 1,
+          label: element.transferWay
         })
-      }
+      })
     })
 
-
+console.log(this.$store.id)
   }
 }
 </script>

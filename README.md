@@ -774,6 +774,50 @@
 }
 ```
 
+### 查询手工录入——流转方式
+
+##### **查**
+
+- **url**
+
+  /miniOptions/manualEntryTransfer
+
+- **method**
+
+  get
+
+- **字段**
+
+  无
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "transferWay": "完成"
+        },
+        {
+            "transferWay": "进一步处理"
+        },
+        {
+            "transferWay": "请示"
+        },
+        {
+            "transferWay": "转发"
+        },
+        {
+            "transferWay": "协同工作"
+        }
+    ]
+}
+```
+
+
+
 ### 查询事件状态
 
 ##### **查**

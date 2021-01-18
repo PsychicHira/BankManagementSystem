@@ -208,13 +208,13 @@ export default {
         submitUpload(this.fileList[0], (res) => {
           this.form.filePath = res
         }).then(res => {
-          this.$axios.post('/events/addNewEvent', this.form).then(res => {
+          this.$axios.post('/event/addNewEvent', this.form).then(res => {
             noReturnValJudge(res)
 
           })
         })
       } else {
-        this.$axios.post('/events/addNewEvent', this.form).then(res => {
+        this.$axios.post('/event/addNewEvent', this.form).then(res => {
           noReturnValJudge(res)
         })
       }
@@ -233,6 +233,7 @@ export default {
         }
       })
     },
+
     //选择优先级option
     selectPriority(val) {
       console.log(val)
@@ -278,30 +279,15 @@ export default {
       })
       console.log(presentDepartment)
       C_queryPersonnnelByDepartment(presentDepartment, (res) => {
-        // console.log(res)
-        if (res == 0) {
-          this.$message({
-            message: '数据库请求失败',
-            type: 'error',
-            duration: 3000
+        res.forEach((element, index) => {
+          // console.log(index)
+          // console.log(element)
+          //受理人员的options
+          this.acceptors.push({
+            value: index + 1,
+            label: element.name
           })
-        } else if (res == 2) {
-          this.$message({
-            message: '发生错误',
-            type: 'error',
-            duration: 3000
-          });
-        } else {
-          res.forEach((element, index) => {
-            // console.log(index)
-            // console.log(element)
-            //受理人员的options
-            this.acceptors.push({
-              value: index + 1,
-              label: element.name
-            })
-          });
-        }
+        });
       })
     },
 
@@ -350,32 +336,18 @@ export default {
   mounted: function () {
     //获取部门
     C_queryDepartment((res) => {
-      if (res == 0) {
-        this.$message({
-          message: '数据库请求失败',
-          type: 'error',
-          duration: 3000
+      res.forEach(element => {
+        // //所属部门的options
+        // this.departments.push({
+        //   value: element.number,
+        //   label: element.departmentName
+        // })
+        //受理部门的options
+        this.acceptDepartments.push({
+          value: element.number,
+          label: element.departmentName
         })
-      } else if (res == 2) {
-        this.$message({
-          message: '发生错误',
-          type: 'error',
-          duration: 3000
-        });
-      } else {
-        res.forEach(element => {
-          //所属部门的options
-          this.departments.push({
-            value: element.number,
-            label: element.departmentName
-          })
-          //受理部门的options
-          this.acceptDepartments.push({
-            value: element.number,
-            label: element.departmentName
-          })
-        });
-      }
+      });
     });
 
     //  获取业务分类
@@ -433,9 +405,13 @@ export default {
     let a = new Date('2021-1-15')
     let b = new Date('2021-1-16')
     let c = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
-    console.log(a < b)
-    console.log(a > b)
-    console.log(a == b)
+    // console.log(a < b)
+    // console.log(a > b)
+    // console.log(a == b)
+    let d = new Date()
+    d = d.setDate(new Date(d).getDate() + 1)
+    d = new Date(d).getFullYear() + '-' + (new Date(d).getMonth() + 1) + '-' + new Date(d).getDate();
+    console.log(d)
 
   }
 }

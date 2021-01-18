@@ -3,7 +3,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-const devProxy = ['/','/login'];  // 代理
+const devProxy = ['/','/login','/upload'];  // 代理
 // 生成代理配置对象
 let proxyObj = {};
 devProxy.forEach((value, index) => {
