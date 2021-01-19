@@ -93,7 +93,7 @@
 
         <el-form-item>
           <el-button type="primary" @click="commitEvent('form')">提交事件</el-button>
-          <el-button>重置</el-button>
+          <el-button @click="clear">重置</el-button>
           <!-- <a href="http://localhost:3000/public/files/" download="123.txt">123</a> -->
           <!-- <button type="button" id="btn1" @click="downloadfile('http://localhost:3000/public/files/123.txt')">方法下载</button> -->
         </el-form-item>
@@ -183,7 +183,10 @@ export default {
     downloadfile(url) {
       this.$fileDownload(url, '1232.txt')
     },
-
+    //重置
+    clear() {
+      this.form = {}
+    },
 
     commitEvent(form) {
       //设置一个变量，用来终止提交，不然下面一个验证函数return无效，只是终止它自己，不终止这个提交功能
@@ -210,12 +213,13 @@ export default {
         }).then(res => {
           this.$axios.post('/event/addNewEvent', this.form).then(res => {
             noReturnValJudge(res)
-
+            this.clear()
           })
         })
       } else {
         this.$axios.post('/event/addNewEvent', this.form).then(res => {
           noReturnValJudge(res)
+          this.clear()
         })
       }
 

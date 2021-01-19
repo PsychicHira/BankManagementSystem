@@ -131,8 +131,8 @@
         </el-row>
 
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">创建</el-button>
-          <el-button>取消</el-button>
+          <el-button type="primary" @click="onSubmit('form')">创建</el-button>
+          <el-button @click="clear">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -147,7 +147,7 @@ import {
   queryBusinessCategory as C_queryBusinessCategory,
   queryPriority as C_queryPriority,
   queryInformationSource as C_queryInformationSource,
-  // noReturnValJudge,
+  noReturnValJudge,
   queryManualEntryTransfer as C_queryManualEntryTransfer
 
 } from '../../common/methods.js'
@@ -224,9 +224,46 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
-      console.log('submit!');
+    //重置
+    clear() {
+      this.form = {}
+    },
+
+    onSubmit(form) {
+      //设置一个变量，用来终止提交，不然下面一个验证函数return无效，只是终止它自己，不终止这个提交功能
+      //1表示继续，0表示终止
+      let go = 1
       console.log(this.form);
+      //验证必填项是否填了，没填就弹出红色提醒
+      this.$refs[form].validate((valid) => {
+        if (valid) {
+          // alert('submit!');
+        } else {
+          console.log('error submit!!');
+          go = 0
+        }
+      });
+      if (go == 0) return
+      console.log(1111111)
+
+      //如果上传了文件
+      if (this.fileList[0]) {
+        //把上传文件函数改为同步，因为里面有上传文件的axios请求
+        submitUpload(this.fileList[0], (res) => {
+          this.form.filePath = res
+        }).then(res => {
+          this.$axios.post('/manualEntry/add', this.form).then(res => {
+            noReturnValJudge(res)
+            this.clear()
+          })
+        })
+      } else {
+        this.$axios.post('/manualEntry/add', this.form).then(res => {
+          noReturnValJudge(res)
+          this.clear()
+        })
+      }
+
     },
 
     //选择业务分类option

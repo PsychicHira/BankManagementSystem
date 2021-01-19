@@ -39,6 +39,7 @@ export {
   queryOperationTransfer,        //查询运维流转方式
   queryManualEntryTransfer,        //查询手工录入流转方式
   queryEventStatus,        //查询事件状态
+  queryPastEvents,        //查询往日事件
 
 
   submitUpload,         //文件上传
@@ -533,6 +534,47 @@ let queryManualEntryTransfer = function (cb) {
 //查询事件状态
 let queryEventStatus = function (cb) {
   axios.get('/miniOptions/eventStatus').then(res => {
+    console.log(res)
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      // cb(0)
+      Vue.prototype.$message({
+        message: res.data.message,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else if (res.data.code == 2) {
+      Vue.prototype.$message({
+        message: res.data.message,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+    return
+  })
+}
+
+//查询往日事件
+let queryPastEvents = function (cb){
+  axios.get('/pastEvents').then(res => {
     console.log(res)
     if (res.data.code == 0) {
       console.log(res.data.message)

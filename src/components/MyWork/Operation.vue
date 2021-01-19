@@ -102,7 +102,7 @@
 
         <el-form-item>
           <el-button type="primary" @click="onSubmit">提交</el-button>
-          <el-button>重置</el-button>
+          <el-button @click="clear">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -116,10 +116,10 @@ import {
   queryProblemType as C_queryProblemType,
   queryProblemGrade as C_queryProblemGrade,
   queryInformationSource as C_queryInformationSource,
-  queryOperationTransfer as C_queryOperationTransfer
+  queryOperationTransfer as C_queryOperationTransfer,
   // queryBusinessCategory as C_queryBusinessCategory,
   // queryPriority as C_queryPriority,
-  // noReturnValJudge,
+  noReturnValJudge
   // submitUpload
 } from '../../common/methods.js'
 export default {
@@ -193,13 +193,18 @@ export default {
     }
   },
   methods: {
+    //重置
+    clear() {
+      this.form = {}
+    },
+
     onSubmit() {
       console.log(this.form);
       this.$axios.post('/operation', this.form).then(res => {
-        console.log(res)
+         noReturnValJudge(res)
+        this.clear()
       })
     },
-
 
     //选择受理部门option
     selectAceeptDepartment(val) {

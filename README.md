@@ -599,7 +599,7 @@
 
 - **url**
 
-  /announce/addAnnounce
+  /announce/add
 
 - **method**
 
@@ -608,13 +608,37 @@
 - **字段**
 
 ```
-
+{
+  "title": "1",
+  "content":"1",
+  "startTime": "1",
+  "endTime": "1",
+  "creator": "1",
+  "influenceArea": "1",
+  "phoneNumber":"1",
+  "isMSG": "1",			
+  "filePath": "1212323",
+  "uid":"7774b160-4fc5-11eb-a408-65ca51c3a35b"
+}
 ```
 
 - **返回值**
 
 ```
-
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": {
+        "fieldCount": 0,
+        "affectedRows": 1,
+        "insertId": 0,
+        "serverStatus": 2,
+        "warningCount": 0,
+        "message": "",
+        "protocol41": true,
+        "changedRows": 0
+    }
+}
 ```
 
 ### 查询问题类型
@@ -848,5 +872,193 @@
         ...
     ]
 }
+```
+
+### 新建运维事件
+
+##### **增**
+
+- **url**
+
+  /announce/add
+
+- **method**
+
+  post
+
+- **字段**
+
+```
+{
+  "department": "董监办",
+  "creator":"管理员",
+  "phoneNumber": "1",
+  "address": "1",
+  "title": "1",
+  "description": "1",
+  "problemType":"网络",
+  "problemGrade": "一般",			
+  "opinion": "意见",
+  "informationSource": "电话传真",
+  "acceptDepartment": "董监办",
+  "acceptor": "陈晋",
+  "status": "等待接受",
+  "transferWay": "完成",
+  "uid":"7774b160-4fc5-11eb-a408-65ca51c3a35b"
+}
+```
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": {
+        "fieldCount": 0,
+        "affectedRows": 1,
+        "insertId": 0,
+        "serverStatus": 2,
+        "warningCount": 0,
+        "message": "",
+        "protocol41": true,
+        "changedRows": 0
+    }
+}
+```
+
+### 新建手工录入事件
+
+##### **增**
+
+- **url**
+
+  /manualEntry/add
+
+- **method**
+
+  post
+
+- **字段**
+
+```
+{
+  "department": "董监办",
+  "creator":"管理员",
+  "phoneNumber": "1",
+  "address": "大叔大婶",
+  "title": "1",
+  "description": "1",
+  "filePath": "1",
+  "businessCategory":"网络",
+  "priority": "一般",			
+  "opinion": "意见",
+  "informationSourse": "电话传真",
+  "transferWay": "完成",
+  "acceptDepartment": "董监办",
+  "acceptor": "陈晋",
+  "quantityGrade": "1",
+  "knowledge": "1",
+  "uid":"7774b160-4fc5-11eb-a408-65ca51c3a35b"
+}
+```
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": {
+        "fieldCount": 0,
+        "affectedRows": 1,
+        "insertId": 0,
+        "serverStatus": 2,
+        "warningCount": 0,
+        "message": "",
+        "protocol41": true,
+        "changedRows": 0
+    }
+}
+```
+
+### 查询往日事件
+
+##### **查**
+
+- **url**
+
+  /pastEvents
+
+- **method**
+
+  get
+
+- **字段**
+
+```
+/pastEvents?string=""&department=""&status=""&startTime=""&endTime=""
+```
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "id": "c4bfce60-59fb-11eb-b7be-f5d427bac105",
+            "title": "12312",
+            "acceptor": "陈功",
+            "createTime": "2021-1-19",
+            "creator": "管理员",
+            "status": "等待接受"
+        },...
+    ]
+}
+```
+
+### 查询往日事件详情
+
+##### **查**
+
+- **url**
+
+  /pastEvents/detail
+
+- **method**
+
+  get
+
+- **字段**
+
+```
+/pastEvents/detail?id="0e98cb50-59fb-11eb-b7be-f5d427bac105"
+```
+
+- **返回值**
+
+```
+[
+    {
+        "id": "0e98cb50-59fb-11eb-b7be-f5d427bac105",
+        "title": "2222",
+        "description": "222",
+        "filePath": "public\\uploads\\20210119\\file-1611022038006.JPG",
+        "businessCategory": "业务支持",
+        "priority": "一般",
+        "creator": "管理员",
+        "phoneNumber": "13000000000",
+        "isMSG": null,
+        "acceptDepartment": "个人业务部",
+        "acceptor": "贺文科",
+        "creatorId": null,
+        "acceptorId": "78f35f00-53df-11eb-a072-f9eb1baa49ec",
+        "department": "董监办",
+        "createTime": "2021-1-19",
+        "status": "等待接受"
+    }
+]
 ```
 

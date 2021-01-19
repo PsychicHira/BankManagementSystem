@@ -76,7 +76,7 @@
 
         <el-form-item>
           <el-button type="primary" @click="commitAnnounce('form')">发布公告</el-button>
-          <el-button>重置</el-button>
+          <el-button @click="clear">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -102,6 +102,7 @@ export default {
         phoneNumber: '',
         isMSG: false,
         influenceArea: '',
+        uid: this.$store.id
       },
       fileList: [],
       influenceArea: [],
@@ -132,6 +133,11 @@ export default {
     }
   },
   methods: {
+    //重置
+    clear() {
+      this.form = {}
+    },
+
     commitAnnounce(form) {
       //设置一个变量，用来终止提交，不然下面一个验证函数return无效，只是终止它自己，不终止这个提交功能
       //1表示继续，0表示终止
@@ -153,13 +159,15 @@ export default {
         submitUpload(this.fileList[0], (res) => {
           this.form.filePath = res
         }).then(res => {
-          this.$axios.post('/announce/addAnnounce', this.form).then(res => {
+          this.$axios.post('/announce/add', this.form).then(res => {
             noReturnValJudge(res)
+            this.clear()
           })
         })
       } else {
-        this.$axios.post('/announce/addAnnounce', this.form).then(res => {
+        this.$axios.post('/announce/add', this.form).then(res => {
           noReturnValJudge(res)
+          this.clear()
         })
       }
 
@@ -168,13 +176,13 @@ export default {
     //获取开始时间
     getStartTime(val) {
       this.form.startTime = new Date(val).getFullYear() + '-' + (new Date(val).getMonth() + 1) + '-' + new Date(val).getDate();
-      console.log(this.form.startTime )
+      console.log(this.form.startTime)
     },
 
     //获取结束时间
     getEndTime(val) {
       this.form.endTime = new Date(val).getFullYear() + '-' + (new Date(val).getMonth() + 1) + '-' + new Date(val).getDate();
-      console.log(this.form.endTime )
+      console.log(this.form.endTime)
     },
 
     //完成后是否短信通知的checkBox
