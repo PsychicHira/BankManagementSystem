@@ -40,30 +40,25 @@ export {
   queryManualEntryTransfer,        //查询手工录入流转方式
   queryEventStatus,        //查询事件状态
   queryPastEvents,        //查询往日事件
+  queryEventsById,        //根据事件id查询往日事件(新建事件表、手工录入表、运维事件表)
+  queryTodoEvents,        //待办事件查询(自己是受理人)
+  queryAffairMainClass,        //查询事务大类
 
 
   submitUpload,         //文件上传
 
 
 
-  noReturnValJudge,   //没有返回值的流程判断，适用于对增加数据之后返回值的判断
 }
 
 //发送请求——查询部门，封装方法
 let queryDepartment = function (cb) {
   //发送请求——查询部门
   axios.get('/department/query').then(res => {
-    console.log(res)
+    // console.log(res)
     if (res.data.code == 0) {
       console.log(res.data.message)
       // cb(0)
-      Vue.prototype.$message({
-        message: res.data.message,
-        type: 'error',
-        duration: 3000
-      });
-      return
-    } else if (res.data.code == 2) {
       Vue.prototype.$message({
         message: res.data.message,
         type: 'error',
@@ -87,7 +82,6 @@ let queryDepartment = function (cb) {
       type: 'error',
       duration: 3000
     });
-    return
   })
 }
 
@@ -106,13 +100,6 @@ let queryPersonnnelByDepartment = function (data, cb) {
         duration: 3000
       });
       return
-    } else if (res.data.code == 2) {
-      Vue.prototype.$message({
-        message: res.data.message,
-        type: 'error',
-        duration: 3000
-      });
-      return
     } else if (!res.data.code) {
       console.log(res.data)
       Vue.prototype.$message({
@@ -130,7 +117,6 @@ let queryPersonnnelByDepartment = function (data, cb) {
       type: 'error',
       duration: 3000
     });
-    return
   })
 }
 
@@ -148,13 +134,6 @@ let queryPersonnel = function (cb) {
         duration: 3000
       });
       return
-    } else if (res.data.code == 2) {
-      Vue.prototype.$message({
-        message: res.data.message,
-        type: 'error',
-        duration: 3000
-      });
-      return
     } else if (!res.data.code) {
       console.log(res.data)
       Vue.prototype.$message({
@@ -172,7 +151,6 @@ let queryPersonnel = function (cb) {
       type: 'error',
       duration: 3000
     });
-    return
   })
 }
 
@@ -180,17 +158,10 @@ let queryPersonnel = function (cb) {
 let queryBusinessCategory = function (cb) {
   //发送请求——查询人员
   axios.get('/miniOptions/businessCategory').then(res => {
-    console.log(res)
+    // console.log(res)
     if (res.data.code == 0) {
       console.log(res.data.message)
       // cb(0)
-      Vue.prototype.$message({
-        message: res.data.message,
-        type: 'error',
-        duration: 3000
-      });
-      return
-    } else if (res.data.code == 2) {
       Vue.prototype.$message({
         message: res.data.message,
         type: 'error',
@@ -214,24 +185,16 @@ let queryBusinessCategory = function (cb) {
       type: 'error',
       duration: 3000
     });
-    return
   })
 }
 
 //查询优先级
 let queryPriority = function (cb) {
   axios.get('/miniOptions/priority').then(res => {
-    console.log(res)
+    // console.log(res)
     if (res.data.code == 0) {
       console.log(res.data.message)
       // cb(0)
-      Vue.prototype.$message({
-        message: res.data.message,
-        type: 'error',
-        duration: 3000
-      });
-      return
-    } else if (res.data.code == 2) {
       Vue.prototype.$message({
         message: res.data.message,
         type: 'error',
@@ -255,40 +218,9 @@ let queryPriority = function (cb) {
       type: 'error',
       duration: 3000
     });
-    return
   })
 }
 
-//无返回值的判断，增时使用
-let noReturnValJudge = function (res) {
-  if (res == 0) {
-    Vue.prototype.$message({
-      message: '数据库请求失败',
-      type: 'error',
-      duration: 3000
-    });
-  } else if (res == 2) {
-    Vue.prototype.$message({
-      message: '发生错误',
-      type: 'error',
-      duration: 3000
-    });
-  } else if (!res.data.code) {
-    console.log(res.data)
-    Vue.prototype.$message({
-      message: res.data,
-      type: 'error',
-      duration: 3000
-    });
-    return
-  } else {
-    Vue.prototype.$message({
-      message: '提交成功',
-      type: 'success',
-      duration: 3000
-    });
-  }
-}
 
 //文件上传
 let submitUpload = async function (file, cb) {
@@ -328,17 +260,10 @@ let submitUpload = async function (file, cb) {
 //查询问题类型
 let queryProblemType = function (cb) {
   axios.get('/miniOptions/problemType').then(res => {
-    console.log(res)
+    // console.log(res)
     if (res.data.code == 0) {
       console.log(res.data.message)
       // cb(0)
-      Vue.prototype.$message({
-        message: res.data.message,
-        type: 'error',
-        duration: 3000
-      });
-      return
-    } else if (res.data.code == 2) {
       Vue.prototype.$message({
         message: res.data.message,
         type: 'error',
@@ -362,24 +287,16 @@ let queryProblemType = function (cb) {
       type: 'error',
       duration: 3000
     });
-    return
   })
 }
 
 //查询问题级别
 let queryProblemGrade = function (cb) {
   axios.get('/miniOptions/problemGrade').then(res => {
-    console.log(res)
+    // console.log(res)
     if (res.data.code == 0) {
       console.log(res.data.message)
       // cb(0)
-      Vue.prototype.$message({
-        message: res.data.message,
-        type: 'error',
-        duration: 3000
-      });
-      return
-    } else if (res.data.code == 2) {
       Vue.prototype.$message({
         message: res.data.message,
         type: 'error',
@@ -403,24 +320,16 @@ let queryProblemGrade = function (cb) {
       type: 'error',
       duration: 3000
     });
-    return
   })
 }
 
 //查询问题来源
 let queryInformationSource = function (cb) {
   axios.get('/miniOptions/informationSource').then(res => {
-    console.log(res)
+    // console.log(res)
     if (res.data.code == 0) {
       console.log(res.data.message)
       // cb(0)
-      Vue.prototype.$message({
-        message: res.data.message,
-        type: 'error',
-        duration: 3000
-      });
-      return
-    } else if (res.data.code == 2) {
       Vue.prototype.$message({
         message: res.data.message,
         type: 'error',
@@ -444,24 +353,16 @@ let queryInformationSource = function (cb) {
       type: 'error',
       duration: 3000
     });
-    return
   })
 }
 
 //查询运维流转方式
 let queryOperationTransfer = function (cb) {
   axios.get('/miniOptions/operationTransfer').then(res => {
-    console.log(res)
+    // console.log(res)
     if (res.data.code == 0) {
       console.log(res.data.message)
       // cb(0)
-      Vue.prototype.$message({
-        message: res.data.message,
-        type: 'error',
-        duration: 3000
-      });
-      return
-    } else if (res.data.code == 2) {
       Vue.prototype.$message({
         message: res.data.message,
         type: 'error',
@@ -485,24 +386,16 @@ let queryOperationTransfer = function (cb) {
       type: 'error',
       duration: 3000
     });
-    return
   })
 }
 
 //查询手工录入流转方式
 let queryManualEntryTransfer = function (cb) {
   axios.get('/miniOptions/operationTransfer').then(res => {
-    console.log(res)
+    // console.log(res);
     if (res.data.code == 0) {
       console.log(res.data.message)
       // cb(0)
-      Vue.prototype.$message({
-        message: res.data.message,
-        type: 'error',
-        duration: 3000
-      });
-      return
-    } else if (res.data.code == 2) {
       Vue.prototype.$message({
         message: res.data.message,
         type: 'error',
@@ -526,7 +419,6 @@ let queryManualEntryTransfer = function (cb) {
       type: 'error',
       duration: 3000
     });
-    return
   })
 }
 
@@ -534,17 +426,10 @@ let queryManualEntryTransfer = function (cb) {
 //查询事件状态
 let queryEventStatus = function (cb) {
   axios.get('/miniOptions/eventStatus').then(res => {
-    console.log(res)
+    // console.log(res)
     if (res.data.code == 0) {
       console.log(res.data.message)
       // cb(0)
-      Vue.prototype.$message({
-        message: res.data.message,
-        type: 'error',
-        duration: 3000
-      });
-      return
-    } else if (res.data.code == 2) {
       Vue.prototype.$message({
         message: res.data.message,
         type: 'error',
@@ -568,24 +453,52 @@ let queryEventStatus = function (cb) {
       type: 'error',
       duration: 3000
     });
-    return
   })
 }
 
 //查询往日事件
-let queryPastEvents = function (cb){
+let queryPastEvents = function (cb) {
   axios.get('/pastEvents').then(res => {
-    console.log(res)
+    // console.log(res)
     if (res.data.code == 0) {
       console.log(res.data.message)
       // cb(0)
+
+      // 下方提示数据库查询失败或无数据，注释掉
+      // Vue.prototype.$message({
+      //   message: res.data.message,
+      //   type: 'error',
+      //   duration: 3000
+      // });
+
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
       Vue.prototype.$message({
-        message: res.data.message,
+        message: res.data,
         type: 'error',
         duration: 3000
       });
       return
-    } else if (res.data.code == 2) {
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
+
+//根据事件id查询往日事件(新建事件表、手工录入表、运维事件表)
+let queryEventsById = function (data, cb) {
+  axios.get(`/pastEvents/detail?id=${data}`).then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      // cb(0)
       Vue.prototype.$message({
         message: res.data.message,
         type: 'error',
@@ -609,6 +522,74 @@ let queryPastEvents = function (cb){
       type: 'error',
       duration: 3000
     });
-    return
   })
 }
+
+//待办事件查询(自己是受理人)
+let queryTodoEvents = function (data, cb) {
+  axios.get(`/todo?uid=${data}`).then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      // console.log(res.data.message)
+      // cb(0)
+
+      // 下方提示数据库查询失败或无数据，注释掉
+      // Vue.prototype.$message({
+      //   message: res.data.message,
+      //   type: 'error',
+      //   duration: 3000
+      // });
+
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+};
+
+//查询事务大类
+let queryAffairMainClass = function (cb) {
+  axios.get('/affair/getAffairMainClass').then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      // cb(0)
+      Vue.prototype.$message({
+        message: res.data.message,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+};

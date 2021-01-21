@@ -1062,3 +1062,56 @@
 ]
 ```
 
+### 待办事件查询(自己是受理人)
+
+##### **查**
+
+- **url**
+
+  /todo
+
+- **method**
+
+  get
+
+- **字段**
+
+```
+/todo?uid=""
+```
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "id": "876188f0-5aec-11eb-ba5a-e3e872059fb3",
+            "title": "新建事件1",
+            "acceptor": "陈功",
+            "createTime": "2021-1-20",
+            "creator": "管理员",
+            "department": "董监办"
+        },
+        {
+            "id": "36775a80-5aee-11eb-ba5a-e3e872059fb3",
+            "title": "运维事件1",
+            "acceptor": "陈功",
+            "createTime": "2021-1-20",
+            "creator": "管理员",
+            "department": "董监办"
+        },
+        {
+            "id": "272aba40-5aee-11eb-ba5a-e3e872059fb3",
+            "title": "录入事件1",
+            "acceptor": "陈功",
+            "createTime": "2021-1-20",
+            "creator": "管理员",
+            "department": "董监办"
+        }
+    ]
+}
+```
+

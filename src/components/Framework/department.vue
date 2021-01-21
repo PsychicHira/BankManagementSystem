@@ -159,7 +159,7 @@ export default {
         }
       }).catch(function (error) {
         this.$message({
-          message: '请求发送失败',
+          message: '请求发送失败'+error,
           type: 'error',
           duration: 3000
         });

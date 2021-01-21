@@ -15,7 +15,7 @@ import DepartmentEvents from '@/components/MyWork/DepartmentEvents'
 //Logs
 import FillInLogs from '@/components/Logs/FillInLogs'
 import LogsInquiry from '@/components/Logs/LogsInquiry'
-import ProjectManagement from '@/components/Logs/ProjectManagement'
+import AffairsManagement from '@/components/Logs/AffairsManagement'
 import WorkStatistics from '@/components/Logs/WorkStatistics'
 import OrganizationLogsInquiry from '@/components/Logs/OrganizationLogsInquiry'
 import LogsStatistics from '@/components/Logs/LogsStatistics'
@@ -57,6 +57,7 @@ import ProjectInquiry from '@/components/OKR/ProjectInquiry'
 //Framework
 import department from '@/components/Framework/department'
 import personnel from '@/components/Framework/personnel'
+import affair from '@/components/Framework/affair'
 
 
 
@@ -115,7 +116,7 @@ export default new Router({
         [
           { path: 'FillInLogs', name: 'FillInLogs', component: FillInLogs, meta: { title: '日志填写' } },
           { path: 'LogsInquiry', name: 'LogsInquiry', component: LogsInquiry, meta: { title: '日志查询' } },
-          { path: 'ProjectManagement', name: 'ProjectManagement', component: ProjectManagement, meta: { title: '事务分类维护' } },
+          { path: 'AffairsManagement', name: 'AffairsManagement', component: AffairsManagement, meta: { title: '事务分类维护' } },
           { path: 'WorkStatistics', name: 'WorkStatistics', component: WorkStatistics, meta: { title: '工作统计' } },
           { path: 'OrganizationLogsInquiry', name: 'OrganizationLogsInquiry', component: OrganizationLogsInquiry, meta: { title: '机构日志查询' } },
           { path: 'LogsStatistics', name: 'LogsStatistics', component: LogsStatistics, meta: { title: '日志统计' } },
@@ -204,6 +205,7 @@ export default new Router({
         [
           { path: 'department', name: 'department', component: department, meta: { title: '部门管理' } },
           { path: 'personnel', name: 'personnel', component: personnel, meta: { title: '人员管理' } },
+          { path: 'affair', name: 'affair', component: affair, meta: { title: '事务分类' } },
         ]
     },
   ]

@@ -147,7 +147,6 @@ import {
   queryBusinessCategory as C_queryBusinessCategory,
   queryPriority as C_queryPriority,
   queryInformationSource as C_queryInformationSource,
-  noReturnValJudge,
   queryManualEntryTransfer as C_queryManualEntryTransfer
 
 } from '../../common/methods.js'
@@ -226,7 +225,19 @@ export default {
   methods: {
     //重置
     clear() {
-      this.form = {}
+      this.form.address = '';
+      this.form.title = '';
+      this.form.description = '';
+      this.form.businessCategory = '';
+      this.form.priority = '';
+      this.form.opinion = '';
+      this.form.informationSource = '';
+      this.form.transferWay = '';
+      this.form.acceptDepartment = '';
+      this.form.acceptor = '';
+      this.form.quantity = '';
+      this.form.knowledge = '';
+      this.fileList = []
     },
 
     onSubmit(form) {
@@ -253,14 +264,52 @@ export default {
           this.form.filePath = res
         }).then(res => {
           this.$axios.post('/manualEntry/add', this.form).then(res => {
-            noReturnValJudge(res)
+            // console.log(res)
+          if (res.data.code == 0) {
+            this.$message({
+              message: '数据库请求失败或无数据',
+              type: 'error',
+              duration: 3000
+            });
+          } else if (!res.data.code) {
+            this.$message({
+              message: res.data,
+              type: 'error',
+              duration: 3000
+            });
+          } else {
+            this.$message({
+              message: '提交成功',
+              type: 'success',
+              duration: 3000
+            });
             this.clear()
+          }
           })
         })
       } else {
         this.$axios.post('/manualEntry/add', this.form).then(res => {
-          noReturnValJudge(res)
-          this.clear()
+          // console.log(res)
+          if (res.data.code == 0) {
+            this.$message({
+              message: '数据库请求失败或无数据',
+              type: 'error',
+              duration: 3000
+            });
+          } else if (!res.data.code) {
+            this.$message({
+              message: res.data,
+              type: 'error',
+              duration: 3000
+            });
+          } else {
+            this.$message({
+              message: '提交成功',
+              type: 'success',
+              duration: 3000
+            });
+            this.clear()
+          }
         })
       }
 

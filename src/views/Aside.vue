@@ -30,7 +30,7 @@
             <el-menu-item-group>
               <el-menu-item index="/Logs/FillInLogs">日志填写</el-menu-item>
               <el-menu-item index="/Logs/LogsInquiry">日志查询</el-menu-item>
-              <el-menu-item index="/Logs/ProjectManagement">事务分类维护</el-menu-item>
+              <el-menu-item index="/Logs/AffairsManagement">事务分类维护</el-menu-item>
               <el-menu-item index="/Logs/WorkStatistics">工作统计</el-menu-item>
               <el-menu-item index="/Logs/OrganizationLogsInquiry">机构日志查询</el-menu-item>
               <el-menu-item index="/Logs/LogsStatistics">日志统计</el-menu-item>
@@ -111,6 +111,7 @@
             <el-menu-item-group>
               <el-menu-item index="/Framework/department">部门管理</el-menu-item>
               <el-menu-item index="/Framework/personnel">人员管理</el-menu-item>
+              <el-menu-item index="/Framework/affair">事务分类管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 

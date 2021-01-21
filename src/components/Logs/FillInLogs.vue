@@ -22,12 +22,12 @@
     </el-card>
 
     <!-- 弹窗 -->
-    <el-dialog title="录入工作日志" :visible.sync="centerDialogVisible" center>
+    <el-dialog title="录入工作日志" :visible.sync="centerDialogVisible" center width="1200px">
       <el-form :model="form" label-width="100px">
 
         <el-row>
           <el-col :span="12">
-            <el-form-item label="选择业务分类" :label-width="formLabelWidth">
+            <el-form-item label="选择业务分类">
               <el-input v-model="form.category" autocomplete="off"></el-input>
             </el-form-item>
           </el-col>
@@ -44,7 +44,7 @@
 
         <el-row>
           <el-col :span="18">
-            <el-form-item label="关键词" :label-width="formLabelWidth">
+            <el-form-item label="关键词">
               <el-input v-model="form.words" autocomplete="off"></el-input>
             </el-form-item>
           </el-col>
@@ -85,7 +85,7 @@
         <el-form-item label="完成情况">
           <el-input type="textarea" v-model="form.desc" :rows="4"></el-input>
         </el-form-item>
-        </el-form-item>
+
 
       </el-form>
 

@@ -119,7 +119,6 @@ import {
   queryOperationTransfer as C_queryOperationTransfer,
   // queryBusinessCategory as C_queryBusinessCategory,
   // queryPriority as C_queryPriority,
-  noReturnValJudge
   // submitUpload
 } from '../../common/methods.js'
 export default {
@@ -195,14 +194,42 @@ export default {
   methods: {
     //重置
     clear() {
-      this.form = {}
+      this.form.address = '';
+      this.form.title = '';
+      this.form.description = '';
+      this.form.problemType = '';
+      this.form.problemGrade = '';
+      this.form.opinion = '';
+      this.form.informationSource = '';
+      this.form.transferWay = '';
+      this.form.acceptDepartment = '';
+      this.form.acceptor = '';
     },
 
     onSubmit() {
       console.log(this.form);
       this.$axios.post('/operation', this.form).then(res => {
-         noReturnValJudge(res)
-        this.clear()
+        // console.log(res)
+          if (res.data.code == 0) {
+            this.$message({
+              message: '数据库请求失败或无数据',
+              type: 'error',
+              duration: 3000
+            });
+          } else if (!res.data.code) {
+            this.$message({
+              message: res.data,
+              type: 'error',
+              duration: 3000
+            });
+          } else {
+            this.$message({
+              message: '提交成功',
+              type: 'success',
+              duration: 3000
+            });
+            this.clear()
+          }
       })
     },
 
@@ -303,7 +330,7 @@ export default {
   mounted: function () {
     //获取部门
     C_queryDepartment(res => {
-      console.log(res)
+      // console.log(res)
       if (res == 0) {
         this.$message({
           message: '数据库请求失败',
@@ -376,7 +403,7 @@ export default {
       })
     })
 
-console.log(this.$store.id)
+    // console.log(this.$store.id)
   }
 }
 </script>

@@ -85,7 +85,6 @@
 
 <script>
 import {
-  noReturnValJudge,
   submitUpload
 } from '../../common/methods.js'
 export default {
@@ -135,7 +134,16 @@ export default {
   methods: {
     //重置
     clear() {
-      this.form = {}
+      this.form.title = '';
+      this.form.content = '';
+      this.form.filePath = '';
+      this.form.startTime = '';
+      this.form.endTime = '';
+      this.form.creator = '';
+      this.form.phoneNumber = '';
+      this.form.isMSG = false;
+      this.form.influenceArea = '';
+      this.fileList = []
     },
 
     commitAnnounce(form) {
@@ -160,14 +168,52 @@ export default {
           this.form.filePath = res
         }).then(res => {
           this.$axios.post('/announce/add', this.form).then(res => {
-            noReturnValJudge(res)
+            // console.log(res)
+          if (res.data.code == 0) {
+            this.$message({
+              message: '数据库请求失败或无数据',
+              type: 'error',
+              duration: 3000
+            });
+          } else if (!res.data.code) {
+            this.$message({
+              message: res.data,
+              type: 'error',
+              duration: 3000
+            });
+          } else {
+            this.$message({
+              message: '提交成功',
+              type: 'success',
+              duration: 3000
+            });
             this.clear()
+          }
           })
         })
       } else {
         this.$axios.post('/announce/add', this.form).then(res => {
-          noReturnValJudge(res)
-          this.clear()
+          // console.log(res)
+          if (res.data.code == 0) {
+            this.$message({
+              message: '数据库请求失败或无数据',
+              type: 'error',
+              duration: 3000
+            });
+          } else if (!res.data.code) {
+            this.$message({
+              message: res.data,
+              type: 'error',
+              duration: 3000
+            });
+          } else {
+            this.$message({
+              message: '提交成功',
+              type: 'success',
+              duration: 3000
+            });
+            this.clear()
+          }
         })
       }
 

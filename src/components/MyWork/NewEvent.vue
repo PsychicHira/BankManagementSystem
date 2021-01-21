@@ -94,8 +94,8 @@
         <el-form-item>
           <el-button type="primary" @click="commitEvent('form')">提交事件</el-button>
           <el-button @click="clear">重置</el-button>
-          <!-- <a href="http://localhost:3000/public/files/" download="123.txt">123</a> -->
-          <!-- <button type="button" id="btn1" @click="downloadfile('http://localhost:3000/public/files/123.txt')">方法下载</button> -->
+          <!-- <a href="http://localhost:3000/public/files/" download="123.txt">123</a>
+          <button type="button" id="btn1" @click="downloadfile(`http://localhost:3000/public\\uploads\\20210120\\file-1611124509299.JPG`)">方法下载</button> -->
         </el-form-item>
       </el-form>
     </el-card>
@@ -108,7 +108,6 @@ import {
   queryPersonnnelByDepartment as C_queryPersonnnelByDepartment,
   queryBusinessCategory as C_queryBusinessCategory,
   queryPriority as C_queryPriority,
-  noReturnValJudge,
   submitUpload
 } from '../../common/methods.js'
 
@@ -181,11 +180,19 @@ export default {
   },
   methods: {
     downloadfile(url) {
-      this.$fileDownload(url, '1232.txt')
+      this.$fileDownload(url, '1232.JPG')
     },
     //重置
     clear() {
-      this.form = {}
+      this.form.title = ''
+      this.form.title = ''
+      this.form.description = ''
+      this.form.businessCategory = ''
+      this.form.priority = ''
+      this.form.isMSG = false
+      this.form.acceptDepartment = ''
+      this.form.acceptor = ''
+      this.fileList = []
     },
 
     commitEvent(form) {
@@ -212,14 +219,52 @@ export default {
           this.form.filePath = res
         }).then(res => {
           this.$axios.post('/event/addNewEvent', this.form).then(res => {
-            noReturnValJudge(res)
-            this.clear()
+            // console.log(res)
+            if (res.data.code == 0) {
+              this.$message({
+                message: '数据库请求失败或无数据',
+                type: 'error',
+                duration: 3000
+              });
+            } else if (!res.data.code) {
+              this.$message({
+                message: res.data,
+                type: 'error',
+                duration: 3000
+              });
+            } else {
+              this.$message({
+                message: '提交成功',
+                type: 'success',
+                duration: 3000
+              });
+              this.clear()
+            }
           })
         })
       } else {
         this.$axios.post('/event/addNewEvent', this.form).then(res => {
-          noReturnValJudge(res)
-          this.clear()
+          // console.log(res)
+          if (res.data.code == 0) {
+            this.$message({
+              message: '数据库请求失败或无数据',
+              type: 'error',
+              duration: 3000
+            });
+          } else if (!res.data.code) {
+            this.$message({
+              message: res.data,
+              type: 'error',
+              duration: 3000
+            });
+          } else {
+            this.$message({
+              message: '提交成功',
+              type: 'success',
+              duration: 3000
+            });
+            this.clear()
+          }
         })
       }
 
@@ -406,16 +451,19 @@ export default {
       }
     });
 
-    let a = new Date('2021-1-15')
-    let b = new Date('2021-1-16')
-    let c = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
+    // let a = new Date('2021-1-15')
+    // let b = new Date('2021-1-16')
+    // let c = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
     // console.log(a < b)
     // console.log(a > b)
     // console.log(a == b)
-    let d = new Date()
-    d = d.setDate(new Date(d).getDate() + 1)
-    d = new Date(d).getFullYear() + '-' + (new Date(d).getMonth() + 1) + '-' + new Date(d).getDate();
-    console.log(d)
+    // let d = new Date()
+    // d = d.setDate(new Date(d).getDate() + 1)
+    // d = new Date(d).getFullYear() + '-' + (new Date(d).getMonth() + 1) + '-' + new Date(d).getDate();
+    // console.log(d)
+// let a = public\uploads\20210120\file-1611125749453.JPG
+// console.log(a)
+
 
   }
 }
