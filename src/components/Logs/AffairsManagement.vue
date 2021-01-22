@@ -9,43 +9,27 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="请选择事物大类">
-              <el-select v-model="form.b" placeholder="请选择" style="width:100%">
-                <el-option label="1综合管理" value="213wer12"></el-option>
-                <el-option label="2常规巡查" value="21ewrwe312"></el-option>
-                <el-option label="3运行维护" value="21werwerwer312"></el-option>
-                <el-option label="4变更投产（新系统/新功能/新设备）" value="21ys312"></el-option>
-                <el-option label="5系统建设" value="213rr2"></el-option>
-                <el-option label="6共享分类" value="2131tt2"></el-option>
-                <el-option label="7科技共享" value="2t1312"></el-option>
-                <el-option label="8管理共享" value="21ty312"></el-option>
-                <el-option label="9客户经理条线" value="213y12"></el-option>
+              <el-select v-model="form.affairMainClass" placeholder="请选择事务大类" autocomplete="on" @change="selectAffairMainClass" class="w100">
+                <el-option v-for="item in affairMainClassSelect" :key="item.value" :label="item.value+item.label" :value="item.value"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="请选择事物中类">
-              <el-select v-model="form.m" placeholder="请选择" style="width:100%">
-                <el-option label="1综合管理" value="12asd1312"></el-option>
-                <el-option label="2常规巡查" value="21asd3112"></el-option>
-                <el-option label="3运行维护" value="21asdas3112"></el-option>
-                <el-option label="4变更投产（新系统/新功能/新设备）" value="21131asdsa2"></el-option>
-                <el-option label="5系统建设" value="2113asdasdas12"></el-option>
-                <el-option label="6共享分类" value="2131asdas12"></el-option>
-                <el-option label="7科技共享" value="2131asdasd12"></el-option>
-                <el-option label="8管理共享" value="21311dsa2"></el-option>
-                <el-option label="9客户经理条线" value="21asd312312"></el-option>
+              <el-select v-model="form.affairMiddleClass" placeholder="请选择事务中类" autocomplete="on" @change="selectAffairMiddleClass" class="w100">
+                <el-option v-for="item in affairMiddleClassSelect" :key="item.value" :label="item.value+item.label" :value="item.value"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
 
-          <el-col :span="4">
-            <el-form-item label="事物编号">
-              <el-input v-model="form.num"></el-input>
+          <el-col :span="6">
+            <el-form-item>
+              <el-button type="primary" @click="onSubmit">查询</el-button>
+              <!-- <el-button>重置</el-button> -->
             </el-form-item>
           </el-col>
         </el-row>
-        
 
         <el-row>
           <el-col :span="6">
@@ -69,27 +53,43 @@
               </el-select>
             </el-form-item>
           </el-col>
+
+          <el-col :span="4">
+            <el-form-item label="事物编号">
+              <el-input v-model="form.num"></el-input>
+            </el-form-item>
+          </el-col>
         </el-row>
 
-
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit">查询</el-button>
-          <el-button>重置</el-button>
-        </el-form-item>
       </el-form>
 
-      <el-table :data="tableData" stripe style="width: 100%">
-        <el-table-column prop="id" label="事务编号">
+      <el-table :data="tableData" stripe>
+        <el-table-column label="事务编号" width="180">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.$index+1 }}</span>
+          </template>
         </el-table-column>
-        <el-table-column prop="name" label="事物名称" width="180">
+
+        <el-table-column label="事物名称" prop="title">
         </el-table-column>
-        <el-table-column prop="content" label="事务类别">
+
+        <el-table-column label="事务类别" prop="acceptor">
         </el-table-column>
-        <el-table-column prop="is" label="是否需要审核" width="180">
+
+        <el-table-column label="是否需要审核" prop="createTime">
         </el-table-column>
-        <el-table-column prop="require" label="事务要求">
+
+        <el-table-column label="事务要求" prop="creator">
         </el-table-column>
-        <el-table-column prop="do" label="处理">
+
+        <el-table-column label="处理" prop="status">
+        </el-table-column>
+
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button size="mini" type="success" @click="toDetail(scope.$index, scope.row)">查看</el-button>
+            <el-button size="mini" type="danger" @click="deleteDepartment(scope.$index, scope.row)">删除</el-button>
+          </template>
         </el-table-column>
       </el-table>
     </el-card>
@@ -97,29 +97,75 @@
 </template>
 
 <script>
+import {
+  queryAffairMainClass as C_queryAffairMainClass,
+  queryAffairMiddleClassByMainClassId as C_queryAffairMiddleClassByMainClassId,
+} from '../../common/methods.js'
 export default {
   name: 'NewEvent',
   data() {
     return {
       form: {
-        b: '',
-        m: '',
-        name: '',
-        num: '',
-        sign: '',
-        need: '',
-      }
+        affairMainClass: '',
+        affairMiddleClass: ''
+      },
+      tableData: [],
+      //事务大类的select
+      affairMainClassSelect: [],
+      //事务中类的select
+      affairMiddleClassSelect: []
     }
   },
   methods: {
+    //选择事务大类
+    selectAffairMainClass(val) {
+      // console.log(val) // val是id，根据id找到事务大类的名字
+      this.affairMainClassSelect.forEach(ele => {
+        if (ele.value == val) {
+          this.affairMainClassName = ele.label
+        }
+      });
+      console.log(this.affairMainClassName)
+      //根据事务大类id查询事务中类
+      this.affairMiddleClassSelect = []
+      this.form.affairMiddleClass=''
+      C_queryAffairMiddleClassByMainClassId(this.affairMainClassName, res => {
+        console.log(res)
+        res.forEach((ele) => {
+          this.affairMiddleClassSelect.push({
+            value: ele.id,
+            label: ele.affairMiddleClassName
+          });
+        });
+      })
+    },
+
+    //选择事务中类
+    selectAffairMiddleClass(val) {
+
+    },
+
+
     onSubmit() {
       console.log('submit!');
       console.log(this.form);
-    },
+    }
+  },
+  mounted: function () {
+    //查询事务大类
+    C_queryAffairMainClass(res => {
+      // console.log(res);
+      // this.affairMainClasses = res;
+      res.forEach(ele => {
+        this.affairMainClassSelect.push({
+          value: ele.id,
+          label: ele.affairMainClassName
+        });
+      });
+    });
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 </style>

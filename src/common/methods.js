@@ -43,9 +43,14 @@ export {
   queryEventsById,        //根据事件id查询往日事件(新建事件表、手工录入表、运维事件表)
   queryTodoEvents,        //待办事件查询(自己是受理人)
   queryAffairMainClass,        //查询事务大类
+  queryAffairMiddleClassByMainClassId,        //根据事务大类id查询事务中类
+  
 
 
   submitUpload,         //文件上传
+
+  addAffairMainClass,    //添加事务大类
+  addAffairManClass,    //添加事务中类
 
 
 
@@ -593,3 +598,108 @@ let queryAffairMainClass = function (cb) {
     });
   })
 };
+
+//根据事务大类id查询事务中类
+let queryAffairMiddleClassByMainClassId = function (data,cb) {
+  axios.get(`/affair/getAffairMiddleClassByMainClassId?affairMainClassName=${data}`).then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      // console.log(res.data.message)
+      // cb(0)
+
+      // 下方提示数据库查询失败或无数据，注释掉
+      // Vue.prototype.$message({
+      //   message: res.data.message,
+      //   type: 'error',
+      //   duration: 3000
+      // });
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+};
+
+//添加事务大类
+let addAffairMainClass = function (data,cb) {
+  axios.post(`/affair/addAffairMainClass`,data).then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      // console.log(res.data.message)
+      // cb(0)
+
+      // 下方提示数据库查询失败或无数据，注释掉
+      Vue.prototype.$message({
+        message: res.data.message,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.message)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
+
+//添加事务中类
+let addAffairManClass = function(data,cb){
+  axios.post(`/affair/addAffairMiddleClass`,data).then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      // console.log(res.data.message)
+      // cb(0)
+
+      // 下方提示数据库查询失败或无数据，注释掉
+      Vue.prototype.$message({
+        message: res.data.message,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.message)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
