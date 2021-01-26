@@ -51,6 +51,7 @@ export {
 
   addAffairMainClass,    //添加事务大类
   addAffairManClass,    //添加事务中类
+  addAffair,    //添加事务
 
 
 
@@ -672,6 +673,41 @@ let addAffairMainClass = function (data,cb) {
 //添加事务中类
 let addAffairManClass = function(data,cb){
   axios.post(`/affair/addAffairMiddleClass`,data).then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      // console.log(res.data.message)
+      // cb(0)
+
+      // 下方提示数据库查询失败或无数据，注释掉
+      Vue.prototype.$message({
+        message: res.data.message,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.message)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
+
+//添加事务
+let addAffair = function(data,cb){
+  axios.post(`/affair/addAffair`,data).then(res => {
     // console.log(res)
     if (res.data.code == 0) {
       // console.log(res.data.message)

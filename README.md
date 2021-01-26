@@ -1227,3 +1227,46 @@
 }
 ```
 
+## 添加事务
+
+### **增**
+
+- **url**
+
+  /affair/addAffair
+
+- **method**
+
+  post
+
+- **字段**
+
+```
+{
+    "demand": "123",
+    "number": "123",
+    "affairMiddleClassNameId": "123",
+    "affairName": "123",
+    "isApproval": "123"
+}
+```
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据操作成功",
+    "data": {
+        "fieldCount": 0,
+        "affectedRows": 1,
+        "insertId": 3,
+        "serverStatus": 2,
+        "warningCount": 0,
+        "message": "",
+        "protocol41": true,
+        "changedRows": 0
+    }
+}
+```
+

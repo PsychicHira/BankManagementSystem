@@ -5,7 +5,7 @@
       <h3>事务分类维护</h3>
       <el-divider class="el-divider"></el-divider>
 
-      <el-form ref="form" :model="form" label-width="120px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="130px">
         <el-row>
           <el-col :span="6">
             <el-form-item label="请选择事物大类">
@@ -16,47 +16,56 @@
           </el-col>
 
           <el-col :span="6">
-            <el-form-item label="请选择事物中类">
+            <el-form-item label="请选择事物中类" prop="affairMiddleClass">
               <el-select v-model="form.affairMiddleClass" placeholder="请选择事务中类" autocomplete="on" @change="selectAffairMiddleClass" class="w100">
-                <el-option v-for="item in affairMiddleClassSelect" :key="item.value" :label="item.value+item.label" :value="item.value"></el-option>
+                <el-option v-for="item in affairMiddleClassSelect" :key="item.value" :label="item.label" :value="item.value"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item>
-              <el-button type="primary" @click="onSubmit">查询</el-button>
+              <el-button type="primary" @click="query">查询</el-button>
               <!-- <el-button>重置</el-button> -->
             </el-form-item>
           </el-col>
         </el-row>
 
+        <el-divider class="el-divider"></el-divider>
+
         <el-row>
           <el-col :span="6">
-            <el-form-item label="事物名称">
-              <el-input v-model="form.name"></el-input>
+            <el-form-item label="事物名称" prop="affairName">
+              <el-input v-model="form.affairName"></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
-            <el-form-item label="事物要求">
-              <el-input v-model="form.need"></el-input>
+            <el-form-item label="事物要求" prop="demand">
+              <el-input v-model="form.demand"></el-input>
             </el-form-item>
           </el-col>
 
-          <el-col :span="4">
-            <el-form-item label="审核标志">
-              <el-select v-model="form.sign" placeholder="请选择" style="width:100%">
-                <el-option label="不审核" value="21sdasd312"></el-option>
-                <el-option label="审核" value="fdgfg123123"></el-option>
-                <el-option label="无" value="shafgg1hai"></el-option>
+          <el-col :span="6">
+            <el-form-item label="审核标志" prop="isApproval">
+              <el-select v-model="form.isApproval" placeholder="请选择" style="width:100%">
+                <el-option label="不审核" value="0"></el-option>
+                <el-option label="审核" value="1"></el-option>
+                <el-option label="无" value="2"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
 
           <el-col :span="4">
-            <el-form-item label="事物编号">
-              <el-input v-model="form.num"></el-input>
+            <el-form-item label="事物编号" prop="number">
+              <el-input v-model="form.number"></el-input>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="6">
+            <el-form-item>
+              <el-button type="primary" @click="addAffair('form')">添加事务</el-button>
+              <!-- <el-button>重置</el-button> -->
             </el-form-item>
           </el-col>
         </el-row>
@@ -100,6 +109,7 @@
 import {
   queryAffairMainClass as C_queryAffairMainClass,
   queryAffairMiddleClassByMainClassId as C_queryAffairMiddleClassByMainClassId,
+  addAffair as C_addAffair
 } from '../../common/methods.js'
 export default {
   name: 'NewEvent',
@@ -107,13 +117,41 @@ export default {
     return {
       form: {
         affairMainClass: '',
-        affairMiddleClass: ''
+        affairMiddleClass: '',
+
+        demand: '',
+        number: '',
+        //选中的事务中类id
+        affairMiddleClassNameId: '',
+        affairName: '',
+        isApproval: ''
       },
       tableData: [],
       //事务大类的select
       affairMainClassSelect: [],
       //事务中类的select
-      affairMiddleClassSelect: []
+      affairMiddleClassSelect: [],
+
+
+      //表单验证项
+      rules: {
+        affairMiddleClass: [
+          { required: true, message: '请选择事务中类', trigger: 'blur' },
+        ],
+        affairName: [
+          { required: true, message: '请填写事件名称', trigger: 'blur' },
+        ],
+        demand: [
+          { required: true, message: '请填写事务要求', trigger: 'blur' },
+        ],
+        isApproval: [
+          { required: true, message: '请选择审核标志', trigger: 'blur' },
+        ],
+        number: [
+          { required: true, message: '请填写事务编号', trigger: 'blur' },
+        ]
+      },
+
     }
   },
   methods: {
@@ -128,7 +166,7 @@ export default {
       console.log(this.affairMainClassName)
       //根据事务大类id查询事务中类
       this.affairMiddleClassSelect = []
-      this.form.affairMiddleClass=''
+      this.form.affairMiddleClass = ''
       C_queryAffairMiddleClassByMainClassId(this.affairMainClassName, res => {
         console.log(res)
         res.forEach((ele) => {
@@ -142,14 +180,40 @@ export default {
 
     //选择事务中类
     selectAffairMiddleClass(val) {
+      console.log(val)
+      this.form.affairMiddleClassNameId = val
+    },
+
+    //添加事务
+    addAffair(form) {
+      let go = 1
+      console.log(this.form)
+      //验证必填项是否填了，没填就弹出红色提醒
+      this.$refs[form].validate((valid) => {
+        if (valid) {
+          // alert('submit!');
+        } else {
+          console.log('error submit!!');
+          go = 0
+        }
+      });
+      if (go == 0) return
+
+      //发送请求添加事务
+      C_addAffair(this.form, res => {
+        console.log(res)
+      })
+
 
     },
 
-
-    onSubmit() {
+    //查询
+    query() {
       console.log('submit!');
       console.log(this.form);
     }
+
+
   },
   mounted: function () {
     //查询事务大类
