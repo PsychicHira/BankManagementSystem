@@ -1270,3 +1270,59 @@
 }
 ```
 
+## 查询所有事务
+
+### **查**
+
+- **url**
+
+  /affair/getAllAffair
+
+- **method**
+
+  get
+
+- **字段**
+
+  无
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据操作成功",
+    "data": [
+        {
+            "number": "1101E",
+            "affairName": "组织参与行内外/会议/团队/项目组会议/培训/交流产品、方案、技术（2小时）",
+            "isApproval": 0,
+            "demand": "无",
+            "affairMiddleClassName": "11会议培训"
+        },
+        {
+            "number": "1211A",
+            "affairName": "非专业技术方案或材料（概要、详细、实施、运维）便携（5000字以上）",
+            "isApproval": 0,
+            "demand": "无",
+            "affairMiddleClassName": "12文稿撰写"
+        },...
+```
+
+## 查询事务（根据大类和中类id）
+
+### **查**
+
+- **url**
+
+  /affair/getAllAffair
+
+- **method**
+
+  get
+
+- **字段**
+
+  因为中类id是唯一的，所以
+
+- **返回值**

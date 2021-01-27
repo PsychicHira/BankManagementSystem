@@ -155,7 +155,7 @@ export default {
       }
       let obj = {
         affairMainClassName: this.affairMainClassName,
-        affairMiddleClassName: this.form.affairMainClassInput
+        affairMiddleClassName: this.form.affairMiddleClassInput
       }
       C_addAffairManClass(obj, res => {
         this.$message({

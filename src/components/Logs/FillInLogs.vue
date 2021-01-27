@@ -22,7 +22,89 @@
     </el-card>
 
     <!-- 弹窗 -->
-    <el-dialog title="录入工作日志" :visible.sync="centerDialogVisible" center width="1200px">
+    <el-dialog title="" :visible.sync="centerDialogVisible" center width="1366px">
+
+      <!-- 往日未完成工作 -->
+      <h3>————往日未完成工作————</h3>
+      <el-table :data="tableData" stripe>
+        <el-table-column label="序号" width="180" prop="number">
+          <!-- <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.$index+1 }}</span>
+          </template> -->
+        </el-table-column>
+
+        <el-table-column label="录入时间" prop="affairName">
+        </el-table-column>
+
+        <el-table-column label="工作内容" prop="affairMiddleClassName">
+        </el-table-column>
+
+        <el-table-column label="完成情况" prop="isApproval">
+        </el-table-column>
+
+        <el-table-column label="预计完成时间" prop="demand">
+        </el-table-column>
+
+        <el-table-column label="状态" prop="demand">
+        </el-table-column>
+      </el-table>
+
+      <!-- 今日日志 -->
+      <h3>————今日日志————</h3>
+      <el-table :data="tableData" stripe>
+        <el-table-column label="序号" width="180" prop="number">
+          <!-- <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.$index+1 }}</span>
+          </template> -->
+        </el-table-column>
+
+        <el-table-column label="录入时间" prop="affairName">
+        </el-table-column>
+
+        <el-table-column label="工作内容" prop="affairMiddleClassName">
+        </el-table-column>
+
+        <el-table-column label="完成情况" prop="isApproval">
+        </el-table-column>
+
+        <el-table-column label="预计完成时间" prop="demand">
+        </el-table-column>
+
+        <el-table-column label="状态" prop="demand">
+        </el-table-column>
+      </el-table>
+
+      <el-divider class="el-divider"></el-divider>
+
+      <!-- 已分派未完成工作 -->
+      <h3>————已分派未完成工作————</h3>
+      <el-table :data="tableData" stripe>
+        <el-table-column label="序号" width="180" prop="number">
+          <!-- <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.$index+1 }}</span>
+          </template> -->
+        </el-table-column>
+
+        <el-table-column label="录入时间" prop="affairName">
+        </el-table-column>
+
+        <el-table-column label="工作内容" prop="affairMiddleClassName">
+        </el-table-column>
+
+        <el-table-column label="完成情况" prop="isApproval">
+        </el-table-column>
+
+        <el-table-column label="预计完成时间" prop="demand">
+        </el-table-column>
+
+        <el-table-column label="状态" prop="demand">
+        </el-table-column>
+      </el-table>
+      <el-divider class="el-divider"></el-divider>
+
+
+      <!-- 录入工作日志 -->
+      <h3>————录入工作日志————</h3>
       <el-form :model="form" label-width="100px">
 
         <el-row>
@@ -85,7 +167,6 @@
         <el-form-item label="完成情况">
           <el-input type="textarea" v-model="form.desc" :rows="4"></el-input>
         </el-form-item>
-
 
       </el-form>
 

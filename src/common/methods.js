@@ -44,7 +44,7 @@ export {
   queryTodoEvents,        //待办事件查询(自己是受理人)
   queryAffairMainClass,        //查询事务大类
   queryAffairMiddleClassByMainClassId,        //根据事务大类id查询事务中类
-  
+
 
 
   submitUpload,         //文件上传
@@ -52,6 +52,7 @@ export {
   addAffairMainClass,    //添加事务大类
   addAffairManClass,    //添加事务中类
   addAffair,    //添加事务
+  queryAffair,    //查询事务
 
 
 
@@ -601,7 +602,7 @@ let queryAffairMainClass = function (cb) {
 };
 
 //根据事务大类id查询事务中类
-let queryAffairMiddleClassByMainClassId = function (data,cb) {
+let queryAffairMiddleClassByMainClassId = function (data, cb) {
   axios.get(`/affair/getAffairMiddleClassByMainClassId?affairMainClassName=${data}`).then(res => {
     // console.log(res)
     if (res.data.code == 0) {
@@ -636,8 +637,8 @@ let queryAffairMiddleClassByMainClassId = function (data,cb) {
 };
 
 //添加事务大类
-let addAffairMainClass = function (data,cb) {
-  axios.post(`/affair/addAffairMainClass`,data).then(res => {
+let addAffairMainClass = function (data, cb) {
+  axios.post(`/affair/addAffairMainClass`, data).then(res => {
     // console.log(res)
     if (res.data.code == 0) {
       // console.log(res.data.message)
@@ -671,8 +672,8 @@ let addAffairMainClass = function (data,cb) {
 }
 
 //添加事务中类
-let addAffairManClass = function(data,cb){
-  axios.post(`/affair/addAffairMiddleClass`,data).then(res => {
+let addAffairManClass = function (data, cb) {
+  axios.post(`/affair/addAffairMiddleClass`, data).then(res => {
     // console.log(res)
     if (res.data.code == 0) {
       // console.log(res.data.message)
@@ -706,8 +707,8 @@ let addAffairManClass = function(data,cb){
 }
 
 //添加事务
-let addAffair = function(data,cb){
-  axios.post(`/affair/addAffair`,data).then(res => {
+let addAffair = function (data, cb) {
+  axios.post(`/affair/addAffair`, data).then(res => {
     // console.log(res)
     if (res.data.code == 0) {
       // console.log(res.data.message)
@@ -730,6 +731,41 @@ let addAffair = function(data,cb){
       return
     } else {
       cb(res.data.message)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
+
+//查询事务
+let queryAffair = function (data, cb) {
+  axios.get(`/affair/getAllAffair?affairMain=${data.affairMain}&affairMiddle=${data.affairMiddle}`).then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      // console.log(res.data.message)
+      // cb(0)
+
+      // 下方提示数据库查询失败或无数据，注释掉
+      Vue.prototype.$message({
+        message: res.data.message,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.data)
     }
   }).catch(function (error) {
     Vue.prototype.$message({
