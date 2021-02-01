@@ -102,21 +102,63 @@
       </el-table>
       <el-divider class="el-divider"></el-divider>
 
-
       <!-- 录入工作日志 -->
       <h3>————录入工作日志————</h3>
-      <el-form :model="form" label-width="100px">
+      <el-form ref="form" :model="form" label-width="126px" :rules="rules">
 
         <el-row>
-          <el-col :span="12">
-            <el-form-item label="选择业务分类">
-              <el-input v-model="form.category" autocomplete="off"></el-input>
+          <el-col :span="6">
+            <el-form-item label="请选择事物大类" prop="affairMain">
+              <el-select v-model="form.affairMain" placeholder="请选择事务大类" @change="selectAffairMainClass" class="w100">
+                <el-option v-for="(item,index) in affairMainClassOptions" :key="index" :label="item.value+item.label" :value="item.value"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="6">
+            <el-form-item label="请选择事物中类" prop="affairMiddle">
+              <el-select v-model="form.affairMiddle" placeholder="请选择事物中类" @change="selectAffairMiddle" class="w100">
+                <el-option v-for="(item,index) in affairMiddleClassOptions" :key="index" :label="item.value+item.label" :value="item.value"></el-option>
+              </el-select>
             </el-form-item>
           </el-col>
 
           <el-col :span="12">
+            <el-form-item label="请选择事物" prop="affair">
+              <el-select v-model="form.affair" placeholder="请选择事物或直接搜索" @change="selectAffair" class="w100" filterable>
+                <el-option v-for="(item,index) in affairOptions" :key="index" :label="item.value+item.label" :value="item.value"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+
+        </el-row>
+
+        <el-row>
+          <el-col :span="18">
+            <el-form-item label="关键词" prop="keyWords">
+              <el-input v-model="form.keyWords" autocomplete="on"></el-input>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="6">
+            <el-form-item>
+              <el-checkbox-group v-model="form.isImportant">
+                <el-checkbox label="重点工作" name="type" @change="isImportant"></el-checkbox>
+              </el-checkbox-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row>
+          <el-col :span="6">
+            <el-form-item label="预计完成时间" prop="finishTime">
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.finishTime" style="width: 100%;" @change="finishTime"></el-date-picker>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="6">
             <el-form-item label="">
-              <el-radio-group v-model="form.coordination">
+              <el-radio-group v-model="form.isCooperation" @change="selectCooperation">
                 <el-radio label="无协同"></el-radio>
                 <el-radio label="有协同"></el-radio>
               </el-radio-group>
@@ -125,37 +167,15 @@
         </el-row>
 
         <el-row>
-          <el-col :span="18">
-            <el-form-item label="关键词">
-              <el-input v-model="form.words" autocomplete="off"></el-input>
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="6">
-            <el-form-item>
-              <el-checkbox-group v-model="form.SMS">
-                <el-checkbox label="重点工作" name="type"></el-checkbox>
-              </el-checkbox-group>
-            </el-form-item>
-          </el-col>
+          <el-form-item label="工作内容" prop="content">
+            <el-input type="textarea" v-model="form.content" :rows="4"></el-input>
+          </el-form-item>
         </el-row>
-
-        <el-row>
-          <el-col :span="6">
-            <el-form-item label="预计完成时间">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-            </el-form-item>
-          </el-col>
-        </el-row>
-
-        <el-form-item label="工作内容">
-          <el-input type="textarea" v-model="form.content" :rows="4"></el-input>
-        </el-form-item>
 
         <el-row>
           <el-col :span="12">
-            <el-form-item label="状况">
-              <el-radio-group v-model="form.status">
+            <el-form-item label="状况" prop="status">
+              <el-radio-group v-model="form.status" @change="selectStatus">
                 <el-radio label="未完成"></el-radio>
                 <el-radio label="部分完成"></el-radio>
                 <el-radio label="完成"></el-radio>
@@ -164,15 +184,41 @@
           </el-col>
         </el-row>
 
-        <el-form-item label="完成情况">
-          <el-input type="textarea" v-model="form.desc" :rows="4"></el-input>
-        </el-form-item>
+        <el-row>
+          <el-form-item label="完成情况" prop="completionOfProcess">
+            <el-input type="textarea" v-model="form.completionOfProcess" :rows="4"></el-input>
+          </el-form-item>
+        </el-row>
+
+        <el-row v-if="isShow">
+          <el-col :span="6">
+            <el-form-item label="协同人所在机构" prop="partnerDepartment">
+              <el-select v-model="form.partnerDepartment" placeholder="选择机构" @change="selectPartnerDepartment" class="w100">
+                <el-option v-for="(item,index) in partnerDepartments" :key="index" :label="item.value+item.label" :value="item.label"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="6">
+            <el-form-item label="协同人姓名" prop="partner">
+              <el-select v-model="form.partner" placeholder="选择协同人" @change="selectPartner" class="w100">
+                <el-option v-for="(item,index) in partners" :key="index" :label="item.label" :value="item.label"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="6">
+            <el-form-item label="所占比例(%)" prop="divideProportion">
+              <el-input v-model="form.divideProportion" autocomplete="on"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
 
       </el-form>
 
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
-        <el-button @click="centerDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="commit('form')">提交日志</el-button>
+        <el-button @click="centerDialogVisible = false">取消</el-button>
       </div>
     </el-dialog>
   </div>
@@ -180,6 +226,14 @@
 </template>
 
 <script>
+import {
+  queryAffairMainClass as C_queryAffairMainClass,
+  queryAffairMiddleClassByMainClassId as C_queryAffairMiddleClassByMainClassId,
+  queryAffair as C_queryAffair,
+  queryDepartment as C_queryDepartment,
+  queryPersonnnelByDepartment as C_queryPersonnnelByDepartment,
+  addLog as C_addLog
+} from '../../common/methods.js'
 export default {
   name: 'FillInSchedule',
   data() {
@@ -187,18 +241,291 @@ export default {
       msg: 'FillInSchedule',
       centerDialogVisible: false,
       form: {
-        SMS: ''
+        creator: this.$store.name,
+        uid: this.$store.id,
+        //选中的事务大类
+        affairMain: '',
+        //选中的事务中类
+        affairMiddle: '',
+        //事务
+        affair: '',
+        keyWords: '',
+        //完成时间
+        finishTime: '',
+        isImportant: false,
+        isCooperation: '无协同',
+        content: '',
+        status: '',
+        completionOfProcess: '',
+        partnerDepartment: '',
+        partner: '',
+        divideProportion:''
       },
+      //事务大类的options
+      affairMainClassOptions: [],
+      //事务中类的options
+      affairMiddleClassOptions: [],
+      //事务
+      affairOptions: [],
+      //事务大类的ID
+      affairMainClassNameId: '',
+      //事务大类的名称
+      affairMainClassName: '',
+      //选中的事务大类
+      affairMainClass: '',
+      //选中的事务中类ID
+      affairMiddleClassNameId: '',
+      //部门s
+      partnerDepartments: [],
+      //协同人s
+      partners: [],
       value: new Date(),
-
+      tableData: [],
+      isShow: false,
+      //表单验证项
+      rules: {
+        affairMain: [
+          { required: true, message: '请选择', trigger: 'blur' },
+        ],
+        affairMiddle: [
+          { required: true, message: '请选择', trigger: 'blur' },
+        ],
+        affair: [
+          { required: true, message: '请选择', trigger: 'blur' },
+        ],
+        keyWords: [
+          { required: true, message: '请填写', trigger: 'blur' },
+        ],
+        finishTime: [
+          { required: true, message: '请选择完成时间', trigger: 'blur' },
+        ],
+        content: [
+          { required: true, message: '请填写工作内容', trigger: 'blur' },
+        ],
+        status: [
+          { required: true, message: '请选择状况', trigger: 'blur' },
+        ],
+        completionOfProcess: [
+          { required: true, message: '请填写完成情况', trigger: 'blur' },
+        ]
+      },
     }
+
   },
   methods: {
+    //提交
+    async commit(form) {
+      //设置一个变量，用来终止提交,(不然下面一个验证函数return无效，只是终止它自己，不终止这个提交功能)
+      //1表示继续，0表示终止
+      let go = 1
+      console.log(this.form);
+      //验证必填项是否填了，没填就弹出红色提醒
+      this.$refs[form].validate((valid) => {
+        if (valid) {
+          // alert('submit!');
+        } else {
+          console.log('error submit!!');
+          go = 0
+        }
+      });
+      if (go == 0) return
+      console.log(1111111)
+
+      await 
+      C_addLog(this.form,res=>{
+        console.log(res)
+      })
+
+    },
+
+    //选择协同人所在机构
+    selectPartnerDepartment(val) {
+      //清空协同人数据和协同人数组数据
+      this.form.partner = ''
+      this.partners=[]
+      this.form.partnerDepartment = val
+      // console.log(this.form.partnerDepartment)
+      C_queryPersonnnelByDepartment(val, res => {
+        console.log(res)
+        res.forEach((ele, index) => {
+          this.partners.push({
+            value: index + 1,
+            label: ele.name
+          })
+        })
+      })
+
+    },
+
+    //选择协同人
+    selectPartner(val){
+      console.log(val)
+    },
+
+    //是否是重点工作
+    isImportant(val) {
+      // console.log(val)
+      if (val == false) {
+        this.form.isImportant = false
+      } else {
+        this.form.isImportant = true
+      }
+    },
+
+    //选择状况
+    selectStatus(val) {
+      console.log(val)
+    },
+    //完成时间
+    finishTime(val) {
+      // console.log(val)
+      this.form.finishTime = new Date(val).getFullYear() + '-' + (new Date(val).getMonth() + 1) + '-' + new Date(val).getDate();
+      console.log(this.form.finishTime)
+    },
+
+    //点击日历日子，弹出对话框
     addLog: function (data) {
-      console.log(data)
+      // console.log(data)
       this.centerDialogVisible = true
     },
 
+    //选择事务大类
+    selectAffairMainClass(val) {
+      // console.log(val) // val是id，根据id找到事务大类的名字
+      this.affairMainClassNameId = val
+      this.affairMainClassOptions.forEach(ele => {
+        if (ele.value == val) {
+          //这里不能用form里的变量，获取有问题
+          //这个大类名称用来发送请求
+          this.affairMainClass = ele.label
+          //这个form中的大类名称用来提交表单
+          this.form.affairMain = ele.label
+        }
+      });
+
+      //根据事务大类id查询事务中类
+      //清空事务中类的model
+      this.affairMiddleClassOptions = []
+      //清空事务[]
+      this.affairOptions = []
+      //清空事务选中值
+      this.form.affair = ''
+      //清空事务中类的选中值
+      this.form.affairMiddle = ''
+      //清空事务中类的选中ID
+      this.form.affairMiddleClassNameId = ''
+      C_queryAffairMiddleClassByMainClassId(this.affairMainClass, res => {
+        // console.log(res)
+        res.forEach((ele) => {
+          this.affairMiddleClassOptions.push({
+            value: ele.id,
+            label: ele.affairMiddleClassName
+          });
+        });
+      })
+
+    },
+
+    //选择事务中类
+    selectAffairMiddle(val) {
+      //清空事务[]
+      this.affairOptions = []
+      //清空事务中类的选中值
+      this.form.affair = ''
+      console.log(val)
+      console.log(' this.affairMiddleClassOptions')
+      console.log(this.affairMiddleClassOptions)
+      this.affairMiddleClassNameId = val
+
+      //根据val找出中类名字
+      this.affairMiddleClassOptions.forEach(ele => {
+        if (ele.value == val) {
+          this.form.affairMiddle = ele.label
+        }
+
+      })
+
+      let obj = {
+        affairMain: this.affairMainClassNameId,
+        affairMiddle: this.affairMiddleClassNameId
+      }
+
+      C_queryAffair(obj, res => {
+        console.log(res)
+
+        res.forEach((ele) => {
+          // console.log(this.affairOptions)
+          this.affairOptions.push({
+            value: ele.number,
+            label: ele.affairName
+          });
+        });
+      })
+    },
+
+    //选择事务
+    selectAffair(val) {
+      console.log(val)
+      // this.form.affair=val+this.affairOptions.label
+      this.affairOptions.forEach(ele => {
+        if (ele.value == val) {
+          this.form.affair = val + ele.label
+        }
+      })
+      console.log(this.form.affair)
+
+
+    },
+
+    //选择有无协同
+    selectCooperation(val) {
+      console.log(val)
+      if (val == '有协同') {
+        //展现隐藏的盒子，并且增加验证规则
+        this.isShow = true
+        this.rules.partnerDepartment = [
+          { required: true, message: '请选择协同人所在机构', trigger: 'blur' },
+        ]
+        this.rules.partner = [
+          { required: true, message: '请选择协同人', trigger: 'blur' },
+        ]
+        this.rules.divideProportion = [
+          { required: true, message: '请选择协同人分担比例', trigger: 'blur' },
+        ]
+      } else {
+        //隐藏盒子，并且取消验证规则
+        this.isShow = false
+        this.rules.partnerDepartment = []
+        this.rules.partner = []
+        this.rules.divideProportion = []
+      }
+
+    },
+
+    //状况
+
+  },
+  mounted: function () {
+    //查询事务大类
+    C_queryAffairMainClass(res => {
+      // console.log(res)
+      res.forEach(ele => {
+        this.affairMainClassOptions.push({
+          value: ele.id,
+          label: ele.affairMainClassName
+        });
+      });
+    });
+
+    //查询部门
+    C_queryDepartment(res => {
+      res.forEach(ele => {
+        this.partnerDepartments.push({
+          value: ele.number,
+          label: ele.departmentName
+        })
+      })
+    })
   }
 }
 </script>

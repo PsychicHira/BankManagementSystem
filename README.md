@@ -1323,6 +1323,64 @@
 
 - **字段**
 
-  因为中类id是唯一的，所以
+  因为中类id是唯一的，
 
 - **返回值**
+
+```
+
+```
+
+## 新增工作日志
+
+### **增**
+
+- **url**
+
+  /log/add
+
+- **method**
+
+  post
+
+- **字段**
+
+```
+{
+    "creator": "董监办",
+    "uid": "7774b160-4fc5-11eb-a408-65ca51c3a35b",
+    "affairMain": "1",
+    "affairMiddle": "2",
+    "affair": "3",
+    "keyWords": "12",
+    "finishTime": "2021-0202",
+    "isImportant": false,
+    "isCooperation": "无协同",
+    "content": "123123",
+    "status": "完成",
+    "completionOfProcess": "123123123",
+    "partnerDepartment": "董监办",
+    "partner": "陈功",
+    "divideProportion":"30"
+}
+```
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据添加成功",
+    "data": {
+        "fieldCount": 0,
+        "affectedRows": 1,
+        "insertId": 0,
+        "serverStatus": 2,
+        "warningCount": 0,
+        "message": "",
+        "protocol41": true,
+        "changedRows": 0
+    }
+}
+```
+

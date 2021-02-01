@@ -196,7 +196,7 @@ export default {
     },
 
     commitEvent(form) {
-      //设置一个变量，用来终止提交，不然下面一个验证函数return无效，只是终止它自己，不终止这个提交功能
+      //设置一个变量，用来终止提交,(不然下面一个验证函数return无效，只是终止它自己，不终止这个提交功能)
       //1表示继续，0表示终止
       let go = 1
       console.log(this.form);

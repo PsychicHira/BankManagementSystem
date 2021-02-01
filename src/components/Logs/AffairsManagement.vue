@@ -192,6 +192,7 @@ export default {
       // console.log(val) // val是id，根据id找到事务大类的名字
       this.queryForm.affairMainClassNameId = val
       this.affairMainClassSelect.forEach(ele => {
+        console.log(ele)
         if (ele.value == val) {
           this.affairMainClassName = ele.label
         }
@@ -270,6 +271,7 @@ export default {
 
     //选择事务大类（添加）
     selectAffairMainClassAdd(val) {
+      console.log(111111111111111)
       // console.log(val) // val是id，根据id找到事务大类的名字
       this.form.affairMainClassNameId = val
       this.affairMainClassSelect.forEach(ele => {

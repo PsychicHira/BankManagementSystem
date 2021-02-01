@@ -44,15 +44,14 @@ export {
   queryTodoEvents,        //待办事件查询(自己是受理人)
   queryAffairMainClass,        //查询事务大类
   queryAffairMiddleClassByMainClassId,        //根据事务大类id查询事务中类
-
-
+  queryAffair,    //查询事务
 
   submitUpload,         //文件上传
 
   addAffairMainClass,    //添加事务大类
   addAffairManClass,    //添加事务中类
   addAffair,    //添加事务
-  queryAffair,    //查询事务
+  addLog,    //添加工作日志s
 
 
 
@@ -344,7 +343,7 @@ let queryInformationSource = function (cb) {
       });
       return
     } else if (!res.data.code) {
-      console.log(res.data)
+      // console.log(res.data)
       Vue.prototype.$message({
         message: res.data,
         type: 'error',
@@ -766,6 +765,41 @@ let queryAffair = function (data, cb) {
       return
     } else {
       cb(res.data.data)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
+
+//添加工作日志
+let addLog = function (data, cb) {
+  axios.post(`/log/add`, data).then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      // console.log(res.data.message)
+      // cb(0)
+
+      // 下方提示数据库查询失败或无数据，注释掉
+      Vue.prototype.$message({
+        message: res.data.message,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.message)
     }
   }).catch(function (error) {
     Vue.prototype.$message({
