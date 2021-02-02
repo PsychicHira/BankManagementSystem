@@ -1384,3 +1384,137 @@
 }
 ```
 
+## 查询今日工作日志
+
+### **查**
+
+- **url**
+
+  /log/todayLogs
+
+- **method**
+
+  get
+
+- **字段**
+
+  无
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "id": "14d4cde0-643f-11eb-a3ae-a305e4f16fa4",
+            "creator": "管理员",
+            "creatorID": "7774b160-4fc5-11eb-a408-65ca51c3a35b",
+            "createTime": "2021-2-1",
+            "affairMain": "常规巡查",
+            "affairMiddle": "22软件",
+            "affair": "2211G虚拟化/容器系统日常可用性巡查（每集群）",
+            "isCooperation": "无协同",
+            "keyWords": "1231",
+            "finishTime": "2021-2-2",
+            "content": "12312",
+            "status": "未完成",
+            "completionOfProcess": "123123",
+            "partner": "",
+            "partnerID": null,
+            "partnerDepartment": "",
+            "divideProportion": ""
+        },.......
+```
+
+## 查询往日未完成工作
+
+### **查**
+
+- **url**
+
+  /log/pastLogs
+
+- **method**
+
+  get
+
+- **字段**
+
+  无
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "id": "b06f6d80-643c-11eb-a5ba-b76408aac903",
+            "creator": "管理员",
+            "creatorID": "7774b160-4fc5-11eb-a408-65ca51c3a35b",
+            "createTime": "2021-1-31",
+            "affairMain": "常规巡查",
+            "affairMiddle": "21机房环境",
+            "affair": "2120F指导分支机构检查/协助维保厂商检查",
+            "isCooperation": "有协同",
+            "keyWords": "123123123",
+            "finishTime": "2021-2-2",
+            "content": "123213",
+            "status": "未完成",
+            "completionOfProcess": "123213123",
+            "partner": "陈功",
+            "partnerID": "2a638d90-53dc-11eb-b60b-f5e96c463d42",
+            "partnerDepartment": "董监办",
+            "divideProportion": "30"
+        }
+    ]
+}
+```
+
+## 查询已分派未完成工作
+
+### **查**
+
+- **url**
+
+  /log/divedeLogs
+
+- **method**
+
+  get
+
+- **字段**
+
+  无
+
+- **返回值**
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "id": "b06f6d80-643c-11eb-a5ba-b76408aac903",
+            "creator": "管理员",
+            "creatorID": "7774b160-4fc5-11eb-a408-65ca51c3a35b",
+            "createTime": "2021-1-31",
+            "affairMain": "常规巡查",
+            "affairMiddle": "21机房环境",
+            "affair": "2120F指导分支机构检查/协助维保厂商检查",
+            "isCooperation": "有协同",
+            "keyWords": "123123123",
+            "finishTime": "2021-2-2",
+            "content": "123213",
+            "status": "未完成",
+            "completionOfProcess": "123213123",
+            "partner": "陈功",
+            "partnerID": "2a638d90-53dc-11eb-b60b-f5e96c463d42",
+            "partnerDepartment": "董监办",
+            "divideProportion": "30"
+        },
+```
+

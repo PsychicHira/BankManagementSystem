@@ -2,7 +2,7 @@
   <div class="OrganizationLogsInquiry">
     <el-card class="box-card">
 
-      <h3>工作统计</h3>
+      <h3>机构日志查询</h3>
       <el-divider class="el-divider"></el-divider>
 
       <el-form ref="form" :model="form" label-width="120px">

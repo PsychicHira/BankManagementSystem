@@ -14,6 +14,7 @@ import DepartmentEvents from '@/components/MyWork/DepartmentEvents'
 
 //Logs
 import FillInLogs from '@/components/Logs/FillInLogs'
+import FillInLogsDetail from '@/components/Logs/FillInLogsDetail'
 import LogsInquiry from '@/components/Logs/LogsInquiry'
 import AffairsManagement from '@/components/Logs/AffairsManagement'
 import WorkStatistics from '@/components/Logs/WorkStatistics'
@@ -115,6 +116,7 @@ export default new Router({
       children:
         [
           { path: 'FillInLogs', name: 'FillInLogs', component: FillInLogs, meta: { title: '日志填写' } },
+          { path: 'FillInLogsDetail', name: 'FillInLogsDetail', component: FillInLogsDetail, meta: { title: '日志填写详细页' } },
           { path: 'LogsInquiry', name: 'LogsInquiry', component: LogsInquiry, meta: { title: '日志查询' } },
           { path: 'AffairsManagement', name: 'AffairsManagement', component: AffairsManagement, meta: { title: '事务分类维护' } },
           { path: 'WorkStatistics', name: 'WorkStatistics', component: WorkStatistics, meta: { title: '工作统计' } },

@@ -45,6 +45,9 @@ export {
   queryAffairMainClass,        //查询事务大类
   queryAffairMiddleClassByMainClassId,        //根据事务大类id查询事务中类
   queryAffair,    //查询事务
+  queryTodayLogs,    //查询今日工作日志
+  queryPastLogs,    //查询往日未完成工作
+  queryDivideLogs,    //查询已分派未完成工作
 
   submitUpload,         //文件上传
 
@@ -800,6 +803,87 @@ let addLog = function (data, cb) {
       return
     } else {
       cb(res.data.message)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
+
+//查询今日工作日志
+let queryTodayLogs = function (cb) {
+  axios.get('/log/todayLogs').then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
+
+//查询往日未完成工作
+let queryPastLogs = function (cb) {
+  axios.get('/log/pastLogs').then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
+
+//查询已分派未完成工作   
+let queryDivideLogs = function (cb) {
+  axios.get('/log/divedeLogs').then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.data)
     }
   }).catch(function (error) {
     Vue.prototype.$message({
