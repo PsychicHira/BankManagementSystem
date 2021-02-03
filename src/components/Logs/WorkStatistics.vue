@@ -81,7 +81,8 @@ export default {
         type: [],
         resource: '',
         desc: ''
-      }
+      },
+      tableData:[]
     }
   },
   methods: {

@@ -53,19 +53,23 @@
       </el-form>
 
       <el-table :data="tableData" stripe>
-        <el-table-column prop="id" label="序号">
+        <el-table-column label="序号" width="50">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.$index+1 }}</span>
+          </template>
         </el-table-column>
-        <el-table-column prop="date" label="姓名">
+
+        <el-table-column prop="creator" label="姓名" width="100">
         </el-table-column>
-        <el-table-column prop="title" label="工作内容">
+        <el-table-column prop="content" label="工作内容">
         </el-table-column>
-        <el-table-column prop="name" label="完成情况">
+        <el-table-column prop="completionOfProcess" label="完成情况">
         </el-table-column>
         <el-table-column prop="address" label="启示与反思">
         </el-table-column>
-        <el-table-column prop="address" label="填写时间">
+        <el-table-column prop="createTime" label="填写时间" width="100">
         </el-table-column>
-        <el-table-column prop="address" label="业务分类">
+        <el-table-column prop="affair" label="业务分类">
         </el-table-column>
       </el-table>
     </el-card>
@@ -73,6 +77,10 @@
 </template>
 
 <script>
+import {
+  queryLogs as C_queryLogs,
+
+} from '../../common/methods.js'
 export default {
   name: 'NewEvent',
   data() {
@@ -84,9 +92,7 @@ export default {
         end: '',
         status: '',
       },
-      tableData:{
-
-      }
+      tableData: []
     }
   },
   methods: {
@@ -106,10 +112,15 @@ export default {
     handlePreview(file) {
       console.log(file);
     }
+  },
+  mounted: function () {
+    C_queryLogs(this.$store.id,res => {
+      console.log(res)
+      this.tableData = res
+    })
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 </style>

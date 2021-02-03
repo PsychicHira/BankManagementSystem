@@ -44,13 +44,13 @@
         <el-row>
           <el-col :span="6">
             <el-form-item label="发布人员" prop="creator">
-              <el-input v-model="form.creator"></el-input>
+              <el-input v-model="form.creator" disabled></el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label="联系电话" prop="phoneNumber">
-              <el-input v-model="form.phoneNumber"></el-input>
+              <el-input v-model="form.phoneNumber" disabled></el-input>
             </el-form-item>
           </el-col>
 
@@ -97,11 +97,11 @@ export default {
         filePath: '',
         startTime: '',
         endTime: '',
-        creator: '',
-        phoneNumber: '',
+        creator: this.$store.name,
+        phoneNumber: this.$store.phoneNumber,
         isMSG: false,
         influenceArea: '',
-        uid: this.$store.id
+        uid: this.$store.id,
       },
       fileList: [],
       influenceArea: [],
@@ -190,6 +190,8 @@ export default {
             this.clear()
           }
           })
+        }).catch(err=>{
+          console.log(err)
         })
       } else {
         this.$axios.post('/announce/add', this.form).then(res => {
@@ -214,6 +216,8 @@ export default {
             });
             this.clear()
           }
+        }).catch(err=>{
+          console.log(err)
         })
       }
 

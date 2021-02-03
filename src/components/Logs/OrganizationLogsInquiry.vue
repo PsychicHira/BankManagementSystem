@@ -19,7 +19,7 @@
             </el-form-item>
           </el-col>
 
-          <el-col :span="4">
+          <el-col :span="6">
             <el-form-item label="完成情况">
               <el-select v-model="form.done" placeholder="请选择" style="width:100%">
                 <el-option label="已完成" value="21312"></el-option>
@@ -83,19 +83,23 @@
       </el-form>
 
       <el-table :data="tableData" stripe style="width: 100%">
-        <el-table-column prop="id" label="序号">
+        <el-table-column label="序号" width="50">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.$index+1 }}</span>
+          </template>
         </el-table-column>
-        <el-table-column prop="date" label="姓名" width="180">
+
+        <el-table-column prop="creator" label="姓名" width="100">
         </el-table-column>
-        <el-table-column prop="title" label="工作内容">
+        <el-table-column prop="content" label="工作内容">
         </el-table-column>
-        <el-table-column prop="name" label="完成情况" width="180">
+        <el-table-column prop="completionOfProcess" label="完成情况">
         </el-table-column>
         <el-table-column prop="address" label="启示与反思">
         </el-table-column>
-        <el-table-column prop="address" label="填写时间">
+        <el-table-column prop="createTime" label="填写时间" width="100">
         </el-table-column>
-        <el-table-column prop="address" label="业务分类">
+        <el-table-column prop="affair" label="业务分类">
         </el-table-column>
       </el-table>
     </el-card>
@@ -103,6 +107,9 @@
 </template>
 
 <script>
+import {
+  queryLogsByDepartment as C_queryLogsByDepartment
+} from '../../common/methods.js'
 export default {
   name: 'NewEvent',
   data() {
@@ -117,7 +124,8 @@ export default {
         resource: '',
         desc: '',
         SMS:''
-      }
+      },
+      tableData:[]
     }
   },
   methods: {
@@ -137,6 +145,14 @@ export default {
     handlePreview(file) {
       console.log(file);
     }
+  },
+  mounted:function(){
+    C_queryLogsByDepartment(this.$store.department,res=>{
+      console.log(res)
+      this.tableData = res
+    })
+
+    
   }
 }
 </script>

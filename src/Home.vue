@@ -51,7 +51,6 @@ export default {
 <style lang="scss">
 @import "./assets/style/common.scss";
 
-
 //Home
 //等同于把.el-container的宽度设为100%，让子元素继承此父级的宽
 .HeaderAndMainAndFooter{

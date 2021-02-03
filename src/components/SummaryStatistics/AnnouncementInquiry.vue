@@ -41,21 +41,30 @@
 
       <el-table :data="tableData" stripe style="width: 100%">
 
-        <el-table-column prop="id" label="ID">
+        <el-table-column label="序号" width="50">
+          <template slot-scope="scope">
+            <span style="margin-left: 10px">{{ scope.$index+1 }}</span>
+          </template>
         </el-table-column>
 
         <el-table-column prop="title" label="标题">
         </el-table-column>
 
-        <el-table-column prop="start" label="创建时间" width="180">
+        <el-table-column prop="createTime" label="创建时间" width="100">
         </el-table-column>
 
-        <el-table-column prop="end" label="结束时间">
+        <el-table-column prop="endTime" label="结束时间" width="100">
         </el-table-column>
 
-        <el-table-column prop="sponsor" label="发起人" width="180">
+        <el-table-column prop="creator" label="发起人" width="150">
         </el-table-column>
 
+        <el-table-column label="操作" width="150">
+          <template slot-scope="scope">
+            <el-button size="mini" type="success" @click="toDetail(scope.$index, scope.row)">查看</el-button>
+            <el-button size="mini" type="danger" @click="deleteDepartment(scope.$index, scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </el-card>
   </div>
@@ -63,46 +72,32 @@
 </template>
 
 <script>
+import {
+  queryAnnounce as C_queryAnnounce
+} from '../../common/methods.js'
 export default {
   name: 'Todo',
   data() {
     return {
-      tableData: [
-        {
-          start: '2016-05-02',
-          name: '王小虎',
-          sponsor: 'tom',
-          id: 2131231324255,
-          title: '事件标题1',
-          status: '等待接受'
-        }, {
-          start: '2016-05-04',
-          name: '王小虎',
-          sponsor: 'tony',
-          id: 56756765,
-          title: '事件标题2',
-          status: '等待接受'
-        }, {
-          start: '2016-05-01',
-          name: '王小虎',
-          sponsor: 'john',
-          id: 435435,
-          title: '事件标题3',
-          status: '等待接受'
-        }, {
-          start: '2016-05-03',
-          name: '王小虎',
-          sponsor: 'mike',
-          id: 567567567,
-          title: '事件标题4',
-          status: '等待接受'
-        }
-      ],
-      form: []
+      tableData: [],
+      form: {}
     };
   },
   methods: {
+    onSubmit() {
 
+    },
+
+    toDetail(){
+      ;
+    }
+
+  },
+  mounted: function () {
+    C_queryAnnounce(res => {
+      console.log(res)
+      this.tableData = res
+    })
   }
 }
 </script>

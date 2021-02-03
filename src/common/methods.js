@@ -48,6 +48,9 @@ export {
   queryTodayLogs,    //查询今日工作日志
   queryPastLogs,    //查询往日未完成工作
   queryDivideLogs,    //查询已分派未完成工作
+  queryLogs,    //查询已分派未完成工作   
+  queryLogsByDepartment,    //查询用户所在部门发布过的所有日志（使用用户的所在部门查）   
+  queryAnnounce,    //查询公告
 
   submitUpload,         //文件上传
 
@@ -870,6 +873,101 @@ let queryPastLogs = function (cb) {
 //查询已分派未完成工作   
 let queryDivideLogs = function (cb) {
   axios.get('/log/divedeLogs').then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
+
+//查询已分派未完成工作
+let queryLogs = function (data, cb) {
+  axios.get(`/log/queryLogs?uid=${data}`).then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      // console.log(res.data.message)
+      // cb(0)
+      // 下方提示数据库查询失败或无数据，注释掉
+      // Vue.prototype.$message({
+      //   message: res.data.message,
+      //   type: 'error',
+      //   duration: 3000
+      // });
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
+
+//查询用户所在部门发布过的所有日志（使用用户的所在部门查）   
+let queryLogsByDepartment = function (data, cb) {
+  axios.get(`/log/queryLogsByDepartment?department=${data}`).then(res => {
+    // console.log(res)
+    if (res.data.code == 0) {
+      // console.log(res.data.message)
+      // cb(0)
+      // 下方提示数据库查询失败或无数据，注释掉
+      // Vue.prototype.$message({
+      //   message: res.data.message,
+      //   type: 'error',
+      //   duration: 3000
+      // });
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else {
+      cb(res.data.data)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
+
+//查询公告
+let queryAnnounce = function(cb){
+  axios.get('/announce/queryAnnounce').then(res => {
     // console.log(res)
     if (res.data.code == 0) {
       console.log(res.data.message)

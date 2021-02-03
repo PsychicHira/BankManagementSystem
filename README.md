@@ -1347,7 +1347,8 @@
 
 ```
 {
-    "creator": "董监办",
+    "creator": "管理员",
+    "department":"董监办",
     "uid": "7774b160-4fc5-11eb-a408-65ca51c3a35b",
     "affairMain": "1",
     "affairMiddle": "2",
@@ -1516,5 +1517,82 @@
             "partnerDepartment": "董监办",
             "divideProportion": "30"
         },
+```
+
+## 查询用户发布过的所有日志（使用用户id查）
+
+### **查**
+
+- **url**
+
+  /log/queryLogs
+
+  get
+
+- **字段**
+
+```
+uid=7774b160-4fc5-11eb-a408-65ca51c3a35b
+```
+
+- **返回值**
+
+
+
+
+
+## 查询用户所在部门发布过的所有日志（使用用户的所在部门查）
+
+### **查**
+
+- **url**
+
+  /log/queryLogsByDepartment
+
+  get
+
+- **字段**
+
+```
+department=董监办
+```
+
+- **返回值**
+
+
+
+## 查询公告
+
+- **url**
+
+  /announce/queryAnnounce
+
+  get
+
+- **字段**
+
+  无
+
+- 返回值
+
+```
+{
+    "code": 1,
+    "message": "数据库操作成功",
+    "data": [
+        {
+            "id": "a6002020-65ee-11eb-9e56-dbbe60416257",
+            "title": "公告1",
+            "content": "公告1",
+            "filePath": "",
+            "startTime": "2021-2-3",
+            "endTime": "2021-2-4",
+            "creator": "公告1",
+            "phoneNumber": "公告1",
+            "influenceArea": "influenceArea1",
+            "isMSG": "0",
+            "createTime": "2021-2-3",
+            "creatorId": "7774b160-4fc5-11eb-a408-65ca51c3a35b"
+        },......
 ```
 

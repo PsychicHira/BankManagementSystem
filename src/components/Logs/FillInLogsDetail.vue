@@ -375,6 +375,7 @@ export default {
       form: {
         creator: this.$store.name,
         uid: this.$store.id,
+        department: this.$store.department,
         //选中的事务大类
         affairMain: '',
         //选中的事务中类
