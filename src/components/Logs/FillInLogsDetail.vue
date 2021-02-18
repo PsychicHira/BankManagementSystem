@@ -165,7 +165,7 @@
 
           <el-col :span="6">
             <el-form-item label="">
-              <el-radio-group v-model="form.isCooperation" @change="selectCooperation">
+              <el-radio-group v-model="form.isCoorperation" @change="selectCooperation">
                 <el-radio label="无协同"></el-radio>
                 <el-radio label="有协同"></el-radio>
               </el-radio-group>
@@ -232,7 +232,7 @@
     <!-- 弹窗 -->
     <!-- 往日未完成工作 -->
     <el-dialog title="查看与修改工作日志" :visible.sync="dialogVisible" center width="1200px">
-      <el-form ref="detail" :model="detail" label-width="126px" :rules="detailRules">
+      <el-form ref="detail" :model="detail" label-width="126px" :rules="detailRules" v-loading="loading">
 
         <el-row>
           <el-col :span="6">
@@ -279,7 +279,7 @@
 
           <el-col :span="12">
             <el-form-item label="">
-              <el-radio-group v-model="detail.isCooperation" @change="selectCooperationDetail">
+              <el-radio-group v-model="detail.isCoorperation" @change="selectCooperationDetail">
                 <el-radio label="无协同"></el-radio>
                 <el-radio label="有协同"></el-radio>
               </el-radio-group>
@@ -288,7 +288,7 @@
 
           <el-col :span="6">
             <el-form-item>
-              <el-checkbox label="重点工作" v-model="isImportantDetail" name="type" @change="isImportantUpdate"></el-checkbox>
+              <el-checkbox label="重点工作" v-model="isImportantDetail" name="type" @change="isImportantUpdata"></el-checkbox>
             </el-form-item>
           </el-col>
 
@@ -303,7 +303,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="状况" prop="status">
-              <el-radio-group v-model="detail.status" @change="selectStatus">
+              <el-radio-group v-model="detail.status" @change="selectStatusDetail">
                 <el-radio label="未完成"></el-radio>
                 <el-radio label="部分完成"></el-radio>
                 <el-radio label="完成"></el-radio>
@@ -321,7 +321,7 @@
         <el-row v-if="isShowDetail">
           <el-col :span="6">
             <el-form-item label="协同人所在机构" prop="partnerDepartment">
-              <el-select v-model="detail.partnerDepartment" placeholder="选择机构" disabled class="w100">
+              <el-select v-model="detail.partnerDepartment" placeholder="选择机构" class="w100">
                 <el-option v-for="(item,index) in partnerDepartments" :key="index" :label="item.value+item.label" :value="item.label"></el-option>
               </el-select>
             </el-form-item>
@@ -329,7 +329,7 @@
 
           <el-col :span="6">
             <el-form-item label="协同人姓名" prop="partner">
-              <el-select v-model="detail.partner" placeholder="选择协同人" disabled class="w100">
+              <el-select v-model="detail.partner" placeholder="选择协同人" class="w100">
                 <el-option v-for="(item,index) in partners" :key="index" :label="item.label" :value="item.label"></el-option>
               </el-select>
             </el-form-item>
@@ -343,7 +343,7 @@
         </el-row>
 
         <el-form-item>
-          <el-button type="primary" @click="commitDetail('detail')">提交</el-button>
+          <el-button type="primary" @click="commitDetail('detail')">确认修改</el-button>
           <el-button @click="dialogVisible = false">取消</el-button>
 
         </el-form-item>
@@ -364,7 +364,8 @@ import {
   addLog as C_addLog,
   queryTodayLogs as C_queryTodayLogs,
   queryPastLogs as C_queryPastLogs,
-  queryDivideLogs as C_queryDivideLogs
+  queryDivideLogs as C_queryDivideLogs,
+  updataLog as C_updataLog
 } from '../../common/methods.js'
 export default {
   name: 'FillInSchedule',
@@ -386,7 +387,7 @@ export default {
         //完成时间
         finishTime: '',
         isImportant: "false",
-        isCooperation: '无协同',
+        isCoorperation: '无协同',
         content: '',
         status: '',
         completionOfProcess: '',
@@ -403,7 +404,7 @@ export default {
         affairMain: '',
         affairMiddle: '',
         affair: '',
-        isCooperation: '',
+        isCoorperation: '',
         isImportant: ''
       },
       //事务大类的options
@@ -489,7 +490,8 @@ export default {
         completionOfProcess: [
           { required: true, message: '请填写完成情况', trigger: 'blur' },
         ]
-      }
+      },
+      loading: false
     }
 
   },
@@ -503,24 +505,25 @@ export default {
       console.log(index)
       console.log(row)
       this.dialogVisible = true
-      this.detail.affairMain = row.affairMain
-      this.detail.affairMiddle = row.affairMiddle
-      this.detail.affair = row.affair
-      this.detail.keyWords = row.keyWords
-      this.detail.finishTime = row.finishTime
-      this.detail.isCooperation = row.isCooperation
-      this.detail.content = row.content
-      this.detail.status = row.status
-      this.detail.completionOfProcess = row.completionOfProcess
-      this.detail.partnerDepartment = row.partnerDepartment
-      this.detail.partner = row.partner
-      this.detail.divideProportion = row.divideProportion
+      // this.detail.affairMain = row.affairMain
+      // this.detail.affairMiddle = row.affairMiddle
+      // this.detail.affair = row.affair
+      // this.detail.keyWords = row.keyWords
+      // this.detail.finishTime = row.finishTime
+      // this.detail.isCooperation = row.isCooperation
+      // this.detail.content = row.content
+      // this.detail.status = row.status
+      // this.detail.completionOfProcess = row.completionOfProcess
+      // this.detail.partnerDepartment = row.partnerDepartment
+      // this.detail.partner = row.partner
+      // this.detail.divideProportion = row.divideProportion
+      this.detail = row
       if (row.isImportant == 'true') {
         this.isImportantDetail = true
       } else {
         this.isImportantDetail = false
       }
-      if (row.isCooperation == '有协同') {
+      if (row.isCoorperation == '有协同') {
         this.selectCooperationDetail('有协同')
       } else {
         this.selectCooperationDetail('无协同')
@@ -530,8 +533,36 @@ export default {
     },
 
     //详情页的修改
-    commitDetail(detai) {
+    commitDetail(detail) {
+      //设置一个变量，用来终止提交,(不然下面一个验证函数return无效，只是终止它自己，不终止这个提交功能)
+      //1表示继续，0表示终止
+      let go = 1
+      // console.log(this.form);
+      //验证必填项是否填了，没填就弹出红色提醒
+      this.$refs[detail].validate((valid) => {
+        if (valid) {
+          // alert('submit!');
+        } else {
+          console.log('detail error submit!!');
+          go = 0
+        }
+      });
+      if (go == 0) return
+      console.log(this.detail)
+      console.log(1111111)
 
+      // this.$axios.post('/log/updata',this.detail).then(res=>{
+      //   console.log(res)
+      // })
+      this.loading = true
+      C_updataLog(this.detail, res => {
+        this.loading = false
+        this.$message({
+          message: res,
+          type: 'success',
+          duration: 3000
+        });
+      })
     },
 
     //提交
@@ -597,7 +628,7 @@ export default {
       }
     },
     //是否是重点工作(详情)
-    isImportantUpdate(val) {
+    isImportantUpdata(val) {
       console.log(val)
       if (val == false) {
         this.detail.isImportant = "false"
@@ -612,17 +643,15 @@ export default {
     selectStatus(val) {
       console.log(val)
     },
+    //选择状况(详情页)
+    selectStatusDetail(val) {
+      console.log(val)
+    },
     //完成时间
     finishTime(val) {
       // console.log(val)
       this.form.finishTime = new Date(val).getFullYear() + '-' + (new Date(val).getMonth() + 1) + '-' + new Date(val).getDate();
       console.log(this.form.finishTime)
-    },
-
-    //点击日历日子，弹出对话框
-    addLog: function (data) {
-      // console.log(data)
-      this.centerDialogVisible = true
     },
 
     //选择事务大类

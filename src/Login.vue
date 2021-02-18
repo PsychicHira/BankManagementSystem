@@ -4,7 +4,7 @@
     <div class="logo">
       <div class="col">
         <img src="./assets/logoAlong.png" alt="">
-        <h1>西藏银行 —— 行务综合服务平台</h1>
+        <h1>西藏银行 —— 行务综合服务平台{{aaa}}</h1>
         <h2>བོད་ལྗོངས་དངུལ་ཁང། ཕྱོགས་བསྡུས་ཞབས་ཞུ་འི་སྟེགས་བུ།</h2>
       </div>
     </div>
@@ -31,6 +31,7 @@ export default {
   data() {
 
     return {
+      // aaa:'aaa',
       loginInfo: {
         loginName: '',
         password: ''
@@ -91,6 +92,10 @@ export default {
     //   this.$axios.post('/post').then(function(res){
     //     console.log(res.data)
     //   })
+    // setTimeout(() => {
+    //   console.log(34)
+    //   this.aaa = 'bbb'
+    // }, 2000);
   }
 }
 </script>

@@ -52,12 +52,14 @@ export {
   queryLogsByDepartment,    //查询用户所在部门发布过的所有日志（使用用户的所在部门查）   
   queryAnnounce,    //查询公告
 
-  submitUpload,         //文件上传
+  updataLog,   //修改日志
 
   addAffairMainClass,    //添加事务大类
   addAffairManClass,    //添加事务中类
   addAffair,    //添加事务
-  addLog,    //添加工作日志s
+  addLog,    //添加工作日志
+
+  submitUpload,         //文件上传
 
 
 
@@ -338,7 +340,6 @@ let queryProblemGrade = function (cb) {
 //查询问题来源
 let queryInformationSource = function (cb) {
   axios.get('/miniOptions/informationSource').then(res => {
-    // console.log(res)
     if (res.data.code == 0) {
       console.log(res.data.message)
       // cb(0)
@@ -966,7 +967,7 @@ let queryLogsByDepartment = function (data, cb) {
 }
 
 //查询公告
-let queryAnnounce = function(cb){
+let queryAnnounce = function (cb) {
   axios.get('/announce/queryAnnounce').then(res => {
     // console.log(res)
     if (res.data.code == 0) {
@@ -982,6 +983,38 @@ let queryAnnounce = function(cb){
       return
     } else {
       cb(res.data.data)
+    }
+  }).catch(function (error) {
+    Vue.prototype.$message({
+      message: '请求失败' + error,
+      type: 'error',
+      duration: 3000
+    });
+  })
+}
+
+//修改日志
+let updataLog = function (data, cb) {
+  axios.post(`/log/updataLog`, data).then(res => {
+    console.log('mmmmmmmmmmmmm')
+    if (res.data.code == 0) {
+      console.log(res.data.message)
+      Vue.prototype.$message({
+        message: res.data.message,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else if (!res.data.code) {
+      console.log(res.data)
+      Vue.prototype.$message({
+        message: res.data,
+        type: 'error',
+        duration: 3000
+      });
+      return
+    } else if (res.data.code == 1) {
+      cb(res.data.message)
     }
   }).catch(function (error) {
     Vue.prototype.$message({

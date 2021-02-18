@@ -1527,6 +1527,8 @@
 
   /log/queryLogs
 
+- **method**
+
   get
 
 - **字段**
@@ -1549,6 +1551,8 @@ uid=7774b160-4fc5-11eb-a408-65ca51c3a35b
 
   /log/queryLogsByDepartment
 
+- **method**
+
   get
 
 - **字段**
@@ -1563,9 +1567,13 @@ department=董监办
 
 ## 查询公告
 
+### 查
+
 - **url**
 
   /announce/queryAnnounce
+
+- **method**
 
   get
 
@@ -1596,3 +1604,42 @@ department=董监办
         },......
 ```
 
+## 更新所选日志
+
+### 更
+
+- **url**
+
+  /log/updataLog
+
+- **method**
+
+  post
+
+- **字段**
+
+```
+{
+    affair: "2211G虚拟化/容器系统日常可用性巡查（每集群）"
+    affairMain: "常规巡查"
+    affairMiddle: "22软件"
+    completionOfProcess: "44"
+    content: "444"
+    createTime: "2021-2-1"
+    creator: "管理员"
+    creatorID: "7774b160-4fc5-11eb-a408-65ca51c3a35b"
+    department: null
+    divideProportion: ""
+    finishTime: "2021-2-2"
+    id: "14d4cde0-643f-11eb-a3ae-a305e4f16fa4"
+    isCoorperation: "undefined"
+    isImportant: "true"
+    keyWords: "ccccc2"
+    partner: ""
+    partnerDepartment: ""
+    partnerID: null
+    status: "未完成"
+}
+```
+
+- 返回值
